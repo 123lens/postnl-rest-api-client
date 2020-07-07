@@ -1,7 +1,8 @@
 <?php
-namespace Tests;
+namespace Tests\Feature;
 
 use Budgetlens\PostNLApi\RestApiClient;
+use Tests\TestCase;
 
 /**
  * Basic client tests

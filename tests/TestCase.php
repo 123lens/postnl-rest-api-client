@@ -13,27 +13,13 @@ use Tests\Client\HttpClient;
 class TestCase extends BaseTestCase
 {
     /**
-     * @var ClientInterface
+     * Get Client
+     * 
+     * @param null $mockfile
+     * @param int $mockHttp
+     * @param array|string[] $mockHeaders
+     * @return RestApiClient
      */
-    public $client;
-    /**
-     * @var MockHandler
-     */
-    protected $mockHandler;
-    /**
-     * @var array
-     */
-    protected $defaultResponseHeader = [
-        'Content-Type' => [
-            'text/xml'
-        ]
-    ];
-
-    public function setUp(): void
-    {
-        $this->initClient();
-    }
-
     public function getClient(
         $mockfile = null,
         int $mockHttp = 200,
