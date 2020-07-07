@@ -1,8 +1,9 @@
 <?php
-
-
 namespace Budgetlens\PostNLApi\Client;
 
+/**
+ * Guzzle Http Client
+ */
 
 use Budgetlens\PostNLApi\Client\Contracts\HttpClientConfigInterface;
 use Budgetlens\PostNLApi\Client\Middleware\JsonResponseMiddleware;

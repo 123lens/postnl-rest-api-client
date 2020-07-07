@@ -1,7 +1,9 @@
 <?php
 namespace Budgetlens\PostNLApi\Client;
 
-
+/**
+ * Http Client config
+ */
 use Budgetlens\PostNLApi\Client\Contracts\HttpClientConfigInterface;
 
 class HttpClientConfig implements HttpClientConfigInterface
