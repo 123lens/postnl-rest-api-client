@@ -40,7 +40,12 @@ class TestCase extends BaseTestCase
     {
         // load client
         $client = new RestApiClient();
-        $client->setHttpClient(new HttpClient(getenv('API_KEY')));
+        $client->setHttpClient(
+            new HttpClient(
+                getenv('API_KEY'),
+                (bool)getenv('API_SANDBOX_MODE')
+            )
+        );
         return $client;
     }
 
@@ -64,6 +69,7 @@ class TestCase extends BaseTestCase
         $client->setHttpClient(
             new HttpClient(
                 getenv('API_KEY'),
+                (bool)getenv('API_SANDBOX_MODE'),
                 $mockHandler
             )
         );
