@@ -3,6 +3,7 @@ namespace Budgetlens\PostNLApi;
 
 use Budgetlens\PostNLApi\Client\HttpClient;
 use Budgetlens\PostNLApi\Client\HttpClientConfig;
+use Budgetlens\PostNLApi\Endpoints\Addresses;
 use GuzzleHttp\ClientInterface;
 use Psr\Log\LoggerInterface;
 
@@ -66,5 +67,11 @@ class RestApiClient
             $this->logger,
             "budgetlens/postnl-rest-client-agent/" . static::LIB_VERSION
         ));
+    }
+
+    // set endpoint.
+    public function addresses(): Addresses
+    {
+        return new Addresses($this->client);
     }
 }
