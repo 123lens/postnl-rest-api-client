@@ -18,6 +18,10 @@ $client = new RestApiClient('---  YOUR APIKEY ---');
 ./vendor/bin/phpunit 
 ```
 
+## Examples
+`See tests folder`
+
+
 ## Implementation Status
 This library is still in development. After an endpoint implementation is finished a new (sub)version will be 
 released. \
@@ -175,7 +179,3 @@ Base endoint: /company/search
 |Endpoint|Version|Implemented|Tested
 |---|---|---|---
 | /v3/phonenumber/ |  v3 | &#9744;| &#9744;
-
-
-## Examples
-`See tests folder`
