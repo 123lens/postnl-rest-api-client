@@ -4,6 +4,7 @@ namespace Tests\Client;
 use Budgetlens\PostNLApi\Client\Contracts\HttpClientConfigInterface;
 use Budgetlens\PostNLApi\Client\HttpClientConfig;
 use Budgetlens\PostNLApi\Client\Middleware\JsonResponseMiddleware;
+use Budgetlens\PostNLApi\Client\Middleware\RequestExceptionMiddleware;
 use GuzzleHttp\Client;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
@@ -31,10 +32,11 @@ class HttpClient extends Client
     private $mockHandler;
 
     public function __construct(
-        $apiKey,
+        string $apiKey,
+        bool $testMode = true,
         ?MockHandler $mockHandler = null
     ) {
-        $httpClientConfig = new HttpClientConfig($apiKey, true);
+        $httpClientConfig = new HttpClientConfig($apiKey, $testMode);
         $this->userAgent = 'budgetlens/postnl-rest-client-agent-unit-test/0.1.0';
         $stack = $this->handlerStack($mockHandler);
         // headers
@@ -59,10 +61,12 @@ class HttpClient extends Client
         if ($mockHandler) {
             $stack = HandlerStack::create($mockHandler);
         } else {
-            $stack = new HandlerStack(Utils::chooseHandler());
+            $stack = HandlerStack::create();
         }
         $stack->push(Middleware::redirect(), 'allow_redirects');
         $stack->push(new JsonResponseMiddleware());
+        $stack->push(new RequestExceptionMiddleware(), 'http_errors');
+
         return $stack;
     }
 
