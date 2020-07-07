@@ -7,6 +7,7 @@ namespace Budgetlens\PostNLApi\Client;
 
 use Budgetlens\PostNLApi\Client\Contracts\HttpClientConfigInterface;
 use Budgetlens\PostNLApi\Client\Middleware\JsonResponseMiddleware;
+use Budgetlens\PostNLApi\Client\Middleware\RequestExceptionMiddleware;
 use GuzzleHttp\Client;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\MessageFormatter;
@@ -45,12 +46,14 @@ class HttpClient extends Client
      */
     protected function handlerStack(LoggerInterface $logger = null): HandlerStack
     {
-        $stack = new HandlerStack(Utils::chooseHandler());
-        $stack->push(Middleware::redirect(), 'allow_redirects');
+        $stack = HandlerStack::create();
+        $stack->push(new JsonResponseMiddleware());
         if ($logger) {
             $stack->push(Middleware::log($logger, new MessageFormatter()));
         }
-        $stack->push(new JsonResponseMiddleware());
+        $stack->push(new RequestExceptionMiddleware(), 'http_errors');
+
+
         return $stack;
     }
 
