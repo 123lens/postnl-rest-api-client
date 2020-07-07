@@ -26,7 +26,9 @@
         }
     },
     "autoload-dev": {
-        "Tests\\": "tests/"
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
     },
     "scripts": {
         "style": "vendor/bin/phpcs --standard=PSR2 --extensions=php --colors src/*",

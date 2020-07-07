@@ -17,7 +17,7 @@ class RestApiClient
      * PostNL API Key
      * @var string|null
      */
-    private string $apiKey;
+    private ?string $apiKey;
 
     /**
      * @var bool - Test Mode
@@ -27,7 +27,7 @@ class RestApiClient
     /**
      * @var LoggerInterface
      */
-    private LoggerInterface $logger;
+    private ?LoggerInterface $logger;
 
     /**
      * @var GuzzleHttp\ClientInterface
@@ -39,14 +39,19 @@ class RestApiClient
         bool $testMode = false,
         LoggerInterface $logger = null
     ) {
+
         $this->apiKey = $apiKey;
+    }
+    public function getHttpClient()
+    {
+        return $this->client;
     }
 
     /**
-     * Set Client
+     * Set HttpClient
      * @param ClientInterface $client
      */
-    public function setClient(ClientInterface $client)
+    public function setHttpClient(ClientInterface $client)
     {
         $this->client = $client;
     }
@@ -56,10 +61,10 @@ class RestApiClient
      */
     private function setDefaultClient(): void
     {
-        $this->client = new HttpClient(
+        $this->setHttpClient(new HttpClient(
             new HttpClientConfig($this->apiKey, $this->testMode),
             $this->logger,
             "budgetlens/postnl-rest-client-agent/" . static::LIB_VERSION
-        );
+        ));
     }
 }

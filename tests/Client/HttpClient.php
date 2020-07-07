@@ -1,34 +1,46 @@
 <?php
-
-
-namespace Budgetlens\PostNLApi\Client;
-
+namespace Tests\Client;
 
 use Budgetlens\PostNLApi\Client\Contracts\HttpClientConfigInterface;
+use Budgetlens\PostNLApi\Client\HttpClientConfig;
 use Budgetlens\PostNLApi\Client\Middleware\JsonResponseMiddleware;
 use GuzzleHttp\Client;
+use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\MessageFormatter;
 use GuzzleHttp\Middleware;
 use GuzzleHttp\Utils;
 use Psr\Log\LoggerInterface;
 
+/**
+ * Mockery http client
+ *
+ * Class HttpClient
+ * @package tests\Client
+ */
+
 class HttpClient extends Client
 {
     /**
      * @var string - User Agent
      */
-    private string $userAgent;
+    private $userAgent;
+    /**
+     * @var MockHandler
+     */
+    private $mockHandler;
 
     public function __construct(
-        HttpClientConfigInterface $httpClientConfig,
-        LoggerInterface $logger = null,
-        string $userAgent = 'budgetlens/postnl-rest-client-agent/0.1.0'
+        $apiKey,
+        ?MockHandler $mockHandler = null
     ) {
-        $this->userAgent = $userAgent;
-        $stack = $this->handlerStack($logger);
+        $httpClientConfig = new HttpClientConfig($apiKey, true);
+        $this->userAgent = 'budgetlens/postnl-rest-client-agent-unit-test/0.1.0';
+        $stack = $this->handlerStack($mockHandler);
+        // headers
         $headers = $this->headers($httpClientConfig);
 
+        // construct http client
         parent::__construct([
             'handler' => $stack,
             'base_uri' => $httpClientConfig->getApiUrl(),
@@ -37,18 +49,19 @@ class HttpClient extends Client
         ]);
     }
 
+
     /**
      * Set Guzzle Handler Stack
-     * @param LoggerInterface|null $logger
      * @return HandlerStack
      */
-    protected function handlerStack(LoggerInterface $logger = null): HandlerStack
+    protected function handlerStack(?MockHandler $mockHandler = null): HandlerStack
     {
-        $stack = new HandlerStack(Utils::chooseHandler());
-        $stack->push(Middleware::redirect(), 'allow_redirects');
-        if ($logger) {
-            $stack->push(Middleware::log($logger, new MessageFormatter()));
+        if ($mockHandler) {
+            $stack = HandlerStack::create($mockHandler);
+        } else {
+            $stack = new HandlerStack(Utils::chooseHandler());
         }
+        $stack->push(Middleware::redirect(), 'allow_redirects');
         $stack->push(new JsonResponseMiddleware());
         return $stack;
     }
