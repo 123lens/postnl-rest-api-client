@@ -6,12 +6,11 @@ namespace Budgetlens\PostNLApi\Messages\Requests;
  *
  * ### Example
  * <code>
- *      $request = $client->locations()->nearestLocations();
- *      $request->setCountryCode('NL')
+ *      $request = $client->checkout()->postalcodeCheck();
  *      $request->setPostalcode('1000AA')
- *      $request->setDeliveryOptions(['PG']);
+ *      $request->setHouseNumber(1);
  *      $response = $request->send();
- *      $locations = $response->getLocations();
+ *      $data = $response->getData();
  * </code>
  *
  */
