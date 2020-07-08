@@ -7,9 +7,8 @@ namespace Budgetlens\PostNLApi\Messages\Responses;
 
 use Budgetlens\PostNLApi\Messages\Responses\Contracts\ResponseInterface;
 
-class NearestLocationsByGeoResponse extends AbstractResponse implements ResponseInterface
+class NearestLocationsByGeoResponse extends AbstractLocationsResponse implements ResponseInterface
 {
-
     /**
      * Get Return Data
      * @return array|mixed

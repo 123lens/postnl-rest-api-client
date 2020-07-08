@@ -17,6 +17,7 @@ namespace Budgetlens\PostNLApi\Messages\Requests;
  */
 use Budgetlens\PostNLApi\Messages\Requests\Contracts\MessageInterface;
 use Budgetlens\PostNLApi\Messages\Requests\Contracts\RequestInterface;
+use Budgetlens\PostNLApi\Messages\Responses\NearestLocationsByGeoResponse;
 use Budgetlens\PostNLApi\Messages\Responses\NearestLocationsResponse;
 
 class NearestLocationsByGeoRequest extends AbstractRequest implements RequestInterface, MessageInterface
