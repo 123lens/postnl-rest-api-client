@@ -8,7 +8,6 @@ use Budgetlens\PostNLApi\Endpoints\Locations;
 use GuzzleHttp\ClientInterface;
 use Psr\Log\LoggerInterface;
 
-
 class RestApiClient
 {
     /**

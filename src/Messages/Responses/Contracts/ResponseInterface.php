@@ -14,5 +14,4 @@ interface ResponseInterface
      * @return mixed
      */
     public function getRequest();
-
 }

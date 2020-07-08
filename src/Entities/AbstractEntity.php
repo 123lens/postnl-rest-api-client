@@ -1,15 +1,13 @@
 <?php
 namespace Budgetlens\PostNLApi\Entities;
 
-use Budgetlens\PostNLApi\Entities\Contracts\EntityInterface;
-use Budgetlens\PostNLApi\Traits\ValidationTrait;
-use Composer\XdebugHandler\PhpConfig;
-
 /**
  * Abstract Entity
  * Class AbstractEntity
  * @package Budgetlens\PostNLApi\Entities
  */
+use Budgetlens\PostNLApi\Entities\Contracts\EntityInterface;
+use Budgetlens\PostNLApi\Traits\ValidationTrait;
 
 abstract class AbstractEntity implements EntityInterface
 {
@@ -99,6 +97,4 @@ abstract class AbstractEntity implements EntityInterface
         // getter not accessible or doesn't exists.
         return false;
     }
-
-
 }

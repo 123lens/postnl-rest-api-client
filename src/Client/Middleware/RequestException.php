@@ -1,10 +1,12 @@
 <?php
 namespace Budgetlens\PostNLApi\Client\Middleware;
 
+/**
+ * Request Exception
+ */
 use Budgetlens\PostNLApi\Client\Middleware\JsonResponse;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
-
 
 class RequestException extends \GuzzleHttp\Exception\RequestException
 {

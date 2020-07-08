@@ -1,7 +1,20 @@
 <?php
 namespace Budgetlens\PostNLApi\Messages\Requests;
 
-
+/**
+ * Nearest Locations Request
+ *
+ * ### Example
+ * <code>
+ *      $request = $client->locations()->nearestLocations();
+ *      $request->setCountryCode('NL')
+ *      $request->setPostalcode('1000AA')
+ *      $request->setDeliveryOptions(['PG']);
+ *      $response = $request->send();
+ *      $locations = $response->getLocations();
+ * </code>
+ *
+ */
 use Budgetlens\PostNLApi\Messages\Requests\Contracts\MessageInterface;
 use Budgetlens\PostNLApi\Messages\Requests\Contracts\RequestInterface;
 use Budgetlens\PostNLApi\Messages\Responses\NearestLocationsResponse;

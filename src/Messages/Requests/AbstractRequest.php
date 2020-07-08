@@ -8,7 +8,6 @@ use Budgetlens\PostNLApi\Util\Helper;
 use Budgetlens\PostNLApi\Util\ParameterBag;
 use GuzzleHttp\ClientInterface;
 
-
 /**
  * Abstract Message Request
  * Class AbstractRequest

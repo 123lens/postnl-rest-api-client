@@ -1,5 +1,6 @@
 <?php
 namespace Budgetlens\PostNLApi\Traits;
+
 /**
  * Validation helper trait
  * Class ValidationTrait

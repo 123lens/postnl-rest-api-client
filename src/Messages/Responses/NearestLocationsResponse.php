@@ -45,7 +45,6 @@ class NearestLocationsResponse extends AbstractResponse implements ResponseInter
             $location->setOpeningHours($hours);
             $location->setDeliveryOptions($deliveryOptions);
             $locations[] = $location;
-
         }
         return $locations;
     }

@@ -34,7 +34,13 @@ class ParameterBag implements \IteratorAggregate, \Countable
         }
 
         if (!\is_array($value = $this->parameters[$key] ?? [])) {
-            throw new \InvalidArgumentException(sprintf('Unexpected value for parameter "%s": expecting "array", got "%s".', $key, get_debug_type($value)));
+            throw new \InvalidArgumentException(
+                sprintf(
+                    'Unexpected value for parameter "%s": expecting "array", got "%s".',
+                    $key,
+                    get_debug_type($value)
+                )
+            );
         }
 
         return $value;
