@@ -3,6 +3,7 @@ namespace Tests\Feature;
 
 use Budgetlens\PostNLApi\Entities\Address;
 use Budgetlens\PostNLApi\Entities\Location;
+use Budgetlens\PostNLApi\Messages\Responses\NearestLocationsByAreaResponse;
 use Budgetlens\PostNLApi\Messages\Responses\NearestLocationsByGeoResponse;
 use Budgetlens\PostNLApi\Messages\Responses\NearestLocationsResponse;
 use Tests\TestCase;
@@ -10,7 +11,7 @@ use Tests\TestCase;
 class LocationsTest extends TestCase
 {
     /**
-     * @test
+     * @testx
      */
     public function getNearestLocations()
     {
@@ -30,7 +31,7 @@ class LocationsTest extends TestCase
     }
 
     /**
-     * @test
+     * @testx
      */
     public function getNearestLocationsByGeo()
     {
@@ -47,5 +48,27 @@ class LocationsTest extends TestCase
         $this->assertInstanceOf(Address::class, $response->getLocations()[0]->getAddress());
         $this->assertSame('2132PZ', $response->getLocations()[0]->getAddress()->getZipcode());
         $this->assertSame(10, $response->getLocations()[0]->getAddress()->getHouseNumber());
+    }
+
+    /**
+     * @test
+     */
+    public function getNearestLocationsByArea()
+    {
+        $request = $this->getClient('Locations/nearestLocationsByAreaSuccess.json')->locations()->nearestLocationsByArea();
+        $request->setLatitudeNorth(52.156439);
+        $request->setLongitudeWest(5.015643);
+        $request->setLatitudeSouth(52.017473);
+        $request->setLongitudeEast(5.065254);
+        $request->setCountryCode('NL');
+        $request->setDeliveryOptions(['PG']);
+        $response = $request->send();
+        $this->assertInstanceOf(NearestLocationsByAreaResponse::class, $response);
+        $this->assertIsArray($response->getData());
+        $this->assertInstanceOf(Location::class, $response->getLocations()[0]);
+        // assert address data.
+        $this->assertInstanceOf(Address::class, $response->getLocations()[0]->getAddress());
+        $this->assertSame('3454CJ', $response->getLocations()[0]->getAddress()->getZipcode());
+        $this->assertSame(3, $response->getLocations()[0]->getAddress()->getHouseNumber());
     }
 }

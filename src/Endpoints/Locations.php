@@ -20,8 +20,25 @@ class Locations extends AbstractEndpoint
         return $this->createRequest('Budgetlens\PostNLApi\Messages\Requests\NearestLocationsRequest');
     }
 
+    /**
+     * Get Nearest Locations By GEO
+     * @param array $data
+     * @return mixed
+     */
     public function nearestLocationsByGeo(array $data = [])
     {
         return $this->createRequest('Budgetlens\PostNLApi\Messages\Requests\NearestLocationsByGeoRequest');
     }
+
+    /**
+     * Get Nearest Locations By Area
+     * @param array $data
+     * @return mixed
+     */
+    public function nearestLocationsByArea(array $data = [])
+    {
+        return $this->createRequest('Budgetlens\PostNLApi\Messages\Requests\NearestLocationsByAreaRequest');
+    }
+
+
 }
