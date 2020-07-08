@@ -1,10 +1,12 @@
 <?php
 namespace Budgetlens\PostNLApi\Client\Middleware;
 
+/**
+ * Request Exception
+ */
 use Budgetlens\PostNLApi\Client\Middleware\JsonResponse;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
-
 
 class RequestException extends \GuzzleHttp\Exception\RequestException
 {
@@ -18,25 +20,15 @@ class RequestException extends \GuzzleHttp\Exception\RequestException
             return parent::create($request, $response);
         }
 
-        try {
-            $errorResponse = $response->getBody()->json();
-        } catch (\InvalidArgumentException $exception) {
+        $errorResponse = $response->getBody()->json();
+        $error = $errorResponse['Error'] ?? [];
+        if (count($error) === 0) {
             return parent::create($request, $response);
         }
 
-        $additional = '';
-        if (isset($errorResponse['violations'])) {
-            $additional .= implode(', ', array_map(static function ($violation) {
-                if (isset($violation['name'])) {
-                    return "`{$violation['name']}`: {$violation['reason']}";
-                }
-                return $violation['reason'];
-            }, $errorResponse['violations']));
-        }
-
         $newResponse = $response->withStatus(
-            $response->getStatusCode(),
-            sprintf('%s: %s', $errorResponse['detail'], $additional)
+            404,
+            sprintf('%s: %s', $error['ErrorMsg'], $error['ErrorNumber'])
         );
 
         return parent::create($request, $newResponse);

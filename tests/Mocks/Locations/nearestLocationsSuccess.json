@@ -1,0 +1,105 @@
+{
+  "GetLocationsResult":{
+    "ResponseLocation":[
+      {
+        "Address":{
+          "City":"Plats",
+          "Countrycode":"NL",
+          "HouseNr":1,
+          "Remark":"Dit is een Postkantoor. Post en pakketten die u op werkdagen vóór de lichtingstijd afgeeft, bezorgen we binnen Nederland de volgende dag. Op zaterdag worden alléén pakketten die u afgeeft voor 17:00 uur maandag bezorgd.",
+          "Street":"De straat",
+          "Zipcode":"1000AA"
+        },
+        "DeliveryOptions":{
+          "string":[
+            "DO",
+            "PG",
+            "UL",
+            "PG_EX",
+            "RETA"
+          ]
+        },
+        "Distance":302,
+        "Latitude":52.29857649,
+        "LocationCode":162060,
+        "Longitude":5.14599532,
+        "Name":"Plus",
+        "OpeningHours":{
+          "Friday":{
+            "string":"07:30-21:00"
+          },
+          "Monday":{
+            "string":"07:30-21:00"
+          },
+          "Saturday":{
+            "string":"07:30-21:00"
+          },
+          "Sunday":{
+            "string":"12:00-18:00"
+          },
+          "Thursday":{
+            "string":"07:30-21:00"
+          },
+          "Tuesday":{
+            "string":"07:30-21:00"
+          },
+          "Wednesday":{
+            "string":"07:30-21:00"
+          }
+        },
+        "PartnerName":"PostNL",
+        "RetailNetworkID":"PNPNL-01",
+        "Saleschannel":"PKT M",
+        "TerminalType":"NRS"
+      },
+      {
+        "Address":{
+          "City":"Andere plaats",
+          "Countrycode":"NL",
+          "HouseNr":2,
+          "Remark":"Dit is een Business Point. Post en pakketten die u op werkdagen vóór de lichtingstijd afgeeft, bezorgen we binnen Nederland de volgende dag.",
+          "Street":"De test straat",
+          "Zipcode":"1111AA"
+        },
+        "DeliveryOptions":{
+          "string":[
+            "DO",
+            "PG",
+            "BW",
+            "PG_EX",
+            "PBG"
+          ]
+        },
+        "Distance":467,
+        "Latitude":52.30149116,
+        "LocationCode":160921,
+        "Longitude":5.15177049,
+        "Name":"Car Cleaning Plus Webshop Gooimeer",
+        "OpeningHours":{
+          "Friday":{
+            "string":"08:00-18:00"
+          },
+          "Monday":{
+            "string":"08:00-18:00"
+          },
+          "Saturday":{
+            "string":"09:00-13:00"
+          },
+          "Thursday":{
+            "string":"08:00-18:00"
+          },
+          "Tuesday":{
+            "string":"08:00-18:00"
+          },
+          "Wednesday":{
+            "string":"08:00-18:00"
+          }
+        },
+        "PartnerName":"PostNL",
+        "RetailNetworkID":"PNPNL-01",
+        "Saleschannel":"BUPO RET",
+        "TerminalType":"NRS"
+      }
+    ]
+  }
+}

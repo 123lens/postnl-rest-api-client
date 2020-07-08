@@ -4,6 +4,7 @@ namespace Budgetlens\PostNLApi;
 use Budgetlens\PostNLApi\Client\HttpClient;
 use Budgetlens\PostNLApi\Client\HttpClientConfig;
 use Budgetlens\PostNLApi\Endpoints\Addresses;
+use Budgetlens\PostNLApi\Endpoints\Locations;
 use GuzzleHttp\ClientInterface;
 use Psr\Log\LoggerInterface;
 
@@ -69,9 +70,21 @@ class RestApiClient
         ));
     }
 
-    // set endpoint.
+    /**
+     * Address endpoint
+     * @return Addresses
+     */
     public function addresses(): Addresses
     {
         return new Addresses($this->client);
+    }
+
+    /**
+     * Locations endpoint
+     * @return Locations
+     */
+    public function locations(): Locations
+    {
+        return new Locations($this->client);
     }
 }
