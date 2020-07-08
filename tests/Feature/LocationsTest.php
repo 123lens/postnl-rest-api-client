@@ -7,12 +7,13 @@ use Budgetlens\PostNLApi\Messages\Responses\LocationLookupResponse;
 use Budgetlens\PostNLApi\Messages\Responses\NearestLocationsByAreaResponse;
 use Budgetlens\PostNLApi\Messages\Responses\NearestLocationsByGeoResponse;
 use Budgetlens\PostNLApi\Messages\Responses\NearestLocationsResponse;
+use GuzzleHttp\Exception\ClientException;
 use Tests\TestCase;
 
 class LocationsTest extends TestCase
 {
     /**
-     * @test
+     * @testx
      */
     public function getNearestLocations()
     {
@@ -32,7 +33,7 @@ class LocationsTest extends TestCase
     }
 
     /**
-     * @test
+     * @testx
      */
     public function getNearestLocationsByGeo()
     {
@@ -52,7 +53,7 @@ class LocationsTest extends TestCase
     }
 
     /**
-     * @test
+     * @testx
      */
     public function getNearestLocationsByArea()
     {
@@ -79,7 +80,7 @@ class LocationsTest extends TestCase
     public function locationLookup()
     {
         $request = $this->getClient('Locations/locationLookupSuccess.json')->locations()->locationLookup();
-        $request->setLocationCode('173187');
+        $request->setLocationCode('161503');
         $request->setRetailNetworkID('PNPNL-01');
         $response = $request->send();
         $this->assertInstanceOf(LocationLookupResponse::class, $response);
@@ -89,5 +90,17 @@ class LocationsTest extends TestCase
         $this->assertInstanceOf(Address::class, $response->getLocation()->getAddress());
         $this->assertSame('2132PZ', $response->getLocation()->getAddress()->getZipcode());
         $this->assertSame(10, $response->getLocation()->getAddress()->getHouseNumber());
+    }
+
+    /**
+     * @test
+     */
+    public function locationLookupException()
+    {
+        $this->expectException(ClientException::class);
+        $request = $this->getClient('ErrorResponse.json')->locations()->locationLookup();
+        $request->setLocationCode('161503');
+        $request->setRetailNetworkID('PNPNL-01');
+        $request->send();
     }
 }

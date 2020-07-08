@@ -5,6 +5,7 @@ use Budgetlens\PostNLApi\Client\Contracts\HttpClientConfigInterface;
 use Budgetlens\PostNLApi\Client\HttpClientConfig;
 use Budgetlens\PostNLApi\Client\Middleware\JsonResponseMiddleware;
 use Budgetlens\PostNLApi\Client\Middleware\RequestExceptionMiddleware;
+use Budgetlens\PostNLApi\Client\Middleware\ResponseIsErrorMiddleware;
 use GuzzleHttp\Client;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
@@ -64,8 +65,9 @@ class HttpClient extends Client
             $stack = HandlerStack::create();
         }
         $stack->push(Middleware::redirect(), 'allow_redirects');
-        $stack->push(new JsonResponseMiddleware());
         $stack->push(new RequestExceptionMiddleware(), 'http_errors');
+        $stack->push(new ResponseIsErrorMiddleware());
+        $stack->push(new JsonResponseMiddleware());
 
         return $stack;
     }
