@@ -18,4 +18,16 @@ class AbstractEndpoint
     {
         $this->client = $client;
     }
+
+    /**
+     * Create Request Object
+     * @param $class
+     * @param array $parameters
+     * @return mixed
+     */
+    public function createRequest($class, array $parameters = [])
+    {
+        $obj = new $class($this->client);
+        return $obj->initialize($parameters);
+    }
 }
