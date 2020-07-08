@@ -47,5 +47,4 @@ abstract class AbstractLocationsResponse extends AbstractResponse implements Res
         }
         return $locations;
     }
-
 }
