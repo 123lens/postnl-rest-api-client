@@ -2,13 +2,14 @@
 namespace Budgetlens\PostNLApi\Messages\Requests;
 
 /**
- * Nearest Locations Request
+ * Nearest Locations By Geo Request
  *
  * ### Example
  * <code>
  *      $request = $client->locations()->nearestLocationsByGeo();
- *      $request->setCountryCode('NL')
- *      $request->setPostalcode('1000AA')
+ *      $request->setLatitude(52.2864669620795);
+ *      $request->setLongitude(4.68239055845954);
+ *      $request->setCountryCode('NL');
  *      $request->setDeliveryOptions(['PG']);
  *      $response = $request->send();
  *      $locations = $response->getLocations();
