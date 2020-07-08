@@ -24,8 +24,8 @@ use Budgetlens\PostNLApi\Messages\Responses\NearestLocationsResponse;
 class NearestLocationsByGeoRequest extends AbstractRequest implements RequestInterface, MessageInterface
 {
     /**
-     * Get Country Code
-     * @return string|null
+     * Get Latitude
+     * @return float|null
      */
     public function getLatitude(): ?float
     {
@@ -33,8 +33,8 @@ class NearestLocationsByGeoRequest extends AbstractRequest implements RequestInt
     }
 
     /**
-     * Set Country Code
-     * @param string $country
+     * Set Latitude
+     * @param float $latitude
      * @return NearestLocationsRequest
      */
     public function setLatitude(float $latitude)
@@ -43,8 +43,8 @@ class NearestLocationsByGeoRequest extends AbstractRequest implements RequestInt
     }
 
     /**
-     * Get Postal code
-     * @return string|null
+     * Get Longitude
+     * @return float|null
      */
     public function getLongitude(): ?float
     {
@@ -52,8 +52,8 @@ class NearestLocationsByGeoRequest extends AbstractRequest implements RequestInt
     }
 
     /**
-     * Set Postal Code
-     * @param string $postalcode
+     * Set Longitude
+     * @param float $longitude
      * @return NearestLocationsRequest
      */
     public function setLongitude(float $longitude)
@@ -62,7 +62,7 @@ class NearestLocationsByGeoRequest extends AbstractRequest implements RequestInt
     }
 
     /**
-     * Get City
+     * Get Country Code
      * @return string|null
      */
     public function getCountryCode(): ?string
@@ -71,8 +71,8 @@ class NearestLocationsByGeoRequest extends AbstractRequest implements RequestInt
     }
 
     /**
-     * Set City
-     * @param string $city
+     * Set Country Code
+     * @param string $countryCode
      */
     public function setCountryCode(string $countryCode)
     {
@@ -80,7 +80,7 @@ class NearestLocationsByGeoRequest extends AbstractRequest implements RequestInt
     }
 
     /**
-     * Get Street
+     * Get Delivery Date
      * @return string|null
      */
     public function getDeliveryDate(): ?string
@@ -92,8 +92,8 @@ class NearestLocationsByGeoRequest extends AbstractRequest implements RequestInt
     }
 
     /**
-     * Set Street
-     * @param string $street
+     * Set Delivery Date
+     * @param \DateTime $deliveryDate
      * @return NearestLocationsRequest
      */
     public function setDeliveryDate(\DateTime $deliveryDate)
@@ -102,8 +102,8 @@ class NearestLocationsByGeoRequest extends AbstractRequest implements RequestInt
     }
 
     /**
-     * Get House Number
-     * @return int|null
+     * Get Opening Time
+     * @return string|null
      */
     public function getOpeningTime(): ?string
     {
@@ -114,8 +114,8 @@ class NearestLocationsByGeoRequest extends AbstractRequest implements RequestInt
     }
 
     /**
-     * Set House Number
-     * @param int $houseNumber
+     * Set Opening Time
+     * @param \DateTime $openingTime
      * @return NearestLocationsRequest
      */
     public function setOpeningTime(\DateTime $openingTime)
@@ -124,8 +124,8 @@ class NearestLocationsByGeoRequest extends AbstractRequest implements RequestInt
     }
 
     /**
-     * Get Delivery Date (dd-mm-YYYY)
-     * @return string|null
+     * Get Delivery Options
+     * @return array
      */
     public function getDeliveryOptions(): array
     {
@@ -133,8 +133,8 @@ class NearestLocationsByGeoRequest extends AbstractRequest implements RequestInt
     }
 
     /**
-     * Set Delivery Date
-     * @param \DateTime $deliveryDate
+     * Set Delivery Options
+     * @param array $deliveryOptions
      * @return NearestLocationsRequest
      */
     public function setDeliveryOptions(array $deliveryOptions)
@@ -142,6 +142,10 @@ class NearestLocationsByGeoRequest extends AbstractRequest implements RequestInt
         return $this->setParameter('delivery_options', $deliveryOptions);
     }
 
+    /**
+     * Get Data
+     * @return array
+     */
     public function getData(): array
     {
         $this->validate(
@@ -162,6 +166,12 @@ class NearestLocationsByGeoRequest extends AbstractRequest implements RequestInt
         return array_filter($data);
     }
 
+    /**
+     * Send data
+     * @param array $data
+     * @return NearestLocationsByGeoResponse
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
     public function sendData(array $data = [])
     {
         $response = $this->client->request(
