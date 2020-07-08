@@ -6,6 +6,7 @@ namespace Budgetlens\PostNLApi\Entities;
  * Class DeliveryOption
  * @package Budgetlens\PostNLApi\Entities
  */
+
 use Budgetlens\PostNLApi\Entities\Contracts\EntityInterface;
 
 class DeliveryOption extends AbstractEntity implements EntityInterface

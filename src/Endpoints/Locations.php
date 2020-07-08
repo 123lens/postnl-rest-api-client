@@ -40,6 +40,11 @@ class Locations extends AbstractEndpoint
         return $this->createRequest('Budgetlens\PostNLApi\Messages\Requests\NearestLocationsByAreaRequest');
     }
 
+    /**
+     * Location Lookup
+     * @param array $data
+     * @return mixed
+     */
     public function locationLookup(array $data = [])
     {
         return $this->createRequest('Budgetlens\PostNLApi\Messages\Requests\LocationLookupRequest');

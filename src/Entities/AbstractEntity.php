@@ -6,6 +6,7 @@ namespace Budgetlens\PostNLApi\Entities;
  * Class AbstractEntity
  * @package Budgetlens\PostNLApi\Entities
  */
+
 use Budgetlens\PostNLApi\Entities\Contracts\EntityInterface;
 use Budgetlens\PostNLApi\Traits\ValidationTrait;
 

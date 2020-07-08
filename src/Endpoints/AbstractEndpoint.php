@@ -1,14 +1,14 @@
 <?php
 namespace Budgetlens\PostNLApi\Endpoints;
 
-use GuzzleHttp\ClientInterface;
-
 /**
  * Abstract Endpoint
  *
  * Class AbstractEndpoint
  * @package Budgetlens\PostNLApi\Endpoints
  */
+
+use GuzzleHttp\ClientInterface;
 
 class AbstractEndpoint
 {

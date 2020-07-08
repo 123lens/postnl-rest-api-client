@@ -6,6 +6,7 @@ namespace Budgetlens\PostNLApi\Entities;
  * Class OpeningHour
  * @package Budgetlens\PostNLApi\Entities
  */
+
 use Budgetlens\PostNLApi\Entities\Contracts\EntityInterface;
 
 class OpeningHour extends AbstractEntity implements EntityInterface

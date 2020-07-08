@@ -1,6 +1,10 @@
 <?php
 namespace Budgetlens\PostNLApi\Traits;
 
+/**
+ * Parameter Bag trait
+*/
+
 use Budgetlens\PostNLApi\Util\ParameterBag;
 use Budgetlens\PostNLApi\Util\Helper;
 

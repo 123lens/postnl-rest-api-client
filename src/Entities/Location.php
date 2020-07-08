@@ -1,13 +1,13 @@
 <?php
 namespace Budgetlens\PostNLApi\Entities;
 
-use Budgetlens\PostNLApi\Entities\Contracts\EntityInterface;
-
 /**
  * Location Entity
  * Class Location
  * @package Budgetlens\PostNLApi\Entities
  */
+
+use Budgetlens\PostNLApi\Entities\Contracts\EntityInterface;
 
 class Location extends AbstractEntity implements EntityInterface
 {

@@ -13,7 +13,10 @@ use Budgetlens\PostNLApi\Messages\Responses\Contracts\ResponseInterface;
 
 class LocationLookupResponse extends AbstractResponse implements ResponseInterface
 {
-
+    /**
+     * Get Location
+     * @return Location
+     */
     public function getLocation(): Location
     {
         $locations = [];

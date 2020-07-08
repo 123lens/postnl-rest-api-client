@@ -1,13 +1,13 @@
 <?php
 namespace Budgetlens\PostNLApi\Entities;
 
-use Budgetlens\PostNLApi\Entities\Contracts\EntityInterface;
-
 /**
  * Address Entity
  * Class Address
  * @package Budgetlens\PostNLApi\Entities
  */
+
+use Budgetlens\PostNLApi\Entities\Contracts\EntityInterface;
 
 class Address extends AbstractEntity implements EntityInterface
 {

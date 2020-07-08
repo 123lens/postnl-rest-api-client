@@ -6,12 +6,11 @@ namespace Budgetlens\PostNLApi\Messages\Requests;
  *
  * ### Example
  * <code>
- *      $request = $client->locations()->nearestLocations();
- *      $request->setCountryCode('NL')
- *      $request->setPostalcode('1000AA')
- *      $request->setDeliveryOptions(['PG']);
+ *      $request = $client->locations()->locationLookup();
+ *      $request->setLocationCode('173187');
+ *      $request->setRetailNetworkID('PNPNL-01');
  *      $response = $request->send();
- *      $locations = $response->getLocations();
+ *      $location = $response->getLocation();
  * </code>
  *
  */
@@ -78,6 +77,12 @@ class LocationLookupRequest extends AbstractRequest implements RequestInterface,
         return array_filter($data);
     }
 
+    /**
+     * Send data
+     * @param array $data
+     * @return LocationLookupResponse
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
     public function sendData(array $data = [])
     {
         $response = $this->client->request(

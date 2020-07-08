@@ -174,6 +174,10 @@ class NearestLocationsRequest extends AbstractRequest implements RequestInterfac
         return $this->setParameter('delivery_options', $deliveryOptions);
     }
 
+    /**
+     * Get Data
+     * @return array
+     */
     public function getData(): array
     {
         $this->validate(
@@ -195,6 +199,12 @@ class NearestLocationsRequest extends AbstractRequest implements RequestInterfac
         return array_filter($data);
     }
 
+    /**
+     * Send data
+     * @param array $data
+     * @return NearestLocationsResponse
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
     public function sendData(array $data = [])
     {
         $response = $this->client->request(
