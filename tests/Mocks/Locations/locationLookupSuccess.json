@@ -1,0 +1,54 @@
+{
+  "GetLocationsResult":{
+    "ResponseLocation":{
+      "Address":{
+        "City":"Hoofddorp",
+        "Countrycode":"NL",
+        "HouseNr":10,
+        "Remark":"Dit is een Business Point. Post en pakketten die u op werkdagen vóór de lichtingstijd afgeeft, bezorgen we binnen Nederland de volgende dag.",
+        "Street":"Jacobus Spijkerdreef",
+        "Zipcode":"2132PZ"
+      },
+      "DeliveryOptions":{
+        "string":[
+          "DO",
+          "PG",
+          "UL",
+          "BW",
+          "PG_EX",
+          "BWUL",
+          "RETA",
+          "PBG"
+        ]
+      },
+      "Latitude":52.28646696,
+      "LocationCode":173187,
+      "Longitude":4.68239056,
+      "Name":"Office Centre",
+      "OpeningHours":{
+        "Friday":{
+          "string":"09:00-18:00"
+        },
+        "Monday":{
+          "string":"09:00-18:00"
+        },
+        "Saturday":{
+          "string":"09:00-17:00"
+        },
+        "Thursday":{
+          "string":"09:00-18:00"
+        },
+        "Tuesday":{
+          "string":"09:00-18:00"
+        },
+        "Wednesday":{
+          "string":"09:00-18:00"
+        }
+      },
+      "PartnerName":"PostNL",
+      "RetailNetworkID":"PNPNL-01",
+      "Saleschannel":"BUPO SOC",
+      "TerminalType":"NRS"
+    }
+  }
+}

@@ -3,6 +3,7 @@ namespace Tests\Feature;
 
 use Budgetlens\PostNLApi\Entities\Address;
 use Budgetlens\PostNLApi\Entities\Location;
+use Budgetlens\PostNLApi\Messages\Responses\LocationLookupResponse;
 use Budgetlens\PostNLApi\Messages\Responses\NearestLocationsByAreaResponse;
 use Budgetlens\PostNLApi\Messages\Responses\NearestLocationsByGeoResponse;
 use Budgetlens\PostNLApi\Messages\Responses\NearestLocationsResponse;
@@ -11,7 +12,7 @@ use Tests\TestCase;
 class LocationsTest extends TestCase
 {
     /**
-     * @testx
+     * @test
      */
     public function getNearestLocations()
     {
@@ -31,7 +32,7 @@ class LocationsTest extends TestCase
     }
 
     /**
-     * @testx
+     * @test
      */
     public function getNearestLocationsByGeo()
     {
@@ -70,5 +71,23 @@ class LocationsTest extends TestCase
         $this->assertInstanceOf(Address::class, $response->getLocations()[0]->getAddress());
         $this->assertSame('3454CJ', $response->getLocations()[0]->getAddress()->getZipcode());
         $this->assertSame(3, $response->getLocations()[0]->getAddress()->getHouseNumber());
+    }
+
+    /**
+     * @test
+     */
+    public function locationLookup()
+    {
+        $request = $this->getClient('Locations/locationLookupSuccess.json')->locations()->locationLookup();
+        $request->setLocationCode('173187');
+        $request->setRetailNetworkID('PNPNL-01');
+        $response = $request->send();
+        $this->assertInstanceOf(LocationLookupResponse::class, $response);
+        $this->assertIsArray($response->getData());
+        $this->assertInstanceOf(Location::class, $response->getLocation());
+        // assert address data.
+        $this->assertInstanceOf(Address::class, $response->getLocation()->getAddress());
+        $this->assertSame('2132PZ', $response->getLocation()->getAddress()->getZipcode());
+        $this->assertSame(10, $response->getLocation()->getAddress()->getHouseNumber());
     }
 }
