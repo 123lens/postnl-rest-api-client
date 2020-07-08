@@ -39,6 +39,4 @@ class Locations extends AbstractEndpoint
     {
         return $this->createRequest('Budgetlens\PostNLApi\Messages\Requests\NearestLocationsByAreaRequest');
     }
-
-
 }
