@@ -49,8 +49,8 @@ Meaning of **Is finished:**:
 | [Location webservice](#Location-webservice)               | v1 | &#9744;
 | [Timeframe webservice](#Timeframe-webservice)             | v1 | &#9744;
 |**Checkout** [More info](https://developer.postnl.nl/browse-apis/checkout/)
-| [Checkout Postalcode Check](#Checkout-Postalcode-Check)   | v1 | &#9744;
-| [Checkout API](#Checkout-API)                             | v1 | &#9744;
+| [Checkout Postalcode Check](#Checkout-Postalcode-Check)   | v1 | &#9745;
+| [Checkout API](#Checkout-API)                             | v1 | &#9745;
 |**Customer Overview** [More info](https://developer.postnl.nl/browse-apis/customer-overview/)
 | [Bedrijfscheck Nationaal](#Bedrijfscheck-Nationaal)       | v1 | &#9744;
 
@@ -164,14 +164,14 @@ Base endoint: /shipment/checkout
 
 |Endpoint|Version|Implemented|Tested
 |---|---|---|---
-| /v1/postalcodecheck/ |  v1 | &#9744;| &#9744;
+| /v1/postalcodecheck/ |  v1 | &#9745;| &#9745;
 
 ### Checkout API
 Base endoint: /shipment/v1 
 
 |Endpoint|Version|Implemented|Tested
 |---|---|---|---
-| /checkout |  v1 | &#9744;| &#9744;
+| /checkout |  v1 | &#9745;| &#9745;
 
 ### Bedrijfscheck Nationaal
 Base endoint: /company/search 
