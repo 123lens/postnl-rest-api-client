@@ -6,11 +6,15 @@ namespace Budgetlens\PostNLApi\Messages\Requests\DeliveryDate;
  *
  * ### Example
  * <code>
- *      $request = $client->checkout()->postalcodeCheck();
- *      $request->setPostalcode('1000AA')
- *      $request->setHouseNumber(1);
+ *      $request = $client->deliveryDate()->calculateDeliveryDate();
+ *      $request->setShippingDate(\new DateTime())
+ *      $request->setShippingDuration(1)
+ *      $request->setCutOffTime('16:00:00')
+ *      $request->setPostalCode('1000AA');
  *      $response = $request->send();
  *      $data = $response->getData();
+ *      $deliveryDate = $response->getDeliveryDate();
+ *      $options = $response->getDeliveryOptions();
  * </code>
  *
  */
@@ -19,8 +23,6 @@ use Budgetlens\PostNLApi\Messages\Requests\AbstractRequest;
 use Budgetlens\PostNLApi\Messages\Requests\Contracts\MessageInterface;
 use Budgetlens\PostNLApi\Messages\Requests\Contracts\RequestInterface;
 use Budgetlens\PostNLApi\Messages\Responses\DeliveryDate\CalculateDeliveryDateResponse;
-use Budgetlens\PostNLApi\Messages\Responses\NearestLocationsResponse;
-use Budgetlens\PostNLApi\Messages\Responses\PostalcodeCheckResponse;
 
 class CalculateDeliveryDateRequest extends AbstractRequest implements RequestInterface, MessageInterface
 {
