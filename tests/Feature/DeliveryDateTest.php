@@ -41,6 +41,7 @@ class DeliveryDateTest extends TestCase
         $this->expectException(ClientException::class);
         $request = $this->getClient('DeliveryDate/calculateDeliveryDateError.json', 400)->deliveryDate()->calculateDeliveryDate();
         $request->setShippingDate(new \DateTime())
+            ->setCutOffTime('16:00:00')
             ->setShippingDuration(1)
             ->setPostalCode('1411XC');
         $response = $request->send();
