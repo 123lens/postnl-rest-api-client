@@ -18,6 +18,7 @@ namespace Budgetlens\PostNLApi\Messages\Requests\DeliveryDate;
 use Budgetlens\PostNLApi\Messages\Requests\AbstractRequest;
 use Budgetlens\PostNLApi\Messages\Requests\Contracts\MessageInterface;
 use Budgetlens\PostNLApi\Messages\Requests\Contracts\RequestInterface;
+use Budgetlens\PostNLApi\Messages\Responses\DeliveryDate\CalculateDeliveryDateResponse;
 use Budgetlens\PostNLApi\Messages\Responses\NearestLocationsResponse;
 use Budgetlens\PostNLApi\Messages\Responses\PostalcodeCheckResponse;
 
@@ -69,7 +70,7 @@ class CalculateDeliveryDateRequest extends AbstractRequest implements RequestInt
      */
     public function setShippingDuration(int $duration)
     {
-        $this->setParameter('shipping_duration', $duration);
+        return $this->setParameter('shipping_duration', $duration);
     }
 
     /**
@@ -601,7 +602,7 @@ class CalculateDeliveryDateRequest extends AbstractRequest implements RequestInt
         $this->validate(
             'shipping_date',
             'shipping_duration',
-            'cut_off_time',
+//            'cut_off_time',
             'postal_code'
         );
 
@@ -650,8 +651,12 @@ class CalculateDeliveryDateRequest extends AbstractRequest implements RequestInt
                 'query' => $data
             ]
         );
-        print_r($response->getBody()->json());
-        exit;
-        return $this->response = new PostalcodeCheckResponse($this, $response->getBody()->json());
+//        $path = "/Users/sebastiaan/Projects/123 Lens/123lens-Opensource-Packages/postnl-rest-api/tests/Mocks/DeliveryDate/";
+//        file_put_contents($path . "calculateDeliveryDateSuccess.json", $response->getBody()->getContents());
+//        die(__DIR__);
+//
+//        print_r($response->getBody()->json());
+//        exit;
+        return $this->response = new CalculateDeliveryDateResponse($this, $response->getBody()->json());
     }
 }
