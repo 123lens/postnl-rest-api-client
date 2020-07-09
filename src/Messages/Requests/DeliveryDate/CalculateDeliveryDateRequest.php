@@ -602,7 +602,7 @@ class CalculateDeliveryDateRequest extends AbstractRequest implements RequestInt
         $this->validate(
             'shipping_date',
             'shipping_duration',
-//            'cut_off_time',
+            'cut_off_time',
             'postal_code'
         );
 
@@ -651,12 +651,6 @@ class CalculateDeliveryDateRequest extends AbstractRequest implements RequestInt
                 'query' => $data
             ]
         );
-//        $path = "/Users/sebastiaan/Projects/123 Lens/123lens-Opensource-Packages/postnl-rest-api/tests/Mocks/DeliveryDate/";
-//        file_put_contents($path . "calculateDeliveryDateSuccess.json", $response->getBody()->getContents());
-//        die(__DIR__);
-//
-//        print_r($response->getBody()->json());
-//        exit;
         return $this->response = new CalculateDeliveryDateResponse($this, $response->getBody()->json());
     }
 }
