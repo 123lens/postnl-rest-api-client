@@ -10,6 +10,17 @@ namespace Budgetlens\PostNLApi\Traits;
 trait ValidationTrait
 {
     /**
+     * Validate correct format
+     * @param $value
+     */
+    public function isTime($value, ?string $field = null): void
+    {
+        if (!preg_match("/^[0-9]{2}:[0-9]{2}:[0-9]{2}$/", $value)) {
+            throw new \InvalidArgumentException("{$field} invalid format, time format is: HH:ii:ss");
+        }
+    }
+
+    /**
      * Validate length of string or count of array
      * @param $value
      * @param int $length
