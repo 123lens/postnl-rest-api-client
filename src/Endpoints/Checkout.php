@@ -19,4 +19,14 @@ class Checkout extends AbstractEndpoint
     {
         return $this->createRequest('Budgetlens\PostNLApi\Messages\Requests\PostalcodeCheckRequest', $data);
     }
+
+    /**
+     * Checkout request
+     * @param array $data
+     * @return mixed
+     */
+    public function checkout(array $data = [])
+    {
+        return $this->createRequest('Budgetlens\PostNLApi\Messages\Requests\CheckoutRequest', $data);
+    }
 }

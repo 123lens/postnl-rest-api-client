@@ -1,0 +1,27 @@
+{
+  "DeliveryOptions":[
+    {
+      "DeliveryDate":"10-07-2020",
+      "Timeframe":[
+        {
+          "From":"12:30:00",
+          "To":"15:00:00",
+          "Options":[
+            "Daytime"
+          ],
+          "ShippingDate":null
+        }
+      ]
+    }
+  ],
+  "Warnings":[
+    {
+      "DeliveryDate":"09-07-2020",
+      "Code":"08",
+      "Description":"Geen bezorgopties gevonden op datum.",
+      "Options":[
+        "Daytime"
+      ]
+    }
+  ]
+}

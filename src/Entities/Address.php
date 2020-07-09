@@ -17,6 +17,7 @@ class Address extends AbstractEntity implements EntityInterface
     public $Remark;
     public $Street;
     public $Zipcode;
+    public $CompanyName;
 
     /**
      * Get City
@@ -134,6 +135,26 @@ class Address extends AbstractEntity implements EntityInterface
     public function setZipcode(string $zipcode)
     {
         $this->Zipcode = $zipcode;
+        return $this;
+    }
+
+    /**
+     * Get Company Name
+     * @return string|null
+     */
+    public function getCompanyName(): ?string
+    {
+        return $this->CompanyName;
+    }
+
+    /**
+     * Set Company Name
+     * @param string $companyName
+     * @return $this
+     */
+    public function setCompanyName(string $companyName)
+    {
+        $this->CompanyName = $companyName;
         return $this;
     }
 }

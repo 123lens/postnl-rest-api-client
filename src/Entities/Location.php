@@ -18,8 +18,10 @@ class Location extends AbstractEntity implements EntityInterface
     public $Name;
     public $PartnerName;
     public $RetailNetworkID;
+    public $PartnerID; // same as retailer network id
     public $Saleschannel;
     public $TerminalType;
+    public $PickupTime;
     private $address;
     private $openingHours;
     private $deliveryOptions;
@@ -118,6 +120,26 @@ class Location extends AbstractEntity implements EntityInterface
     public function setName(string $name)
     {
         $this->Name = $name;
+        return $this;
+    }
+
+    /**
+     * Get Pickup Time
+     * @return string|null
+     */
+    public function getPickupTime(): ?string
+    {
+        return $this->PickupTime;
+    }
+
+    /**
+     * Set Pickup time
+     * @param string $time
+     * @return $this
+     */
+    public function setPickupTime(string $time)
+    {
+        $this->PickupTime = $time;
         return $this;
     }
 

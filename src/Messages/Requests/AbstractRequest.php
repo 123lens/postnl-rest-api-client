@@ -4,6 +4,7 @@ namespace Budgetlens\PostNLApi\Messages\Requests;
 use Budgetlens\PostNLApi\Messages\Requests\Contracts\RequestInterface;
 use Budgetlens\PostNLApi\Messages\Responses\Contracts\ResponseInterface;
 use Budgetlens\PostNLApi\Traits\ParametersTrait;
+use Budgetlens\PostNLApi\Traits\ValidationTrait;
 use Budgetlens\PostNLApi\Util\Helper;
 use Budgetlens\PostNLApi\Util\ParameterBag;
 use GuzzleHttp\ClientInterface;
@@ -16,7 +17,7 @@ use GuzzleHttp\ClientInterface;
 
 abstract class AbstractRequest implements RequestInterface
 {
-    use ParametersTrait;
+    use ParametersTrait, ValidationTrait;
 
     /**
      * @var ClientInterface
