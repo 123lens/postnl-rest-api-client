@@ -41,7 +41,7 @@ class PickupOption extends AbstractEntity implements EntityInterface
      * Get Shipping date
      * @return DateTime|null
      */
-    public function getShippingDate(): ?string
+    public function getShippingDate(): ?\DateTime
     {
         return $this->shippingDate;
     }

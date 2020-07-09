@@ -90,11 +90,9 @@ class TimeFrame extends AbstractEntity implements EntityInterface
      * @see https://developer.postnl.nl/browse-apis/checkout/checkout-api/documentation/
      * @return string|null
      */
-    public function getShippingDate(): ?string
+    public function getShippingDate(): ?\DateTime
     {
-        return !is_null($this->shippingDate)
-            ? $this->shippingDate->format("Y-m-d")
-            : null;
+        return $this->shippingDate;
     }
 
     /**

@@ -184,6 +184,26 @@ class Location extends AbstractEntity implements EntityInterface
     }
 
     /**
+     * Get Partner ID
+     * @return string|null
+     */
+    public function getPartnerId(): ?string
+    {
+        return $this->PartnerID;
+    }
+
+    /**
+     * Set Partner ID
+     * @param string $partnerId
+     * @return $this
+     */
+    public function setPartnerId(string $partnerId)
+    {
+        $this->PartnerID = $partnerId;
+        return $this;
+    }
+
+    /**
      * Get Sales Channel
      * @return string|null
      */
