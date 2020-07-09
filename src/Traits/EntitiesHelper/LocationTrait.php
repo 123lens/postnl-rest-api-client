@@ -1,6 +1,9 @@
 <?php
 namespace Budgetlens\PostNLApi\Traits\EntitiesHelper;
 
+/**
+ * Helper trait for building location entity from array input
+ */
 
 use Budgetlens\PostNLApi\Entities\Address;
 use Budgetlens\PostNLApi\Entities\DeliveryOption;

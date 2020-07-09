@@ -11,7 +11,6 @@ class RequestExceptionMiddleware
         return function (RequestInterface $request, array $options) use ($handler) {
             return $handler($request, $options)->then(
                 function (ResponseInterface $response) use ($request) {
-//                    die($request->getBody()->getContents());
                     $code = $response->getStatusCode();
                     if ($code < 400) {
                         return $response;

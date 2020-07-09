@@ -41,10 +41,9 @@ abstract class AbstractEntity implements EntityInterface
                 $propertyName = $property->getName();
                 if (isset($this->data[$propertyName])) {
                     $this->{$propertyName} = $this->data[$propertyName];
-                } else if (isset($this->data[Helper::camelCase($propertyName)])) {
+                } elseif (isset($this->data[Helper::camelCase($propertyName)])) {
                     $this->{$propertyName} = $this->data[Helper::camelCase($propertyName)];
                 }
-
             }
         }
     }
