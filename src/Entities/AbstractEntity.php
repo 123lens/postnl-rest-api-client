@@ -9,6 +9,7 @@ namespace Budgetlens\PostNLApi\Entities;
 
 use Budgetlens\PostNLApi\Entities\Contracts\EntityInterface;
 use Budgetlens\PostNLApi\Traits\ValidationTrait;
+use Budgetlens\PostNLApi\Util\Helper;
 
 abstract class AbstractEntity implements EntityInterface
 {
@@ -40,6 +41,8 @@ abstract class AbstractEntity implements EntityInterface
                 $propertyName = $property->getName();
                 if (isset($this->data[$propertyName])) {
                     $this->{$propertyName} = $this->data[$propertyName];
+                } elseif (isset($this->data[Helper::camelCase($propertyName)])) {
+                    $this->{$propertyName} = $this->data[Helper::camelCase($propertyName)];
                 }
             }
         }

@@ -4,6 +4,7 @@ namespace Budgetlens\PostNLApi;
 use Budgetlens\PostNLApi\Client\HttpClient;
 use Budgetlens\PostNLApi\Client\HttpClientConfig;
 use Budgetlens\PostNLApi\Endpoints\Addresses;
+use Budgetlens\PostNLApi\Endpoints\Checkout;
 use Budgetlens\PostNLApi\Endpoints\Locations;
 use GuzzleHttp\ClientInterface;
 use Psr\Log\LoggerInterface;
@@ -86,5 +87,14 @@ class RestApiClient
     public function locations(): Locations
     {
         return new Locations($this->client);
+    }
+
+    /**
+     * Checkout endpoint
+     * @return Checkout
+     */
+    public function checkout(): Checkout
+    {
+        return new Checkout($this->client);
     }
 }
