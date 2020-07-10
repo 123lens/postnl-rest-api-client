@@ -2,15 +2,17 @@
 namespace Budgetlens\PostNLApi\Messages\Requests\DeliveryDate;
 
 /**
- * Postalcode Check Request
+ * Calculate Shipping Date Request
  *
  * ### Example
  * <code>
- *      $request = $client->checkout()->postalcodeCheck();
- *      $request->setPostalcode('1000AA')
- *      $request->setHouseNumber(1);
+ *      $request = $client->deliveryDate()->calculateShippingDate();
+ *      $request->setDeliveryDate(\new DateTime())
+ *      $request->setShippingDuration(1)
+ *      $request->setPostalCode('1000AA');
  *      $response = $request->send();
  *      $data = $response->getData();
+ *      $shippingDate = $response->getSendDate();
  * </code>
  *
  */
@@ -18,7 +20,6 @@ namespace Budgetlens\PostNLApi\Messages\Requests\DeliveryDate;
 use Budgetlens\PostNLApi\Messages\Requests\AbstractRequest;
 use Budgetlens\PostNLApi\Messages\Requests\Contracts\MessageInterface;
 use Budgetlens\PostNLApi\Messages\Requests\Contracts\RequestInterface;
-use Budgetlens\PostNLApi\Messages\Responses\DeliveryDate\CalculateDeliveryDateResponse;
 use Budgetlens\PostNLApi\Messages\Responses\DeliveryDate\CalculateShippingDateResponse;
 
 class CalculateShippingDateRequest extends AbstractRequest implements RequestInterface, MessageInterface
@@ -29,6 +30,7 @@ class CalculateShippingDateRequest extends AbstractRequest implements RequestInt
 
     /**
      * Get Delivery Date
+     * Date of the expected delivery (to the final destination) of the shipment.
      * @return \DateTime|null
      */
     public function getDeliveryDate(): ?\DateTime
@@ -38,7 +40,7 @@ class CalculateShippingDateRequest extends AbstractRequest implements RequestInt
 
     /**
      * Set Delivery Date
-     *
+     * Date of the expected delivery (to the final destination) of the shipment.
      * @param \DateTime $date
      * @return CalculateShippingDateRequest
      */
