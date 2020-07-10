@@ -45,7 +45,7 @@ Meaning of **Is finished:**:
 | [Shippingstatus webservice](#Shippingstatus-webservice)   | v1 | &#9744;
 | [Return on demand](#Return-on-demand)                     | v1 | &#9744;
 |**Delivery Options** [More info](https://developer.postnl.nl/browse-apis/delivery-options/)||
-| [Deliverydate webservice](#Deliverydate-webservice)       | v1 | &#9744;
+| [Deliverydate webservice](#Deliverydate-webservice)       | v1 | &#9745;
 | [Location webservice](#Location-webservice)               | v1 | &#9744;
 | [Timeframe webservice](#Timeframe-webservice)             | v1 | &#9744;
 |**Checkout** [More info](https://developer.postnl.nl/browse-apis/checkout/)
@@ -139,8 +139,8 @@ Base endoint: /shipment
 
 |Endpoint|Version|Implemented|Tested
 |---|---|---|---
-| /v2_2/calculate/date/delivery | v2_2 | &#9744;| &#9744;
-| /v2_2/calculate/date/shipping | v2_2 | &#9744;| &#9744;
+| /v2_2/calculate/date/delivery | v2_2 | &#9745;| &#9745;
+| /v2_2/calculate/date/shipping | v2_2 | &#9745;| &#9745;
 
 ### Location webservice
 Base endoint: /shipment 
