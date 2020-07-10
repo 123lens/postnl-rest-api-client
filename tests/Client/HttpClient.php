@@ -66,7 +66,6 @@ class HttpClient extends Client
         }
         $stack->push(Middleware::redirect(), 'allow_redirects');
         $stack->push(new RequestExceptionMiddleware(), 'http_errors');
-        $stack->push(new ResponseIsErrorMiddleware());
         $stack->push(new JsonResponseMiddleware());
 
         return $stack;
