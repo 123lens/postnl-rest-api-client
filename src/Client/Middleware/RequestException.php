@@ -15,8 +15,7 @@ class RequestException extends \GuzzleHttp\Exception\RequestException
         ResponseInterface $response = null,
         \Throwable $previous = null,
         array $ctx = []
-    ): \GuzzleHttp\Exception\RequestException
-    {
+    ): \GuzzleHttp\Exception\RequestException {
         return parent::create($request, $response);
     }
 }

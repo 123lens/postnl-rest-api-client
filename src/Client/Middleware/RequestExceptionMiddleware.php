@@ -19,7 +19,11 @@ class RequestExceptionMiddleware
                         throw RequestException::create($request, $response);
                     } else {
                         // json formatted error response from PostNL
-                        throw new ErrorResponseException('Error', $response->getStatusCode(), $response->getBody()->json());
+                        throw new ErrorResponseException(
+                            'Error',
+                            $response->getStatusCode(),
+                            $response->getBody()->json()
+                        );
                     }
                 }
             );
