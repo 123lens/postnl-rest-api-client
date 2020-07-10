@@ -1,6 +1,7 @@
 <?php
 namespace Tests\Feature;
 
+use Budgetlens\PostNLApi\Client\Middleware\ErrorResponseException;
 use Budgetlens\PostNLApi\Entities\Address;
 use Budgetlens\PostNLApi\Entities\Location;
 use Budgetlens\PostNLApi\Messages\Responses\LocationLookupResponse;
@@ -97,8 +98,8 @@ class LocationsTest extends TestCase
      */
     public function locationLookupException()
     {
-        $this->expectException(ClientException::class);
-        $request = $this->getClient('ErrorResponse.json')->locations()->locationLookup();
+        $this->expectException(ErrorResponseException::class);
+        $request = $this->getClient('ErrorResponse.json', 400)->locations()->locationLookup();
         $request->setLocationCode('161503');
         $request->setRetailNetworkID('PNPNL-01');
         $request->send();
