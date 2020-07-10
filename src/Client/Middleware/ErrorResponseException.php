@@ -1,11 +1,19 @@
 <?php
 namespace Budgetlens\PostNLApi\Client\Middleware;
 
+/**
+ * Error Response Exception
+ * PostNL Returned a 400 error code with json formatted error body.
+ * However PostNL doesn't use the same formatting for the errors.
+*/
 
 use Throwable;
 
 class ErrorResponseException extends \Exception
 {
+    /**
+     * @var array
+     */
     protected $errors = [];
 
     public function __construct($message = "", $code = 0, $errors = [])
@@ -29,7 +37,12 @@ class ErrorResponseException extends \Exception
             $this->errors = $errors;
         }
     }
-    public function getErrors()
+
+    /**
+     * Return errors
+     * @return array
+     */
+    public function getErrors(): array
     {
         return $this->errors;
     }

@@ -15,11 +15,8 @@ class RequestException extends \GuzzleHttp\Exception\RequestException
         ResponseInterface $response = null,
         \Throwable $previous = null,
         array $ctx = []
-    ): \GuzzleHttp\Exception\RequestException {
-        if ($response === null || !($response->getBody() instanceof JsonResponse)) {
-            return parent::create($request, $response);
-        }
-
-        throw new ErrorResponseException('Error', $response->getStatusCode(), $response->getBody()->json());
+    ): \GuzzleHttp\Exception\RequestException
+    {
+        return parent::create($request, $response);
     }
 }
