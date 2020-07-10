@@ -52,7 +52,6 @@ class HttpClient extends Client
             $stack->push(Middleware::log($logger, new MessageFormatter()));
         }
         $stack->push(new RequestExceptionMiddleware(), 'http_errors');
-        $stack->push(new ResponseIsErrorMiddleware());
         $stack->push(new JsonResponseMiddleware());
         return $stack;
     }

@@ -15,8 +15,16 @@ class RequestExceptionMiddleware
                     if ($code < 400) {
                         return $response;
                     }
-
-                    throw RequestException::create($request, $response);
+                    if ($response === null || !($response->getBody() instanceof JsonResponse)) {
+                        throw RequestException::create($request, $response);
+                    } else {
+                        // json formatted error response from PostNL
+                        throw new ErrorResponseException(
+                            'Error',
+                            $response->getStatusCode(),
+                            $response->getBody()->json()
+                        );
+                    }
                 }
             );
         };
