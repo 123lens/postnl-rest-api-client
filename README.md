@@ -46,7 +46,7 @@ Meaning of **Is finished:**:
 | [Return on demand](#Return-on-demand)                     | v1 | &#9744;
 |**Delivery Options** [More info](https://developer.postnl.nl/browse-apis/delivery-options/)||
 | [Deliverydate webservice](#Deliverydate-webservice)       | v1 | &#9745;
-| [Location webservice](#Location-webservice)               | v1 | &#9744;
+| [Location webservice](#Location-webservice)               | v1 | &#9745;
 | [Timeframe webservice](#Timeframe-webservice)             | v1 | &#9744;
 |**Checkout** [More info](https://developer.postnl.nl/browse-apis/checkout/)
 | [Checkout Postalcode Check](#Checkout-Postalcode-Check)   | v1 | &#9745;
@@ -147,10 +147,10 @@ Base endoint: /shipment
 
 |Endpoint|Version|Implemented|Tested
 |---|---|---|---
-| /v2_1/locations/nearest           | v2_1 | &#9744;| &#9744;
-| /v2_1/locations/nearest/geocode   | v2_1 | &#9744;| &#9744;
-| /v2_1/locations/area              | v2_1 | &#9744;| &#9744;
-| /v2_1/locations/lookup            | v2_1 | &#9744;| &#9744;
+| /v2_1/locations/nearest           | v2_1 | &#9745;| &#9745;
+| /v2_1/locations/nearest/geocode   | v2_1 | &#9745;| &#9745;
+| /v2_1/locations/area              | v2_1 | &#9745;| &#9745;
+| /v2_1/locations/lookup            | v2_1 | &#9745;| &#9745;
 
 ### Timeframe webservice
 Base endoint: /shipment/v2_1 
