@@ -2,17 +2,8 @@
 namespace Tests\Feature;
 
 use Budgetlens\PostNLApi\Client\Middleware\ErrorResponseException;
-use Budgetlens\PostNLApi\Client\Middleware\RequestException;
-use Budgetlens\PostNLApi\Entities\Address;
-use Budgetlens\PostNLApi\Entities\Location;
 use Budgetlens\PostNLApi\Messages\Responses\DeliveryDate\CalculateDeliveryDateResponse;
 use Budgetlens\PostNLApi\Messages\Responses\DeliveryDate\CalculateShippingDateResponse;
-use Budgetlens\PostNLApi\Messages\Responses\LocationLookupResponse;
-use Budgetlens\PostNLApi\Messages\Responses\NearestLocationsByAreaResponse;
-use Budgetlens\PostNLApi\Messages\Responses\NearestLocationsByGeoResponse;
-use Budgetlens\PostNLApi\Messages\Responses\NearestLocationsResponse;
-use GuzzleHttp\Exception\ClientException;
-use http\Exception\InvalidArgumentException;
 use Tests\TestCase;
 
 class DeliveryDateTest extends TestCase
