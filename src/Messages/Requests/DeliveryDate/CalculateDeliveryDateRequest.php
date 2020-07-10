@@ -2,7 +2,7 @@
 namespace Budgetlens\PostNLApi\Messages\Requests\DeliveryDate;
 
 /**
- * Postalcode Check Request
+ * Calculate Delivery Date Request
  *
  * ### Example
  * <code>
