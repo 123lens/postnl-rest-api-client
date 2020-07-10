@@ -5,10 +5,10 @@ namespace Budgetlens\PostNLApi\Messages\Responses\DeliveryDate;
  * Calculate Delivery Date Response
  */
 
-use Budgetlens\PostNLApi\Messages\Responses\AbstractLocationsResponse;
+use Budgetlens\PostNLApi\Messages\Responses\AbstractResponse;
 use Budgetlens\PostNLApi\Messages\Responses\Contracts\ResponseInterface;
 
-class CalculateDeliveryDateResponse extends AbstractLocationsResponse implements ResponseInterface
+class CalculateDeliveryDateResponse extends AbstractResponse implements ResponseInterface
 {
     /**
      * Get Delivery Date

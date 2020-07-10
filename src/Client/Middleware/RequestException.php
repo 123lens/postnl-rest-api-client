@@ -20,17 +20,6 @@ class RequestException extends \GuzzleHttp\Exception\RequestException
             return parent::create($request, $response);
         }
 
-        $errorResponse = $response->getBody()->json();
-        $error = $errorResponse['Error'] ?? [];
-        if (count($error) === 0) {
-            return parent::create($request, $response);
-        }
-
-        $newResponse = $response->withStatus(
-            404,
-            sprintf('%s: %s', $error['ErrorMsg'], $error['ErrorNumber'])
-        );
-
-        return parent::create($request, $newResponse);
+        throw new ErrorResponseException('Error', $response->getStatusCode(), $response->getBody()->json());
     }
 }
