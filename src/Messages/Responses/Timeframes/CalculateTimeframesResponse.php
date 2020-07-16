@@ -22,8 +22,11 @@ class CalculateTimeframesResponse extends AbstractResponse implements ResponseIn
         $return = [];
         foreach ($timeframes as $item) {
             $timeframe = (new DeliveryTimeFrame())
-                ->setDate($item['Date']);
+                ->setDate(new \DateTime($item['Date']));
             $tframes = $item['Timeframes']['TimeframeTimeFrame'] ?? [];
+            if (!isset($tframes[0])) { // assoc array
+                $tframes = array($tframes);
+            }
             foreach ($tframes as $tframe) {
                 $tmp = $tframe['Options'] ?? [];
                 $timeframe->addTimeframe(
@@ -47,6 +50,7 @@ class CalculateTimeframesResponse extends AbstractResponse implements ResponseIn
             $options = $frame['Options'] ?? [];
             $reason = (new ReasonNoTimeframeEntity())
                 ->setCode($frame['Code'] ?? '')
+                ->setDescription($frame['Description'] ?? '')
                 ->setDate(new \DateTime($frame['Date']))
                 ->setOptions($this->getOptions($options));
             $return[] = $reason;

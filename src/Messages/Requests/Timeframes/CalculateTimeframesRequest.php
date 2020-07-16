@@ -23,6 +23,7 @@ use Budgetlens\PostNLApi\Messages\Requests\AbstractRequest;
 use Budgetlens\PostNLApi\Messages\Requests\Contracts\MessageInterface;
 use Budgetlens\PostNLApi\Messages\Requests\Contracts\RequestInterface;
 use Budgetlens\PostNLApi\Messages\Responses\DeliveryDate\CalculateDeliveryDateResponse;
+use Budgetlens\PostNLApi\Messages\Responses\Timeframes\CalculateTimeframesResponse;
 
 class CalculateTimeframesRequest extends AbstractRequest implements RequestInterface, MessageInterface
 {
@@ -112,7 +113,7 @@ class CalculateTimeframesRequest extends AbstractRequest implements RequestInter
     {
         $this->validOption($option, $this->availableOptions);
         $options = $this->getOptions();
-        $options[] = $options;
+        $options[] = $option;
         return $this->setOptions(array_filter($options));
     }
 
@@ -345,6 +346,7 @@ class CalculateTimeframesRequest extends AbstractRequest implements RequestInter
             'Interval' => $this->getInterval(),
             'TimeframeRange' => $this->getTimeframeRange()
         ];
+        return $data;
         return array_filter($data);
     }
 
@@ -356,6 +358,9 @@ class CalculateTimeframesRequest extends AbstractRequest implements RequestInter
      */
     public function sendData(array $data = [])
     {
+        unset($data['AllowSundaySorting']);
+        unset($data['EndDate']);
+
         $response = $this->client->request(
             'GET',
             '/shipment/v2_1/calculate/timeframes',
@@ -363,7 +368,6 @@ class CalculateTimeframesRequest extends AbstractRequest implements RequestInter
                 'query' => $data
             ]
         );
-        print_r($response->getBody()->json());
-        return $this->response = new CalculateDeliveryDateResponse($this, $response->getBody()->json());
+        return $this->response = new CalculateTimeframesResponse($this, $response->getBody()->json());
     }
 }
