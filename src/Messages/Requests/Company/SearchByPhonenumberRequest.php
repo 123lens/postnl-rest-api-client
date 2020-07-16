@@ -7,10 +7,9 @@ namespace Budgetlens\PostNLApi\Messages\Requests\Company;
  * ### Example
  * <code>
  *      $request = $client->company()->companySearchByPhonenumber();
- *      $request->setLocationCode('173187');
- *      $request->setRetailNetworkID('PNPNL-01');
+ *      $request->setPhonenumber('1234567890');
  *      $response = $request->send();
- *      $location = $response->getLocation();
+ *      $data = $response->getData();
  * </code>
  *
  */
