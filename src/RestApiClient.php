@@ -7,6 +7,7 @@ use Budgetlens\PostNLApi\Endpoints\Addresses;
 use Budgetlens\PostNLApi\Endpoints\Checkout;
 use Budgetlens\PostNLApi\Endpoints\Deliverydate;
 use Budgetlens\PostNLApi\Endpoints\Locations;
+use Budgetlens\PostNLApi\Endpoints\Timeframe;
 use GuzzleHttp\ClientInterface;
 use Psr\Log\LoggerInterface;
 
@@ -106,5 +107,14 @@ class RestApiClient
     public function deliveryDate(): Deliverydate
     {
         return new Deliverydate($this->client);
+    }
+
+    /**
+     * Timeframe Endpoint
+     * @return Timeframe
+     */
+    public function timeframe(): Timeframe
+    {
+        return new Timeframe($this->client);
     }
 }
