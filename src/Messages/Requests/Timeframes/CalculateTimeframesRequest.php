@@ -271,7 +271,8 @@ class CalculateTimeframesRequest extends AbstractRequest implements RequestInter
 
     /**
      * Get Interval
-     * Optional filter for MyTime shipments (possible values: 60/30); choose 60 if you only want ‘whole hour’ timeframes returned
+     * Optional filter for MyTime shipments (possible values: 60/30);
+     * choose 60 if you only want ‘whole hour’ timeframes returned
      * @return int|null
      */
     public function getInterval(): ?int
@@ -362,9 +363,6 @@ class CalculateTimeframesRequest extends AbstractRequest implements RequestInter
      */
     public function sendData(array $data = [])
     {
-        unset($data['AllowSundaySorting']);
-        unset($data['EndDate']);
-
         $response = $this->client->request(
             'GET',
             '/shipment/v2_1/calculate/timeframes',
