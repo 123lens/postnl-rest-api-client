@@ -33,10 +33,10 @@ Meaning of **Is finished:**:
 |Service | Version | Implemented
 |---|---|---
 |**Addresses** [More info](https://developer.postnl.nl/browse-apis/addresses/)||
-| [Adrescheck Nationaal](#Adrescheck-Nationaal)             | v1 | &#9744;
-| [Adrescheck Internationaal](#Adrescheck-Internationaal)   | v1 | &#9744;
-| [Geo Adrescheck Nationaal](#Geo-Adrescheck-Nationaal)     | v1 | &#9744;
-| [Adrescheck Basis Nationaal](#Adrescheck-Basis-Nationaal) | v1 | &#9744;
+| [Adrescheck Nationaal](#Adrescheck-Nationaal)             | v1 | &#9745;
+| [Adrescheck Internationaal](#Adrescheck-Internationaal)   | v1 | &#9745;
+| [Geo Adrescheck Nationaal](#Geo-Adrescheck-Nationaal)     | v1 | &#9745;
+| [Adrescheck Basis Nationaal](#Adrescheck-Basis-Nationaal) | v1 | &#9745;
 |**Send and Track** [More info](https://developer.postnl.nl/browse-apis/send-and-track/)||
 | [Shipping webservice](#Shipping-webservice)               | v1 | &#9744;
 | [Barcode webservice](#Barcode-webservice)                 | v1 | &#9744;
@@ -57,34 +57,42 @@ Meaning of **Is finished:**:
 ## Endpoint/Service specific
 
 ### Adrescheck Nationaal
+**No contract for this service, tests not 100%!** 
+
 Base endpoint: /address/national
 
 |Endpoint|Version|Implemented|Tested
 |---|---|---|---
-| /v1/validate/ | v1 | &#9744;| &#9744;
+| /v1/validate/ | v1 | &#9745;| &#9745;
 
 
 ### Adrescheck Internationaal
+**No contract for this service, tests not 100%!**
+
 Base endpoint: /address/international
 
 |Endpoint|Version|Implemented|Tested
 |---|---|---|---
 | /v1/labelformat | v1 | &#9744;| &#9744;
-| /v1/validate | v1 | &#9744;| &#9744;
+| /v1/validate | v1 | &#9745;| &#9745;
 
 ### Geo Adrescheck Nationaal
+**No contract for this service, tests not 100%!**
+
 Base endoint: /address/national
 
 |Endpoint|Version|Implemented|Tested
 |---|---|---|---
-| /v1/geocode | v1 | &#9744;| &#9744;
+| /v1/geocode | v1 | &#9745;| &#9745;
 
 ### Adrescheck Basis Nationaal
+**No contract for this service, tests not 100%!**
+
 Base endoint: /address/sequence 
 
 |Endpoint|Version|Implemented|Tested
 |---|---|---|---
-| /v1/postalcode | v1 | &#9744;| &#9744;
+| /v1/postalcode | v1 | &#9745;| &#9745;
 
 ### Shipping webservice
 Base endoint: / 
