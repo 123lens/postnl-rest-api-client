@@ -2,19 +2,18 @@
 namespace Budgetlens\PostNLApi\Messages\Requests\Addresses\National;
 
 /**
- * Calculate Delivery Date Request
+ * Validate National Address
  *
  * ### Example
  * <code>
- *      $request = $client->deliveryDate()->calculateDeliveryDate();
- *      $request->setShippingDate(\new DateTime())
- *      $request->setShippingDuration(1)
- *      $request->setCutOffTime('16:00:00')
- *      $request->setPostalCode('1000AA');
+ *      $request = $client->addresses()->validateAddressCheckNational();
+ *      $request->setPostalCode('1000AA')
+ *      $request->setCity('Plaats')
+ *      $request->setStreet('Straat')
+ *      $request->setHouseNumber(1)
+ *      $request->setAddition('');
  *      $response = $request->send();
  *      $data = $response->getData();
- *      $deliveryDate = $response->getDeliveryDate();
- *      $options = $response->getDeliveryOptions();
  * </code>
  *
  */
