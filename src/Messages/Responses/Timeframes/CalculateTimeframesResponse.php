@@ -13,6 +13,11 @@ use Budgetlens\PostNLApi\Messages\Responses\Contracts\ResponseInterface;
 
 class CalculateTimeframesResponse extends AbstractResponse implements ResponseInterface
 {
+    /**
+     * Get Available timeframes
+     * @return array
+     * @throws \Exception
+     */
     public function getTimeframes(): array
     {
         $data = $this->getData();
@@ -41,6 +46,11 @@ class CalculateTimeframesResponse extends AbstractResponse implements ResponseIn
         return $return;
     }
 
+    /**
+     * Get Reasons no timeframe
+     * @return array
+     * @throws \Exception
+     */
     public function getReasonNoTimeframes(): array
     {
         $data = $this->getData();
@@ -63,7 +73,7 @@ class CalculateTimeframesResponse extends AbstractResponse implements ResponseIn
      * @param $options
      * @return array
      */
-    public function getOptions($options): array
+    private function getOptions($options): array
     {
         // no clue why PostNL uses "string" as key.. but get rid of it..
         return array_values($options);

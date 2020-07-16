@@ -6,15 +6,19 @@ namespace Budgetlens\PostNLApi\Messages\Requests\Timeframes;
  *
  * ### Example
  * <code>
- *      $request = $client->deliveryDate()->calculateDeliveryDate();
- *      $request->setShippingDate(\new DateTime())
- *      $request->setShippingDuration(1)
- *      $request->setCutOffTime('16:00:00')
- *      $request->setPostalCode('1000AA');
+ *      $request = $client->timeframe()->calculateTimeframes();
+ *      $request->setStartDate(new \DateTime())
+ *      $request->setEndDate((new \DateTime())->add(new \DateInterval("P7D")))
+ *      $request->addOption('Daytime')
+ *      $request->setAllowSundaySorting(false)
+ *      $request->setCountryCode("NL")
+ *      $request->setPostalCode('1000AA')
+ *      $request->setHouseNumber(1);
+ *
  *      $response = $request->send();
  *      $data = $response->getData();
- *      $deliveryDate = $response->getDeliveryDate();
- *      $options = $response->getDeliveryOptions();
+ *      $timeframes = $response->getTimeframes();
+ *      $noTimeframes = $response->getReasonNoTimeframes();
  * </code>
  *
  */

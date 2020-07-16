@@ -38,12 +38,21 @@ class DeliveryTimeFrame extends AbstractEntity implements EntityInterface
         return $this->date;
     }
 
+    /**
+     * Add Timeframe
+     * @param TimeFrame $timeframe
+     * @return $this
+     */
     public function addTimeframe(TimeFrame $timeframe)
     {
         $this->timeframes[] = $timeframe;
         return $this;
     }
 
+    /**
+     * Get Timeframes
+     * @return array
+     */
     public function getTimeframes(): array
     {
         return $this->timeframes;
