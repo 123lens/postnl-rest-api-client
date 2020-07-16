@@ -10,13 +10,21 @@ namespace Budgetlens\PostNLApi\Endpoints;
 
 class Addresses extends AbstractEndpoint
 {
-    public function getAddressByPostalcodeAndHouseNumber(string $postalCode, string $houseNumber)
+    public function validateAddressCheckNational(array $data = [])
     {
-        $response = $this->client->get('/address/sequence/v1/postalcode', [
-            'postalcode' => $postalCode,
-            'housenumber' => $houseNumber
-        ]);
-        print_r($response->getBody()->json());
-        exit;
+        return $this->createRequest(
+            'Budgetlens\PostNLApi\Messages\Requests\Addresses\National\ValidateAddressRequest',
+            $data
+        );
     }
+//
+//    public function getAddressByPostalcodeAndHouseNumber(string $postalCode, string $houseNumber)
+//    {
+//        $response = $this->client->get('/address/sequence/v1/postalcode', [
+//            'postalcode' => $postalCode,
+//            'housenumber' => $houseNumber
+//        ]);
+//        print_r($response->getBody()->json());
+//        exit;
+//    }
 }
