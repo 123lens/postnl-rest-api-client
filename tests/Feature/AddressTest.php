@@ -15,10 +15,10 @@ class AddressTest extends TestCase
     public function validateAddressNational()
     {
         $request = $this->getClient('Addresses/AddressCheckNational/ValidateAddressSuccess.json')->addresses()->validateAddressCheckNational();
-        $request->setPostalCode('1411XC')
-            ->setCity('Naarden')
-            ->setStreet('Churchillstraat')
-            ->setHouseNumber(22)
+        $request->setPostalCode('1000AA')
+            ->setCity('Plaats')
+            ->setStreet('Straat')
+            ->setHouseNumber(1)
             ->setAddition('');
         $response = $request->send();
         $this->assertInstanceOf(ValidateAddressResponse::class, $response);
