@@ -1,10 +1,7 @@
 <?php
 namespace Tests\Feature;
 
-use Budgetlens\PostNLApi\Client\Middleware\ErrorResponseException;
 use Budgetlens\PostNLApi\Messages\Responses\Addresses\National\ValidateAddressResponse;
-use Budgetlens\PostNLApi\Messages\Responses\DeliveryDate\CalculateDeliveryDateResponse;
-use Budgetlens\PostNLApi\Messages\Responses\DeliveryDate\CalculateShippingDateResponse;
 use Tests\TestCase;
 
 class AddressTest extends TestCase
