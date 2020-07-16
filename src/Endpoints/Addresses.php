@@ -10,6 +10,12 @@ namespace Budgetlens\PostNLApi\Endpoints;
 
 class Addresses extends AbstractEndpoint
 {
+    /**
+     * Validate Address Check National
+     * https://developer.postnl.nl/browse-apis/addresses/adrescheck-nationaal/
+     * @param array $data
+     * @return mixed
+     */
     public function validateAddressCheckNational(array $data = [])
     {
         return $this->createRequest(
@@ -17,6 +23,22 @@ class Addresses extends AbstractEndpoint
             $data
         );
     }
+
+    /**
+     * Validate Adress Check International
+     * https://developer.postnl.nl/browse-apis/addresses/adrescheck-internationaal/
+     * @param array $data
+     * @return mixed
+     */
+    public function validateAddressCheckInternational(array $data = [])
+    {
+        return $this->createRequest(
+            'Budgetlens\PostNLApi\Messages\Requests\Addresses\International\ValidateAddressRequest',
+            $data
+        );
+    }
+
+
 //
 //    public function getAddressByPostalcodeAndHouseNumber(string $postalCode, string $houseNumber)
 //    {

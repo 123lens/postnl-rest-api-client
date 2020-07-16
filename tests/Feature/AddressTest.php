@@ -24,5 +24,7 @@ class AddressTest extends TestCase
         $this->assertSame('2132WT', $response->getPostalCode());
         $this->assertIsArray($response->getFormattedAddress());
     }
+
+
 }
 

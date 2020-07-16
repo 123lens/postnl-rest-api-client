@@ -15,6 +15,8 @@ class RequestExceptionMiddleware
                     if ($code < 400) {
                         return $response;
                     }
+                    print_r($response->getBody()->json());
+                    exit;
                     if ($response === null || !($response->getBody() instanceof JsonResponse)) {
                         throw RequestException::create($request, $response);
                     } else {
