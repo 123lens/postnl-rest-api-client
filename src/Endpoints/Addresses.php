@@ -52,6 +52,12 @@ class Addresses extends AbstractEndpoint
         );
     }
 
+    /**
+     * Validate Address Check Basic National
+     * @see https://developer.postnl.nl/browse-apis/addresses/adrescheck-basis-nationaal/
+     * @param array $data
+     * @return mixed
+     */
     public function validateAddressCheckBasicNational(array $data = [])
     {
         return $this->createRequest(
@@ -59,15 +65,4 @@ class Addresses extends AbstractEndpoint
             $data
         );
     }
-
-//
-//    public function getAddressByPostalcodeAndHouseNumber(string $postalCode, string $houseNumber)
-//    {
-//        $response = $this->client->get('/address/sequence/v1/postalcode', [
-//            'postalcode' => $postalCode,
-//            'housenumber' => $houseNumber
-//        ]);
-//        print_r($response->getBody()->json());
-//        exit;
-//    }
 }

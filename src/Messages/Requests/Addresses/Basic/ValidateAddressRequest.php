@@ -84,7 +84,7 @@ class ValidateAddressRequest extends AbstractRequest implements RequestInterface
     /**
      * Send data
      * @param array $data
-     * @return AddressCheckResponse
+     * @return ValidateAddressResponse
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function sendData(array $data = [])
