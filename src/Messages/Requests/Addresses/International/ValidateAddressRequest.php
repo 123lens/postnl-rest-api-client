@@ -156,7 +156,7 @@ class ValidateAddressRequest extends AbstractRequest implements RequestInterface
     {
         $response = $this->client->request(
             'POST',
-            '/address/national/v1/validate',
+            '/address/international/v1/validate',
             [
                 'body' => json_encode($data),
                 'headers' => [
