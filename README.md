@@ -47,7 +47,7 @@ Meaning of **Is finished:**:
 |**Delivery Options** [More info](https://developer.postnl.nl/browse-apis/delivery-options/)||
 | [Deliverydate webservice](#Deliverydate-webservice)       | v1 | &#9745;
 | [Location webservice](#Location-webservice)               | v1 | &#9745;
-| [Timeframe webservice](#Timeframe-webservice)             | v1 | &#9744;
+| [Timeframe webservice](#Timeframe-webservice)             | v1 | &#9745;
 |**Checkout** [More info](https://developer.postnl.nl/browse-apis/checkout/)
 | [Checkout Postalcode Check](#Checkout-Postalcode-Check)   | v1 | &#9745;
 | [Checkout API](#Checkout-API)                             | v1 | &#9745;
@@ -157,7 +157,7 @@ Base endoint: /shipment/v2_1
 
 |Endpoint|Version|Implemented|Tested
 |---|---|---|---
-| /calculate/timeframes |  v2_1 | &#9744;| &#9744;
+| /calculate/timeframes |  v2_1 | &#9745;| &#9745;
 
 ### Checkout Postalcode Check
 Base endoint: /shipment/checkout 
