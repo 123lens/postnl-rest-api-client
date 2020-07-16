@@ -8,6 +8,7 @@ use Budgetlens\PostNLApi\Endpoints\Checkout;
 use Budgetlens\PostNLApi\Endpoints\Deliverydate;
 use Budgetlens\PostNLApi\Endpoints\Locations;
 use Budgetlens\PostNLApi\Endpoints\Timeframe;
+use Budgetlens\PostNLApi\Endpoints\Company;
 use GuzzleHttp\ClientInterface;
 use Psr\Log\LoggerInterface;
 
@@ -116,5 +117,14 @@ class RestApiClient
     public function timeframe(): Timeframe
     {
         return new Timeframe($this->client);
+    }
+
+    /**
+     * Company Endpoint
+     * @return Company
+     */
+    public function company(): Company
+    {
+        return new Company($this->client);
     }
 }

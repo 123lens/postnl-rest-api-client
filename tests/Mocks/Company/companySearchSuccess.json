@@ -1,0 +1,31 @@
+{
+  "totalPages": 1,
+  "requestedPage": 1,
+  "resultCount": 1,
+  "results": [
+    {
+      "companyName": "test",
+      "kvkNumber": "123456",
+      "postnlKey": "1004784700",
+      "branchNumber": "000017063566",
+      "companyPhoneNumber": "0882363747",
+      "companyMobilePhoneNumber": "0682363747",
+      "branchStreetName": "Prinses Beatrixlaan",
+      "branchHouseNumber": "23",
+      "branceHouseNumberAddition": "",
+      "branchPostalCode": "2595AK",
+      "branchCity": "'S-GRAVENHAGE",
+      "mailingStreetName": "Prinses Beatrixlaan",
+      "mailingHouseNumber": "23",
+      "mailingHouseNumberAddition": "",
+      "mailingPostalCode": "2595AK",
+      "mailingCity": "'S-GRAVENHAGE",
+      "legalName": "Koninklijke Postnl B.V.",
+      "tradeNames": [
+        "CENDRIS",
+        "Customer Information",
+        "Omnidata Tracking & Tracing",
+        "PostNL Data Solutions B.V."
+      ]
+  }]
+}
