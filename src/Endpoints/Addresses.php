@@ -52,6 +52,14 @@ class Addresses extends AbstractEndpoint
         );
     }
 
+    public function validateAddressCheckBasicNational(array $data = [])
+    {
+        return $this->createRequest(
+            'Budgetlens\PostNLApi\Messages\Requests\Addresses\Basic\ValidateAddressRequest',
+            $data
+        );
+    }
+
 //
 //    public function getAddressByPostalcodeAndHouseNumber(string $postalCode, string $houseNumber)
 //    {

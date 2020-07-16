@@ -46,5 +46,20 @@ class AddressTest extends TestCase
         $this->assertSame('2132WT', $response->getPostalCode());
         $this->assertIsArray($response->getFormattedAddress());
     }
+
+    /**
+     * @test
+     */
+    public function validateAddressCheckBasic()
+    {
+        $request = $this->getClient('Addresses/AddressCheckBasic/ValidateAddressSuccess.json')->addresses()->validateAddressCheckBasicNational();
+        $request->setPostalCode('1000AA')
+            ->setHouseNumber(1);
+        $response = $request->send();
+        $this->assertInstanceOf(\Budgetlens\PostNLApi\Messages\Responses\Addresses\Basic\ValidateAddressResponse::class, $response);
+        $this->assertIsArray($response->getData());
+        $this->assertSame('HOOFDDORP', $response->getCity());
+        $this->assertSame('2132WT', $response->getPostalCode());
+    }
 }
 
