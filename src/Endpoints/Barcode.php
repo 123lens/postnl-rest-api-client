@@ -18,7 +18,7 @@ class Barcode extends AbstractEndpoint
     public function generateBarcode(array $data = [])
     {
         return $this->createRequest(
-            'Budgetlens\PostNLApi\Messages\Requests\Barcode\generateBarcodeRequest',
+            'Budgetlens\PostNLApi\Messages\Requests\Barcode\GenerateBarcodeRequest',
             $data
         );
     }
