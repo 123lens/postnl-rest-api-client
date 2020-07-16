@@ -1,12 +1,12 @@
 <?php
-namespace Budgetlens\PostNLApi\Messages\Requests\Addresses\National;
+namespace Budgetlens\PostNLApi\Messages\Requests\Addresses\Geo;
 
 /**
  * Validate National Address
  *
  * ### Example
  * <code>
- *      $request = $client->addresses()->validateAddressCheckNational();
+ *      $request = $client->addresses()->geoAddressCheckNational();
  *      $request->setPostalCode('1000AA')
  *      $request->setCity('Plaats')
  *      $request->setStreet('Straat')
@@ -21,9 +21,9 @@ namespace Budgetlens\PostNLApi\Messages\Requests\Addresses\National;
 use Budgetlens\PostNLApi\Messages\Requests\AbstractRequest;
 use Budgetlens\PostNLApi\Messages\Requests\Contracts\MessageInterface;
 use Budgetlens\PostNLApi\Messages\Requests\Contracts\RequestInterface;
-use Budgetlens\PostNLApi\Messages\Responses\Addresses\National\ValidateAddressResponse;
+use Budgetlens\PostNLApi\Messages\Responses\Addresses\Geo\AddressCheckResponse;
 
-class ValidateAddressRequest extends AbstractRequest implements RequestInterface, MessageInterface
+class AddressCheckRequest extends AbstractRequest implements RequestInterface, MessageInterface
 {
     /**
      * Get Postal Code
@@ -156,7 +156,7 @@ class ValidateAddressRequest extends AbstractRequest implements RequestInterface
     {
         $response = $this->client->request(
             'POST',
-            '/address/national/v1/validate',
+            '/address/national/v1/geocode',
             [
                 'body' => json_encode($data),
                 'headers' => [
@@ -164,6 +164,6 @@ class ValidateAddressRequest extends AbstractRequest implements RequestInterface
                 ]
             ]
         );
-        return $this->response = new ValidateAddressResponse($this, $response->getBody()->json());
+        return $this->response = new AddressCheckResponse($this, $response->getBody()->json());
     }
 }

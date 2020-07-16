@@ -38,6 +38,19 @@ class Addresses extends AbstractEndpoint
         );
     }
 
+    /**
+     * Geo Address Check National
+     * @see https://developer.postnl.nl/browse-apis/addresses/geo-adrescheck-nationaal/
+     * @param array $data
+     * @return mixed
+     */
+    public function geoAddressCheckNational(array $data = [])
+    {
+        return $this->createRequest(
+            'Budgetlens\PostNLApi\Messages\Requests\Addresses\Geo\AddressCheckRequest',
+            $data
+        );
+    }
 
 //
 //    public function getAddressByPostalcodeAndHouseNumber(string $postalCode, string $houseNumber)
