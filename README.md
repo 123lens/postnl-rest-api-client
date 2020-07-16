@@ -52,7 +52,7 @@ Meaning of **Is finished:**:
 | [Checkout Postalcode Check](#Checkout-Postalcode-Check)   | v1 | &#9745;
 | [Checkout API](#Checkout-API)                             | v1 | &#9745;
 |**Customer Overview** [More info](https://developer.postnl.nl/browse-apis/customer-overview/)
-| [Bedrijfscheck Nationaal](#Bedrijfscheck-Nationaal)       | v1 | &#9744;
+| [Bedrijfscheck Nationaal](#Bedrijfscheck-Nationaal)       | v1 | &#9745;
 
 ## Endpoint/Service specific
 
@@ -182,8 +182,10 @@ Base endoint: /shipment/v1
 | /checkout |  v1 | &#9745;| &#9745;
 
 ### Bedrijfscheck Nationaal
+**No contract for this service, tests not 100%!**
+
 Base endoint: /company/search 
 
 |Endpoint|Version|Implemented|Tested
 |---|---|---|---
-| /v3/phonenumber/ |  v3 | &#9744;| &#9744;
+| /v3/phonenumber/ |  v3 | &#9745;| &#9745;
