@@ -22,4 +22,21 @@ class BarcodeTest extends TestCase
         $this->assertInstanceOf(GenerateBarcodeResponse::class, $response);
         $this->assertSame('3STBJG214842', $response->getBarcode());
     }
+
+    /**
+     * @test
+     */
+    public function generateBarcodeEPS()
+    {
+        $request = $this->getClient('Barcode/generateBarcodeEpsSuccess.json')->barcode()->generateBarcode();
+        $request//->setCustomerCode(getenv('CUSTOMER_CODE'))
+            ->setCustomerCode(getenv('GLOBAL_PACK_CODE'))
+            ->setCustomerNumber(getenv('CUSTOMER_NUMBER'))
+            ->setType('CD')
+            ->setSerie($request->getBarcodeSerie('CD', getenv('GLOBAL_PACK_CODE'), true));
+        $response = $request->send();
+        $this->assertInstanceOf(GenerateBarcodeResponse::class, $response);
+        $this->assertSame('CD630598080NL', $response->getBarcode());
+    }
+
 }

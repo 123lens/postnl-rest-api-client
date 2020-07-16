@@ -164,6 +164,13 @@ class GenerateBarcodeRequest extends AbstractRequest implements RequestInterface
                 'query' => $data
             ]
         );
+//        $path = "/Users/sebastiaan/Projects/123 Lens/123lens-Opensource-Packages/postnl-rest-api/tests/Mocks/Barcode/";
+//        file_put_contents($path . "generateBarcodeEpsSuccess.json", $response->getBody()->getContents());
+//        die(__DIR__);
+//        die($response->getBody()->json());
+//
+//        print_r($response->getBody()->json());
+//        exit;
         return $this->response = new GenerateBarcodeResponse($this, $response->getBody()->json());
     }
 }
