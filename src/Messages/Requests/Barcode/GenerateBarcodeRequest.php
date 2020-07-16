@@ -26,7 +26,7 @@ class GenerateBarcodeRequest extends AbstractRequest implements RequestInterface
     use BarcodeTrait;
 
     private $availableOptions = [
-        '2S, 3S, CC, CP, CD, CF, LA'
+        '2S', '3S', 'CC', 'CP', 'CD', 'CF', 'LA'
     ];
 
     /**
@@ -164,7 +164,6 @@ class GenerateBarcodeRequest extends AbstractRequest implements RequestInterface
                 'query' => $data
             ]
         );
-
         return $this->response = new GenerateBarcodeResponse($this, $response->getBody()->json());
     }
 }
