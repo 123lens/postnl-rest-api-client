@@ -1,0 +1,19 @@
+[
+  {
+    "City": "HOOFDDORP",
+    "PostalCode": "2132WT",
+    "Street": "Siriusdreef",
+    "HouseNumber":42,
+    "Addition": "A",
+    "FormattedAddress": [
+      "Siriusdreef 42 A",
+      "2132WT HOOFDDORP"
+    ],
+    "Geocode": {
+      "latitude": 12.345678,
+      "longitude": 1.2345,
+      "rdxCoordinate": 123456.78,
+      "rdyCoordinate": 123456.789
+    }
+  }
+]
