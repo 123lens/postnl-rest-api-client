@@ -11,14 +11,40 @@ namespace Budgetlens\PostNLApi\Endpoints;
 class Barcode extends AbstractEndpoint
 {
     /**
-     * Generate Barcode
+     * Generate Barcode Domestic (Dutch Shipments)
      * @param array $data
      * @return mixed
      */
-    public function generateBarcode(array $data = [])
+    public function generateBarcodeDomestic(array $data = [])
     {
         return $this->createRequest(
-            'Budgetlens\PostNLApi\Messages\Requests\Barcode\GenerateBarcodeRequest',
+            'Budgetlens\PostNLApi\Messages\Requests\Barcode\GenerateBarcodeDomesticRequest',
+            $data
+        );
+    }
+
+    /**
+     * Generate Barcode EU Shipments
+     * @param array $data
+     * @return mixed
+     */
+    public function generateBarcodeEu(array $data = [])
+    {
+        return $this->createRequest(
+            'Budgetlens\PostNLApi\Messages\Requests\Barcode\GenerateBarcodeEuRequest',
+            $data
+        );
+    }
+
+    /**
+     * Generate Barcode Global Pack (EPS) Shipments
+     * @param array $data
+     * @return mixed
+     */
+    public function generateBarcodeGlobalPack(array $data = [])
+    {
+        return $this->createRequest(
+            'Budgetlens\PostNLApi\Messages\Requests\Barcode\GenerateBarcodeGlobalPackRequest',
             $data
         );
     }

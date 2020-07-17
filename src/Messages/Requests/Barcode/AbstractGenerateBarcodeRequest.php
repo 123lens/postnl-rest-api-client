@@ -2,28 +2,24 @@
 namespace Budgetlens\PostNLApi\Messages\Requests\Barcode;
 
 /**
- * Generate Barcode Request
- *
- * ### Example
- * <code>
- *      $request = $client->barcode()->generateBarcode();
- *      $request->setLocationCode('173187');
- *      $request->setRetailNetworkID('PNPNL-01');
- *      $response = $request->send();
- *      $location = $response->getLocation();
- * </code>
+ * Abstract Barcode Request
  *
  */
-
 use Budgetlens\PostNLApi\Messages\Requests\AbstractRequest;
 use Budgetlens\PostNLApi\Messages\Requests\Contracts\MessageInterface;
 use Budgetlens\PostNLApi\Messages\Requests\Contracts\RequestInterface;
 use Budgetlens\PostNLApi\Messages\Responses\Barcode\GenerateBarcodeResponse;
-use Budgetlens\PostNLApi\Traits\BarcodeTrait;
 
-class GenerateBarcodeRequest extends AbstractRequest implements RequestInterface, MessageInterface
+abstract class AbstractGenerateBarcodeRequest extends AbstractRequest implements RequestInterface, MessageInterface
 {
-    use BarcodeTrait;
+    /**
+     * Possible barcodes series per barcode type.
+     */
+    const NL_BARCODE_SERIE_LONG   = '0000000000-9999999999';
+    const NL_BARCODE_SERIE_SHORT  = '000000000-999999999';
+    const EU_BARCODE_SERIE_LONG   = '00000000-99999999';
+    const EU_BARCODE_SERIE_SHORT  = '0000000-9999999';
+    const GLOBAL_BARCODE_SERIE    = '0000-9999';
 
     private $availableOptions = [
         '2S', '3S', 'CC', 'CP', 'CD', 'CF', 'LA'
@@ -138,7 +134,6 @@ class GenerateBarcodeRequest extends AbstractRequest implements RequestInterface
             'customer_number',
             'type'
         );
-
         $data = [
             'CustomerCode' => $this->getCustomerCode(),
             'CustomerNumber' => $this->getCustomerNumber(),
@@ -164,13 +159,6 @@ class GenerateBarcodeRequest extends AbstractRequest implements RequestInterface
                 'query' => $data
             ]
         );
-//        $path = "/Users/sebastiaan/Projects/123 Lens/123lens-Opensource-Packages/postnl-rest-api/tests/Mocks/Barcode/";
-//        file_put_contents($path . "generateBarcodeEpsSuccess.json", $response->getBody()->getContents());
-//        die(__DIR__);
-//        die($response->getBody()->json());
-//
-//        print_r($response->getBody()->json());
-//        exit;
         return $this->response = new GenerateBarcodeResponse($this, $response->getBody()->json());
     }
 }

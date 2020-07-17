@@ -12,31 +12,42 @@ class BarcodeTest extends TestCase
     /**
      * @test
      */
-    public function generateBarcode()
+    public function generateBarcodeDomestic()
     {
-        $request = $this->getClient('Barcode/generateBarcodeSuccess.json')->barcode()->generateBarcode();
+        $request = $this->getClient('Barcode/generateBarcodeDomesticSuccess.json')->barcode()->generateBarcodeDomestic();
         $request->setCustomerCode(getenv('CUSTOMER_CODE'))
-            ->setCustomerNumber(getenv('CUSTOMER_NUMBER'))
-            ->setType('3S');
+            ->setCustomerNumber(getenv('CUSTOMER_NUMBER'));
         $response = $request->send();
         $this->assertInstanceOf(GenerateBarcodeResponse::class, $response);
-        $this->assertSame('3STBJG214842', $response->getBarcode());
+        $this->assertSame('3STBJG243556367', $response->getBarcode());
     }
 
     /**
      * @test
      */
-    public function generateBarcodeEPS()
+    public function generateBarcodeEU()
     {
-        $request = $this->getClient('Barcode/generateBarcodeEpsSuccess.json')->barcode()->generateBarcode();
-        $request//->setCustomerCode(getenv('CUSTOMER_CODE'))
-            ->setCustomerCode(getenv('GLOBAL_PACK_CODE'))
-            ->setCustomerNumber(getenv('CUSTOMER_NUMBER'))
-            ->setType('CD')
-            ->setSerie($request->getBarcodeSerie('CD', getenv('GLOBAL_PACK_CODE'), true));
+        $request = $this->getClient('Barcode/generateBarcodeEuSuccess.json')->barcode()->generateBarcodeEu();
+        $request->setCustomerCode(getenv('CUSTOMER_CODE'))
+            ->setCustomerNumber(getenv('CUSTOMER_NUMBER'));
         $response = $request->send();
         $this->assertInstanceOf(GenerateBarcodeResponse::class, $response);
-        $this->assertSame('CD630598080NL', $response->getBarcode());
+        $this->assertSame('3STBJG1402522', $response->getBarcode());
+    }
+
+    /**
+     * @test
+     */
+    public function generateBarcodeGlobalPack()
+    {
+        $request = $this->getClient('Barcode/generateBarcodeGlobalPackSuccess.json')->barcode()->generateBarcodeGlobalPack();
+        $request->setCustomerCode(getenv('CUSTOMER_CODE'))
+            ->setCustomerNumber(getenv('CUSTOMER_NUMBER'))
+            ->setType('CD')
+            ->setRange(getenv('GLOBAL_PACK_CODE'));
+        $response = $request->send();
+        $this->assertInstanceOf(GenerateBarcodeResponse::class, $response);
+        $this->assertSame('CD630548715NL', $response->getBarcode());
     }
 
 }
