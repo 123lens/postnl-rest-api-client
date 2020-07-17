@@ -9,6 +9,9 @@ namespace Budgetlens\PostNLApi\Entities\Shipment;
 
 use Budgetlens\PostNLApi\Entities\AbstractEntity;
 use Budgetlens\PostNLApi\Entities\Contracts\EntityInterface;
+use Intervention\Validation\Rules\Bic;
+use Intervention\Validation\Rules\Iban;
+use Intervention\Validation\Validator;
 
 class Amounts extends AbstractEntity implements EntityInterface
 {
@@ -127,6 +130,10 @@ class Amounts extends AbstractEntity implements EntityInterface
      */
     public function setBIC(string $bic)
     {
+        $validator = new Validator(new Bic);
+        if (!$validator->validate($bic)) {
+            throw new \InvalidArgumentException("Invalid BIC");
+        }
         $this->BIC = $bic;
         return $this;
     }
@@ -172,7 +179,10 @@ class Amounts extends AbstractEntity implements EntityInterface
     public function setIBAN(string $iban)
     {
         // validate iban
-
+        $validator = new Validator(new Iban);
+        if (!$validator->validate($iban)) {
+            throw new \InvalidArgumentException("Invalid IBAN");
+        }
         $this->IBAN = $iban;
         return $this;
     }
