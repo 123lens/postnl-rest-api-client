@@ -34,7 +34,7 @@ class HttpClientConfig implements HttpClientConfigInterface
     public function __construct(
         string $apiKey,
         bool $testMode = false,
-        int $connectionTimeout = 10
+        int $connectionTimeout = 30
     ) {
         $this->apiKey = $apiKey;
         $this->testMode = $testMode;

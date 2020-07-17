@@ -4,6 +4,7 @@ namespace Budgetlens\PostNLApi;
 use Budgetlens\PostNLApi\Client\HttpClient;
 use Budgetlens\PostNLApi\Client\HttpClientConfig;
 use Budgetlens\PostNLApi\Endpoints\Addresses;
+use Budgetlens\PostNLApi\Endpoints\Barcode;
 use Budgetlens\PostNLApi\Endpoints\Checkout;
 use Budgetlens\PostNLApi\Endpoints\Deliverydate;
 use Budgetlens\PostNLApi\Endpoints\Locations;
@@ -126,5 +127,14 @@ class RestApiClient
     public function company(): Company
     {
         return new Company($this->client);
+    }
+
+    /**
+     * Barcode Endpoint
+     * @return Barcode
+     */
+    public function barcode(): Barcode
+    {
+        return new Barcode($this->client);
     }
 }

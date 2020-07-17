@@ -39,7 +39,7 @@ Meaning of **Is finished:**:
 | [Adrescheck Basis Nationaal](#Adrescheck-Basis-Nationaal) | v1 | &#9745;
 |**Send and Track** [More info](https://developer.postnl.nl/browse-apis/send-and-track/)||
 | [Shipping webservice](#Shipping-webservice)               | v1 | &#9744;
-| [Barcode webservice](#Barcode-webservice)                 | v1 | &#9744;
+| [Barcode webservice](#Barcode-webservice)                 | v1 | &#9745;
 | [Labelling webservice](#Labelling-webservice)             | v1 | &#9744;
 | [Confirming webservice](#Confirming-webservice)           | v1 | &#9744;
 | [Shippingstatus webservice](#Shippingstatus-webservice)   | v1 | &#9744;
@@ -107,7 +107,7 @@ Base endoint: /shipment/v1_1
 
 |Endpoint|Version|Implemented|Tested
 |---|---|---|---
-| /barcode | v1_1 | &#9744;| &#9744;
+| /barcode | v1_1 | &#9745;| &#9745;
 
 ### Labelling webservice
 Base endoint: /shipment/v2_2 
