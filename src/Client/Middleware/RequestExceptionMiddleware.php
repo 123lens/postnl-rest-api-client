@@ -1,6 +1,8 @@
 <?php
 namespace Budgetlens\PostNLApi\Client\Middleware;
 
+use Budgetlens\PostNLApi\Exceptions\ApiException;
+use Budgetlens\PostNLApi\Exceptions\CifDownException;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
@@ -15,11 +17,18 @@ class RequestExceptionMiddleware
                     if ($code < 400) {
                         return $response;
                     }
-                    print_r($response->getBody()->json());
-                    exit;
                     if ($response === null || !($response->getBody() instanceof JsonResponse)) {
                         throw RequestException::create($request, $response);
                     } else {
+                        $json = $response->getBody()->json();
+                        if (!empty($json['fault']['faultstring']) && $json['fault']['faultstring'] === 'Invalid ApiKey') {
+                            throw new ApiException('Invalid Api Key');
+                        }
+                        if (isset($json['Envelope']['Body']['Fault']['Reason']['Text'][''])) {
+                            throw new CifDownException($json['Envelope']['Body']['Fault']['Reason']['Text']['']);
+                        }
+
+
                         // json formatted error response from PostNL
                         throw new ErrorResponseException(
                             'Error',
