@@ -9,13 +9,16 @@ namespace Budgetlens\PostNLApi\Entities;
 
 use Budgetlens\PostNLApi\Entities\Contracts\EntityInterface;
 use Budgetlens\PostNLApi\Entities\Shipment\Address;
+use Budgetlens\PostNLApi\Entities\Shipment\Amounts;
 use Budgetlens\PostNLApi\Entities\Shipment\Contact;
 use Budgetlens\PostNLApi\Entities\Shipment\Dimension;
 
 class Shipment extends AbstractEntity implements EntityInterface
 {
     private $Address;
+    private $Amounts = [];
     private $Barcode;
+    private $CodingText;
     private $Contacts = [];
     private $DeliveryAddress;
     private $Dimension;
@@ -42,6 +45,26 @@ class Shipment extends AbstractEntity implements EntityInterface
     }
 
     /**
+     * Get Amounts
+     * @return array
+     */
+    public function getAmounts(): array
+    {
+        return $this->Amounts;
+    }
+
+    /**
+     * Add Amount
+     * @param Amounts $amount
+     * @return $this
+     */
+    public function addAmount(Amounts $amount)
+    {
+        $this->Amounts[] = $amount;
+        return $this;
+    }
+
+    /**
      * Get Barcode
      * Barcode of the shipment. This is a unique value
      * @return string|null
@@ -59,6 +82,30 @@ class Shipment extends AbstractEntity implements EntityInterface
     public function setBarcode(string $barcode)
     {
         $this->Barcode = $barcode;
+        return $this;
+    }
+
+    /**
+     * Get Coding Text
+     * CodingText used for mailbox parcels. If you are using GenerateLabelWithoutConfirm, please use this value in
+     * the Confirming request when confirming the shipment.
+     * @return string|null
+     */
+    public function getCodingText(): ?string
+    {
+        return $this->CodingText ?? null;
+    }
+
+    /**
+     * Set Coding Text
+     * CodingText used for mailbox parcels. If you are using GenerateLabelWithoutConfirm, please use this value in
+     * the Confirming request when confirming the shipment.
+     * @param string $codingText
+     * @return $this
+     */
+    public function setCodingText(string $codingText)
+    {
+        $this->CodingText = $codingText;
         return $this;
     }
 
