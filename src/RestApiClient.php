@@ -7,6 +7,7 @@ use Budgetlens\PostNLApi\Endpoints\Addresses;
 use Budgetlens\PostNLApi\Endpoints\Barcode;
 use Budgetlens\PostNLApi\Endpoints\Checkout;
 use Budgetlens\PostNLApi\Endpoints\Deliverydate;
+use Budgetlens\PostNLApi\Endpoints\Labelling;
 use Budgetlens\PostNLApi\Endpoints\Locations;
 use Budgetlens\PostNLApi\Endpoints\Timeframe;
 use Budgetlens\PostNLApi\Endpoints\Company;
@@ -136,5 +137,14 @@ class RestApiClient
     public function barcode(): Barcode
     {
         return new Barcode($this->client);
+    }
+
+    /**
+     * Labelling Endpoint
+     * @return Labelling
+     */
+    public function labelling(): Labelling
+    {
+        return new Labelling($this->client);
     }
 }
