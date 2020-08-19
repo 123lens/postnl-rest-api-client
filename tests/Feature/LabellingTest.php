@@ -305,7 +305,7 @@ class LabellingTest extends TestCase
     }
 
     /**
-     * @test
+     * @testx
      */
     public function generateLabelDeliveryOnDemand()
     {
@@ -338,6 +338,53 @@ class LabellingTest extends TestCase
             ->setProductCodeDelivery(3089)
             ->addProductOption((new Shipment\ProductOption())
                 ->setOption('014')
+                ->setCharacteristic('118')
+            )
+            ->setCustomerOrderNumber('1234test')
+            ->setReference('1234testref')
+            ->setRemark('remark')
+        );
+        $response = $request->send();
+        $this->writeLabel($response);
+        $this->assertInstanceOf(GenerateLabelResponse::class, $response);
+        $this->assertIsArray($response->getShipments());
+        $this->assertArrayHasKey('Labels', $response->getShipments()[0]);
+        $this->assertSame($barcode, $response->getShipments()[0]['Barcode']);
+    }
+
+    /**
+     * @test
+     */
+    public function generateLabelGuaranteedDelivery()
+    {
+        $barcode = '3STBJG243556388';
+        $customer = $this->getCustomerEntity();
+
+        $request = $this->getClient()->labelling()->generateLabelWithoutConfirm();
+        $request->setPrinter('GraphicFile|PDF');
+        $request->setCustomer($customer);
+        $request->addShipment((new Shipment())
+            ->addAddress((new Address())
+                ->setAddressType(Address::RECEIVER)
+                ->setName('Ontvangende Partij')
+                ->setZipcode('1411XC')
+                ->setStreetHouseNrExt('Churchillstraat 22')
+                ->setCity('Naarden')
+                ->setRemark('3x bellen')
+            )
+            ->setDeliveryDate(new \DateTime('next Wednesday'))
+            ->setBarcode($barcode)
+            ->addContact((new Shipment\Contact())
+                ->setEmail('sebastiaan@123lens.nl')
+                ->setContactType('01')
+                ->setSMSNr('0647128052')
+            )
+            ->setDimension((new Shipment\Dimension())
+                ->setWeight(450)
+            )
+            ->setProductCodeDelivery(3089)
+            ->addProductOption((new Shipment\ProductOption())
+                ->setOption('007')
                 ->setCharacteristic('118')
             )
             ->setCustomerOrderNumber('1234test')
