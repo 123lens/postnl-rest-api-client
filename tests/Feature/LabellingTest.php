@@ -400,7 +400,7 @@ class LabellingTest extends TestCase
     }
 
     /**
-     * @test
+     * @testx
      */
     public function generateLabelIdCheckAtDoor()
     {
@@ -440,6 +440,54 @@ class LabellingTest extends TestCase
             ->setRemark('remark')
         );
         $response = $request->send();
+        $this->assertInstanceOf(GenerateLabelResponse::class, $response);
+        $this->assertIsArray($response->getShipments());
+        $this->assertArrayHasKey('Labels', $response->getShipments()[0]);
+        $this->assertSame($barcode, $response->getShipments()[0]['Barcode']);
+    }
+
+    /**
+     * @test
+     */
+    public function generateLabelDangerousGoods()
+    {
+        $barcode = '3STBJG243556388';
+        $customer = $this->getCustomerEntity();
+
+        $request = $this->getClient()->labelling()->generateLabelWithoutConfirm();
+        $request->setPrinter('GraphicFile|PDF');
+        $request->setCustomer($customer);
+        $request->addShipment((new Shipment())
+            ->addAddress((new Address())
+                ->setAddressType(Address::RECEIVER)
+                ->setName('Ontvangende Partij')
+                ->setZipcode('1411XC')
+                ->setStreetHouseNrExt('Churchillstraat 22')
+                ->setCity('Naarden')
+                ->setRemark('3x bellen')
+            )
+            ->setDeliveryDate(new \DateTime('next Wednesday'))
+            ->setBarcode($barcode)
+            ->addContact((new Shipment\Contact())
+                ->setEmail('sebastiaan@123lens.nl')
+                ->setContactType('01')
+                ->setSMSNr('0647128052')
+            )
+            ->setDimension((new Shipment\Dimension())
+                ->setWeight(450)
+            )
+            ->setProductCodeDelivery(3096)
+            ->addProductOption((new Shipment\ProductOption())
+                ->setCharacteristic('136')
+                ->setOption('006')
+            )
+            ->setReceiverDateOfBirth(new \DateTime('1980-04-07'))
+            ->setCustomerOrderNumber('1234test')
+            ->setReference('ADR/LQ - Reference')
+            ->setRemark('remark')
+        );
+        $response = $request->send();
+        $this->writeLabel($response);
         $this->assertInstanceOf(GenerateLabelResponse::class, $response);
         $this->assertIsArray($response->getShipments());
         $this->assertArrayHasKey('Labels', $response->getShipments()[0]);
