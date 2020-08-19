@@ -538,7 +538,7 @@ class LabellingTest extends TestCase
     }
 
     /**
-     * @test
+     * @testx
      */
     public function generateLabelExtraAtHomeCOD()
     {
@@ -582,6 +582,89 @@ class LabellingTest extends TestCase
             ->setReference('2016014567')
             ->setRemark('remark')
         );
+        $response = $request->send();
+        $this->writeLabel($response);
+        $this->assertInstanceOf(GenerateLabelResponse::class, $response);
+        $this->assertIsArray($response->getShipments());
+        $this->assertArrayHasKey('Labels', $response->getShipments()[0]);
+        $this->assertSame($barcode, $response->getShipments()[0]['Barcode']);
+    }
+
+    /**
+     * @test
+     */
+    public function generateLabelExtraAtHomeMultiCollo()
+    {
+        $barcode = '3STBJG243556390';
+        $barcode2 = '3STBJG243556391';
+
+        $customer = $this->getCustomerEntity();
+
+        $request = $this->getClient()->labelling()->generateLabelWithoutConfirm();
+        $request->setPrinter('GraphicFile|PDF');
+        $request->setCustomer($customer);
+        $request->addShipment((new Shipment())
+            ->addAddress((new Address())
+                ->setAddressType(Address::RECEIVER)
+                ->setName('Ontvangende Partij')
+                ->setZipcode('1411XC')
+                ->setStreetHouseNrExt('Churchillstraat 22')
+                ->setCity('Naarden')
+                ->setRemark('3x bellen')
+            )
+            ->setBarcode($barcode)
+            ->addContact((new Shipment\Contact())
+                ->setEmail('sebastiaan@123lens.nl')
+                ->setContactType('01')
+                ->setSMSNr('0647128052')
+            )
+            ->setContent('Media player')
+            ->setDimension((new Shipment\Dimension())
+                ->setWeight(4500)
+                ->setVolume(30000)
+            )
+            ->addGroup((new Shipment\Group())
+                ->setGroupCount(2)
+                ->setGroupSequence(1)
+                ->setGroupType(Shipment\Group::GROUPTYPE_MULTICOLLO)
+                ->setMainBarcode($barcode)
+            )
+            ->setProductCodeDelivery(3628)
+            ->setReference('2016014567')
+            ->setRemark('remark')
+        );
+        $request->addShipment((new Shipment())
+            ->addAddress((new Address())
+                ->setAddressType(Address::RECEIVER)
+                ->setName('Ontvangende Partij')
+                ->setZipcode('1411XC')
+                ->setStreetHouseNrExt('Churchillstraat 22')
+                ->setCity('Naarden')
+                ->setRemark('3x bellen')
+            )
+            ->setBarcode($barcode2)
+            ->addContact((new Shipment\Contact())
+                ->setEmail('sebastiaan@123lens.nl')
+                ->setContactType('01')
+                ->setSMSNr('0647128052')
+            )
+            ->setContent('Chair')
+            ->setDimension((new Shipment\Dimension())
+                ->setWeight(5200)
+                ->setVolume(40000)
+            )
+            ->addGroup((new Shipment\Group())
+                ->setGroupCount(2)
+                ->setGroupSequence(2)
+                ->setGroupType(Shipment\Group::GROUPTYPE_MULTICOLLO)
+                ->setMainBarcode($barcode)
+            )
+            ->setProductCodeDelivery(3628)
+            ->setReference('2016014567')
+            ->setRemark('remark')
+        );
+
+
         $response = $request->send();
         $this->writeLabel($response);
         $this->assertInstanceOf(GenerateLabelResponse::class, $response);
