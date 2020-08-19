@@ -26,36 +26,36 @@ class Amounts extends AbstractEntity implements EntityInterface
      * 12 mandatory for Inco terms DDP Commercial route China.
      * @var string
      */
-    private $AmountType;
+    public $AmountType;
     /**
      * @var string
      */
-    private $AccountName;
+    public $AccountName;
     /**
      * @var string
      */
-    private $BIC;
+    public $BIC;
     /**
      * @var string
      */
-    private $Currency;
+    public $Currency;
     /**
      * @var string
      */
-    private $IBAN;
+    public $IBAN;
 
     /**
      * @var string
      */
-    private $Reference;
+    public $Reference;
     /**
      * @var string
      */
-    private $TransactionNumber;
+    public $TransactionNumber;
     /**
      * @var float
      */
-    private $Value;
+    public $Value;
 
     /**
      * Get Amount Type

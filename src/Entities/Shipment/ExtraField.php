@@ -16,8 +16,8 @@ class ExtraField extends AbstractEntity implements EntityInterface
 {
     use ValidationTrait;
 
-    private $Key;
-    private $Value;
+    public $Key;
+    public $Value;
 
     /**
      * Get Key

@@ -11,13 +11,13 @@ use Budgetlens\PostNLApi\Entities\Contracts\EntityInterface;
 
 class Customer extends AbstractEntity implements EntityInterface
 {
-    private $Address;
-    private $CollectionLocation;
-    private $ContactPerson;
-    private $CustomerCode;
-    private $CustomerNumber;
-    private $Email;
-    private $Name;
+    public $Address;
+    public $CollectionLocation;
+    public $ContactPerson;
+    public $CustomerCode;
+    public $CustomerNumber;
+    public $Email;
+    public $Name;
 
     /**
      * Get Address
@@ -112,7 +112,7 @@ class Customer extends AbstractEntity implements EntityInterface
      */
     public function getCustomerNumber(): ?string
     {
-        return $his->CustomerNumber ?? null;
+        return $this->CustomerNumber ?? null;
     }
 
     /**
@@ -134,7 +134,7 @@ class Customer extends AbstractEntity implements EntityInterface
      */
     public function getEmail(): ?string
     {
-        return $This->Email ?? null;
+        return $this->Email ?? null;
     }
 
     /**

@@ -16,10 +16,14 @@ class Group extends AbstractEntity implements EntityInterface
 {
     use ValidationTrait;
 
-    private $GroupType;
-    private $GroupSequence;
-    private $GroupCount;
-    private $MainBarcode;
+    const GROUPTYPE_COLLECTION_REQUEST = "01";
+    const GROUPTYPE_MULTICOLLO = "03";
+    const GROUPTYPE_SINGLE = "04";
+
+    public $GroupType;
+    public $GroupSequence;
+    public $GroupCount;
+    public $MainBarcode;
 
     /**
      * Get Group Type

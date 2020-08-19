@@ -16,8 +16,8 @@ class ProductOption extends AbstractEntity implements EntityInterface
 {
     use ValidationTrait;
 
-    private $Characteristic;
-    private $Option;
+    public $Characteristic;
+    public $Option;
 
     /**
      * Get Characteristic

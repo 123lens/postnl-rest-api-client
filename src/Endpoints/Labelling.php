@@ -17,6 +17,10 @@ class Labelling extends AbstractEndpoint
      */
     public function generateLabel(array $data = [])
     {
+        $data = array_merge($data, [
+            'confirm' => true
+        ]);
+
         return $this->createRequest(
             'Budgetlens\PostNLApi\Messages\Requests\Labelling\GenerateLabelRequest',
             $data
@@ -26,7 +30,7 @@ class Labelling extends AbstractEndpoint
     public function generateLabelWithoutConfirm(array $data = [])
     {
         $data = array_merge($data, [
-            'confirm' => true
+            'confirm' => false
         ]);
 
         return $this->createRequest(

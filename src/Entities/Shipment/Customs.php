@@ -20,20 +20,20 @@ class Customs extends AbstractEntity implements EntityInterface
         '01'
     ];
 
-    private $Certificate;
-    private $CertificateNr;
-    private $License;
-    private $LicenseNr;
-    private $Invoice;
-    private $InvoiceNr;
-    private $HandleAsNonDeliverable;
-    private $Currency;
-    private $ShipmentType;
-    private $TrustedShipperID;
-    private $ImporterReferenceCode;
-    private $TransactionCode;
-    private $TransactionDescription;
-    private $Content = [];
+    public $Certificate;
+    public $CertificateNr;
+    public $License;
+    public $LicenseNr;
+    public $Invoice;
+    public $InvoiceNr;
+    public $HandleAsNonDeliverable;
+    public $Currency;
+    public $ShipmentType;
+    public $TrustedShipperID;
+    public $ImporterReferenceCode;
+    public $TransactionCode;
+    public $TransactionDescription;
+    public $Content = [];
 
     /**
      * Get Certificate

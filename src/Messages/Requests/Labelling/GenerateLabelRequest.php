@@ -16,12 +16,12 @@ namespace Budgetlens\PostNLApi\Messages\Requests\Labelling;
  */
 
 use Budgetlens\PostNLApi\Entities\Customer;
-use Budgetlens\PostNLApi\Messages\Requests\AbstractRequest;
+use Budgetlens\PostNLApi\Entities\Shipment;
 use Budgetlens\PostNLApi\Messages\Requests\Contracts\MessageInterface;
 use Budgetlens\PostNLApi\Messages\Requests\Contracts\RequestInterface;
-use Budgetlens\PostNLApi\Messages\Responses\Laelling\GenerateLabelResponse;
+use Budgetlens\PostNLApi\Messages\Responses\Labelling\GenerateLabelResponse;
 
-class GenerateLabelRequest extends AbstractRequest implements RequestInterface, MessageInterface
+class GenerateLabelRequest extends AbstractLabellingRequest implements RequestInterface, MessageInterface
 {
     /**
      * Get Customer
@@ -48,7 +48,10 @@ class GenerateLabelRequest extends AbstractRequest implements RequestInterface, 
      */
     public function getShipments(): array
     {
-        return $this->getParameter('shipments') || [];
+        $shipments =  $this->getParameter('shipments');
+        return is_array($shipments)
+            ? $shipments
+            : [];
     }
 
     /**
@@ -104,13 +107,24 @@ class GenerateLabelRequest extends AbstractRequest implements RequestInterface, 
     {
         $this->validate(
             'customer',
+            'printer',
             'shipments'
         );
-        return parent::getData();
+        $shipments = [];
+        foreach ($this->getShipments() as $shipment) {
+            $shipments[] = $shipment->toArray();
+        }
+        $data = [
+            'message' => $this->getMessage()->toArray(),
+            'customer' => $this->getCustomer()->toArray(),
+            'shipments' => $shipments
+        ];
+        return array_filter($data);
     }
 
     public function sendData(array $data = [])
     {
+//        print_r($data);exit;
         $response = $this->client->request(
             'POST',
             '/shipment/v2_2/label',

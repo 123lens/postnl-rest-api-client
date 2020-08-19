@@ -1,5 +1,5 @@
 <?php
-namespace Budgetlens\PostNLApi\Messages\Responses\Laelling;
+namespace Budgetlens\PostNLApi\Messages\Responses\Labelling;
 
 /**
  * Label Response

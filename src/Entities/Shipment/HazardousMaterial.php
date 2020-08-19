@@ -16,16 +16,16 @@ class HazardousMaterial extends AbstractEntity implements EntityInterface
 {
     use ValidationTrait;
 
-    private $ToxicSubstanceCode;
-    private $AdditionalToxicSubstanceCode;
-    private $ADRPoints;
-    private $TunnelCode;
-    private $PackagingGroupCode;
-    private $PackagingGroupDescription;
-    private $GrossWeight;
-    private $UNDGNumber;
-    private $TransportCategoryCode;
-    private $ChemicalTechnicalDescription;
+    public $ToxicSubstanceCode;
+    public $AdditionalToxicSubstanceCode;
+    public $ADRPoints;
+    public $TunnelCode;
+    public $PackagingGroupCode;
+    public $PackagingGroupDescription;
+    public $GrossWeight;
+    public $UNDGNumber;
+    public $TransportCategoryCode;
+    public $ChemicalTechnicalDescription;
 
     /**
      * Get Toxic Substance Code

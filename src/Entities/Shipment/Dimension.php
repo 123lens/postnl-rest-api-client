@@ -15,23 +15,23 @@ class Dimension extends AbstractEntity implements EntityInterface
     /**
      * @var int
      */
-    private $Height;
+    public $Height;
     /**
      * @var int
      */
-    private $Length;
+    public $Length;
     /**
      * @var int
      */
-    private $Volume;
+    public $Volume;
     /**
      * @var int
      */
-    private $Weight;
+    public $Weight;
     /**
      * @var int
      */
-    private $Width;
+    public $Width;
 
     /**
      * Get Height

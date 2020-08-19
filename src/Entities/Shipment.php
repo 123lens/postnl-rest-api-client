@@ -8,7 +8,6 @@ namespace Budgetlens\PostNLApi\Entities;
  */
 
 use Budgetlens\PostNLApi\Entities\Contracts\EntityInterface;
-use Budgetlens\PostNLApi\Entities\Shipment\Address;
 use Budgetlens\PostNLApi\Entities\Shipment\Amounts;
 use Budgetlens\PostNLApi\Entities\Shipment\Contact;
 use Budgetlens\PostNLApi\Entities\Shipment\Customs;
@@ -16,74 +15,87 @@ use Budgetlens\PostNLApi\Entities\Shipment\Dimension;
 use Budgetlens\PostNLApi\Entities\Shipment\ExtraField;
 use Budgetlens\PostNLApi\Entities\Shipment\Group;
 use Budgetlens\PostNLApi\Entities\Shipment\HazardousMaterial;
+use Budgetlens\PostNLApi\Entities\Shipment\ProductCodes;
 use Budgetlens\PostNLApi\Entities\Shipment\ProductOption;
 
 class Shipment extends AbstractEntity implements EntityInterface
 {
-    private $Address;
-    private $Amounts = [];
-    private $Barcode;
-    private $CodingText;
-    private $CollectionTimeStampStart;
-    private $CollectionTimeStampEnd;
-    private $Contacts = [];
-    private $Content;
-    private $CostCenter;
-    private $CustomerOrderNumber;
-    private $Customs;
-    private $DeliveryAddress;
-    private $DeliveryDate;
-    private $DeliveryTimeStampStart;
-    private $DeliveryTimeStampEnd;
-    private $Dimension;
-    private $DownPartnerBarcode;
-    private $DownPartnerID;
-    private $DownPartnerLocation;
-    private $Groups = [];
-    private $HazardousMaterial = [];
-    private $IDType;
-    private $IDNumber;
-    private $IDExpiration;
-    private $ProductCodeCollect;
-    private $ProductCodeDelivery;
-    private $ProductOptions = [];
-    private $ReceiverDateOfBirth;
-    private $Reference;
-    private $ReferenceCollect;
-    private $Remark;
-    private $ReturnBarcode;
-    private $ReturnReference;
-    private $TimeslotID;
-    private $ExtraFields = [];
+    public $Addresses = [];
+    public $Amounts = [];
+    public $Barcode;
+    public $CodingText;
+    public $CollectionTimeStampStart;
+    public $CollectionTimeStampEnd;
+    public $Contacts = [];
+    public $Content;
+    public $CostCenter;
+    public $CustomerOrderNumber;
+    public $Customs;
+    public $DeliveryAddress;
+    public $DeliveryDate;
+    public $DeliveryTimeStampStart;
+    public $DeliveryTimeStampEnd;
+    public $Dimension;
+    public $DownPartnerBarcode;
+    public $DownPartnerID;
+    public $DownPartnerLocation;
+    public $Groups = [];
+    public $HazardousMaterial = [];
+    public $IDType;
+    public $IDNumber;
+    public $IDExpiration;
+    public $ProductCodeCollect;
+    public $ProductCodeDelivery;
+    public $ProductOptions = [];
+    public $ReceiverDateOfBirth;
+    public $Reference;
+    public $ReferenceCollect;
+    public $Remark;
+    public $ReturnBarcode;
+    public $ReturnReference;
+    public $TimeslotID;
+    public $ExtraFields = [];
 
+    const ID_TYPE_DUTCH_RESIDENCE_DOCUMENT = "01";
+    const ID_TYPE_DUTCH_ID = "02";
+    const ID_TYPE_DUTCH_PASPORT = "03";
+    const ID_TYPE_DUTCH_DRIVING_LICENSE = "04";
+    const ID_TYPE_EUROPEAN_ID = "05";
+    const ID_TYPE_FOREIGN_ID = "07";
 
     /**
      * Get Address
-     * @return Address
+     * @return array
      */
-    public function getAddress(): Address
+    public function getAddresses(): array
     {
-        return $this->Address;
+        $return = [];
+        foreach ($this->Addresses as $address) {
+            $return[] = $address->toArray();
+        }
+        return $return;
     }
 
     /**
-     * Set Address
+     * Add Address
      * @param Address $address
      * @return $this
      */
-    public function setAddress(Address $address)
+    public function addAddress(Address $address)
     {
-        $this->Address = $address;
+        $this->Addresses[] = $address;
         return $this;
     }
 
     /**
      * Get Amounts
-     * @return array
+     * @return array|null
      */
-    public function getAmounts(): array
+    public function getAmounts(): ?array
     {
-        return $this->Amounts;
+        return count($this->Amounts)
+            ? $this->Amounts
+            : null;
     }
 
     /**
@@ -199,7 +211,11 @@ class Shipment extends AbstractEntity implements EntityInterface
      */
     public function getContacts(): array
     {
-        return $this->Contacts;
+        $return = [];
+        foreach ($this->Contacts as $contact) {
+            $return[] = $contact->toArray();
+        }
+        return $return;
     }
 
     /**
@@ -275,7 +291,7 @@ class Shipment extends AbstractEntity implements EntityInterface
      * @param string $customerOrderNumber
      * @return $this
      */
-    private function setCustomerOrderNumber(string $customerOrderNumber)
+    public function setCustomerOrderNumber(string $customerOrderNumber)
     {
         $this->CustomerOrderNumber = $customerOrderNumber;
         return $this;
@@ -499,11 +515,13 @@ class Shipment extends AbstractEntity implements EntityInterface
      * Get Groups
      * List of 0 or more Group types with data, grouping multiple shipments together.
      * Mandatory for multicollo shipments. Please see Guidelines (Multiple shipments) for more information.
-     * @return array
+     * @return array|null
      */
-    private function getGroups(): array
+    protected function getGroups(): ?array
     {
-        return $this->Groups;
+        return count($this->Groups)
+            ? $this->Groups
+            : null;
     }
 
     /**
@@ -521,11 +539,14 @@ class Shipment extends AbstractEntity implements EntityInterface
 
     /**
      * Get HazardousMaterial
-     * @return array
+     * @return array|null
      */
-    public function getHazardousMaterial(): array
+
+    public function getHazardousMaterial(): ?array
     {
-        return $this->HazardousMaterial;
+        return count($this->HazardousMaterial)
+            ? $this->HazardousMaterial
+            : null;
     }
 
     /**
@@ -647,6 +668,7 @@ class Shipment extends AbstractEntity implements EntityInterface
     public function setProductCodeDelivery(string $productCodeDelivery)
     {
         $this->ProductCodeDelivery = $productCodeDelivery;
+        return $this;
     }
 
     /**
@@ -654,7 +676,7 @@ class Shipment extends AbstractEntity implements EntityInterface
      * @param ProductOption $option
      * @return $this
      */
-    public function addOption(ProductOption $option)
+    public function addProductOption(ProductOption $option)
     {
         $this->ProductOptions[] = $option;
         return $this;
@@ -663,11 +685,17 @@ class Shipment extends AbstractEntity implements EntityInterface
     /**
      * Get Product Options
      * Product options for the shipment, mandatory for certain products, see the Products page of this webservice
-     * @return array
+     * @return array|null
      */
-    public function getProductOption(): array
+    public function getProductOptions(): ?array
     {
-        return $this->ProductOptions;
+        $return = [];
+        foreach ($this->ProductOptions as $option) {
+            $return[] = $option->toArray();
+        }
+        return count($return)
+            ? $return
+            : null;
     }
 
     /**
@@ -800,6 +828,7 @@ class Shipment extends AbstractEntity implements EntityInterface
     public function setReturnReference(string $returnReference)
     {
         $this->ReturnReference = $returnReference;
+        return $this;
     }
 
     /**
@@ -828,9 +857,11 @@ class Shipment extends AbstractEntity implements EntityInterface
      * Get Extra Fields
      * @return array
      */
-    public function getExtraFields(): array
+    public function getExtraFields(): ?array
     {
-        return $this->ExtraFields;
+        return count($this->ExtraFields)
+            ? $this->ExtraFields
+            : null;
     }
 
     /**
@@ -840,5 +871,6 @@ class Shipment extends AbstractEntity implements EntityInterface
     public function addExtraFields(ExtraField $extra)
     {
         $this->ExtraFields[] = $extra;
+        return $this;
     }
 }

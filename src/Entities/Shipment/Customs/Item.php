@@ -15,13 +15,13 @@ class Item extends AbstractEntity implements EntityInterface
 {
     use ValidationTrait;
 
-    private $EAN;
-    private $ProductURL;
-    private $Quantity;
-    private $Weight;
-    private $Value;
-    private $HSTariffNr;
-    private $CountryOfOrigin;
+    public $EAN;
+    public $ProductURL;
+    public $Quantity;
+    public $Weight;
+    public $Value;
+    public $HSTariffNr;
+    public $CountryOfOrigin;
 
     /**
      * Get Eancode
