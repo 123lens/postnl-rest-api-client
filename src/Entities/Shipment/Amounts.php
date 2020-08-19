@@ -15,6 +15,11 @@ use Intervention\Validation\Validator;
 
 class Amounts extends AbstractEntity implements EntityInterface
 {
+    const TYPE_COD = "01";
+    const TYPE_INSURED = "02";
+    const TYPE_COMMERCIAL_CHINA = "04";
+    const TYPE_INCO_CHINA = "12";
+
     private $availableAmountTypes = [
         '01', '02', '04', '12'
     ];
