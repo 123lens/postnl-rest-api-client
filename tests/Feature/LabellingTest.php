@@ -591,7 +591,7 @@ class LabellingTest extends TestCase
     }
 
     /**
-     * @test
+     * @testx
      */
     public function generateLabelExtraAtHomeMultiCollo()
     {
@@ -672,6 +672,64 @@ class LabellingTest extends TestCase
         $this->assertArrayHasKey('Labels', $response->getShipments()[0]);
         $this->assertSame($barcode, $response->getShipments()[0]['Barcode']);
     }
+
+    /**
+     * @test
+     */
+    public function generateLabelReturnLabel()
+    {
+        $barcode = '3STBJG243556390';
+        $customer = $this->getCustomerEntity();
+
+        $request = $this->getClient()->labelling()->generateLabelWithoutConfirm();
+        $request->setPrinter('GraphicFile|PDF');
+        $request->setCustomer($customer);
+        $request->addShipment((new Shipment())
+            ->addAddress((new Address())
+                ->setAddressType(Address::RECEIVER)
+                ->setName('Ontvangende Partij')
+                ->setZipcode('1411XC')
+                ->setStreetHouseNrExt('Churchillstraat 22')
+                ->setCity('Naarden')
+                ->setRemark('3x bellen')
+            )
+            ->addAddress((new Address())
+                ->setAddressType('08')
+                ->setName('Retour Partij')
+                ->setZipcode('1402VV')
+                ->setStreetHouseNrExt('Keizer ottostraat 86')
+                ->setCity('Bussum')
+                ->setRemark('3x bellen')
+            )
+            ->setBarcode($barcode)
+            ->addContact((new Shipment\Contact())
+                ->setEmail('sebastiaan@123lens.nl')
+                ->setContactType('01')
+                ->setSMSNr('0647128052')
+            )
+            ->setDimension((new Shipment\Dimension())
+                ->setWeight(4500)
+            )
+            ->setProductCodeDelivery(3085)
+            ->setReturnBarcode('3SRETR12345678')
+            ->setReference('2016014567')
+            ->setRemark('remark')
+        );
+        $response = $request->send();
+        $this->writeLabel($response);
+        $this->assertInstanceOf(GenerateLabelResponse::class, $response);
+        $this->assertIsArray($response->getShipments());
+        $this->assertArrayHasKey('Labels', $response->getShipments()[0]);
+        $this->assertSame($barcode, $response->getShipments()[0]['Barcode']);
+
+        $this->assertSame('Return Label', $response->getShipments()[0]['Labels'][1]['Labeltype']);
+    }
+
+
+
+
+
+
 
     /**
      * @testx
