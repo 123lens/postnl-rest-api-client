@@ -18,7 +18,7 @@ class Address extends AbstractEntity implements EntityInterface
     const SENDER = "02";
     const ALTERNATIVE_SENDER = "03";
     const COLLECTION_ADDRESS = "04";
-    const RETURN_ADDRESS = "05";
+    const RETURN_ADDRESS = "08";
     const DELIVERY_ADDRES = "09";
 
     const DEFAULT_COUNTRY = "NL";
