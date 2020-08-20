@@ -1047,7 +1047,7 @@ class LabellingTest extends TestCase
     }
 
     /**
-     * @test
+     * @testx
      */
     public function generateLabelCargoPickupMultiCollo()
     {
@@ -1154,7 +1154,77 @@ class LabellingTest extends TestCase
         $this->assertSame($barcode2, $response->getShipments()[1]['Barcode']);
     }
 
+    /**
+     * @test
+     */
+    public function generateLabelGLobalpackCombilabel()
+    {
+        $barcode = '3STBJG243556369';
+        $customer = $this->getCustomerEntity();
 
+        $request = $this->getClient()->labelling()->generateLabelWithoutConfirm();
+        $request->setPrinter('GraphicFile|PDF');
+        $request->setCustomer($customer);
+        $request->addShipment((new Shipment())
+            ->addAddress((new Address())
+                ->setAddressType(Address::RECEIVER)
+                ->setName('Ontvangende Partij')
+                ->setZipcode('310000')
+                ->setStreetHouseNrExt('Nanjinglu 137')
+                ->setCity('Shanghai')
+                ->setCountryCode('CN')
+                ->setRemark('3x bellen')
+            )
+            ->addAddress((new Address())
+                ->setAddressType(Address::COLLECTION_ADDRESS)
+                ->setName('Pickup adres')
+                ->setZipcode('1411XC')
+                ->setStreetHouseNrExt('Churchillstraat 22')
+                ->setCity('Naarden')
+                ->setRemark('3x bellen')
+            )
+            ->setBarcode($barcode)
+            ->setCustoms((new Shipment\Customs())
+                ->setCurrency('EUR')
+                ->setHandleAsNonDeliverable(false)
+                ->setInvoice(true)
+                ->setInvoiceNr('12345')
+                ->setShipmentType(Shipment\Customs::TYPE_COMMERCIAL_GOODS)
+                ->addItem((new Shipment\Customs\Item())
+                    ->setCountryOfOrigin('NL')
+                    ->setDescription('Powdered milk')
+                    ->setHSTariffNr('100878')
+                    ->setQuantity(2)
+                    ->setValue('20.00')
+                    ->setWeight(4300)
+                    ->setEAN('0231231232124')
+                )
+            )
+            ->addContact((new Shipment\Contact())
+                ->setEmail('sebastiaan@123lens.nl')
+                ->setContactType('01')
+                ->setSMSNr('0647128052')
+            )
+            ->setDimension((new Shipment\Dimension())
+                ->setWeight(4500)
+            )
+            ->setDownPartnerBarcode('CC123456785NL')
+            ->setProductCodeDelivery(4947)
+            ->setCustomerOrderNumber('1234test')
+            ->setReference('1234testref')
+            ->setRemark('remark')
+        );
+        $response = $request->send();
+        $this->writeLabel($response);
+        $this->assertInstanceOf(GenerateLabelResponse::class, $response);
+        $this->assertIsArray($response->getShipments());
+        $this->assertCount(1, $response->getShipments());
+        $this->assertCount(3, $response->getShipments()[0]['Labels']);
+        $this->assertArrayHasKey('Labels', $response->getShipments()[0]);
+        $this->assertSame($barcode, $response->getShipments()[0]['Barcode']);
+        $this->assertNotNull($response->getShipments()[0]['DownPartnerBarcode']);
+        $this->assertNotNull($response->getShipments()[0]['DownPartnerID']);
+    }
 
     private function writeLabel($response, $mergedLabels = false)
     {

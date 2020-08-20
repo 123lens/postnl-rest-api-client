@@ -15,6 +15,7 @@ class Item extends AbstractEntity implements EntityInterface
 {
     use ValidationTrait;
 
+    public $Description;
     public $EAN;
     public $ProductURL;
     public $Quantity;
@@ -23,6 +24,25 @@ class Item extends AbstractEntity implements EntityInterface
     public $HSTariffNr;
     public $CountryOfOrigin;
 
+    /**
+     * Get Description
+     * @return string|null
+     */
+    public function getDescription(): ?string
+    {
+        return $this->Description;
+    }
+
+    /**
+     * Set Description
+     * @param string $description
+     * @return $this
+     */
+    public function setDescription(string $description)
+    {
+        $this->Description = $description;
+        return $this;
+    }
     /**
      * Get Eancode
      * A unique code for a product. Together with HS number this is mandatory for product code 4992.

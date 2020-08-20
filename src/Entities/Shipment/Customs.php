@@ -16,6 +16,12 @@ class Customs extends AbstractEntity implements EntityInterface
 {
     use ValidationTrait;
 
+    const TYPE_GIFT = "Gift";
+    const TYPE_DOCUMENTS = "Documents";
+    const TYPE_COMMERCIAL_GOODS = "Commercial Goods";
+    const TYPE_COMMERCIAL_SAMPLE = "Commerical Sample";
+    const TYPE_RETURNED_GOODS = "Returned Goods";
+
     private $availableContactTypes = [
         '01'
     ];
