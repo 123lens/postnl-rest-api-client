@@ -124,7 +124,6 @@ class GenerateLabelRequest extends AbstractLabellingRequest implements RequestIn
 
     public function sendData(array $data = [])
     {
-//        print_r($data);exit;
         $response = $this->client->request(
             'POST',
             '/shipment/v2_2/label',

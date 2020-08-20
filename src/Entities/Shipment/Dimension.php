@@ -40,7 +40,7 @@ class Dimension extends AbstractEntity implements EntityInterface
      */
     public function getHeight(): ?int
     {
-        return $this->Height ?? 0;
+        return $this->Height ?? null;
     }
 
     /**
