@@ -9,8 +9,10 @@ use Tests\TestCase;
 
 class LabellingTest extends TestCase
 {
+    // mostly used in tests
+    const PRODUCT_CODE = "3085";
     /**
-     * @test
+     * @testx
      */
     public function generateLabelNoConfirm()
     {
@@ -18,30 +20,18 @@ class LabellingTest extends TestCase
         $barcode = '3STBJG243556367';
         $customer = $this->getCustomerEntity();
 
-        $request = $this->getClient('Labelling/GenerateLabelNoConfirmSuccess.json')->labelling()->generateLabelWithoutConfirm();
-//        $request = $this->getClient()->labelling()->generateLabelWithoutConfirm();
+//        $request = $this->getClient('Labelling/GenerateLabelNoConfirmSuccess.json')->labelling()->generateLabelWithoutConfirm();
+        $request = $this->getClient()->labelling()->generateLabelWithoutConfirm();
         $request->setPrinter('GraphicFile|PDF');
         $request->setCustomer($customer);
         $request->addShipment((new Shipment())
-            ->addAddress((new Address())
-                ->setAddressType(Address::RECEIVER)
-                ->setFirstName('Peter')
-                ->setName('de Ruiter')
-                ->setZipcode('3573SJ')
-                ->setStreetHouseNrExt('Oldenburgerstraat 137')
-                ->setCity('Utrecht')
-                ->setCompanyName('PostNL')
-            )
+            ->addAddress($this->getReceiverEntity())
             ->setBarcode($barcode)
-            ->addContact((new Shipment\Contact())
-                ->setEmail('some@email.nl')
-                ->setContactType('01')
-                ->setSMSNr('0612345678')
-            )
+            ->addContact($this->getContactEntity())
             ->setDimension((new Shipment\Dimension())
                 ->setWeight(450)
             )
-            ->setProductCodeDelivery(3085)
+            ->setProductCodeDelivery(self::PRODUCT_CODE)
             ->setCustomerOrderNumber('CustomerOrderNumber')
             ->setReference('Reference')
             ->setRemark('Unit Test')
@@ -54,7 +44,7 @@ class LabellingTest extends TestCase
     }
 
     /**
-     * @testx
+     * @test
      */
     public function generateLabelPickup()
     {
@@ -114,11 +104,9 @@ class LabellingTest extends TestCase
     {
 
         $barcode = '3SDEVC0013543';
-        $customer = $this->getCustomerEntity();
-
         $request = $this->getClient()->labelling()->generateLabelWithoutConfirm();
         $request->setPrinter('GraphicFile|PDF');
-        $request->setCustomer($customer);
+        $request->setCustomer($this->getCustomerEntity());
         $request->addShipment((new Shipment())
             ->setDownPartnerID('PNPBE-01')
             ->setDownPartnerLocation('BE0Q82')
@@ -1263,5 +1251,25 @@ class LabellingTest extends TestCase
             ->setCustomerCode(getenv('CUSTOMER_CODE'))
             ->setCustomerNumber(getenv('CUSTOMER_NUMBER'))
             ->setEmail('some@email.nl');
+    }
+
+    private function getReceiverEntity()
+    {
+        return (new Address())
+            ->setAddressType(Address::RECEIVER)
+            ->setFirstName('Peter')
+            ->setName('de Ruiter')
+            ->setZipcode('3573SJ')
+            ->setStreetHouseNrExt('Oldenburgerstraat 137')
+            ->setCity('Utrecht')
+            ->setCompanyName('PostNL');
+    }
+
+    private function getContactEntity()
+    {
+        return (new Shipment\Contact())
+            ->setEmail('some@email.nl')
+            ->setContactType('01')
+            ->setSMSNr('0612345678');
     }
 }
