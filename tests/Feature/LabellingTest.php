@@ -10,7 +10,7 @@ use Tests\TestCase;
 class LabellingTest extends TestCase
 {
     /**
-     * @testx
+     * @test
      */
     public function generateLabelNoConfirm()
     {
@@ -18,31 +18,33 @@ class LabellingTest extends TestCase
         $barcode = '3STBJG243556367';
         $customer = $this->getCustomerEntity();
 
-        $request = $this->getClient()->labelling()->generateLabelWithoutConfirm();
+        $request = $this->getClient('Labelling/GenerateLabelNoConfirmSuccess.json')->labelling()->generateLabelWithoutConfirm();
+//        $request = $this->getClient()->labelling()->generateLabelWithoutConfirm();
         $request->setPrinter('GraphicFile|PDF');
         $request->setCustomer($customer);
         $request->addShipment((new Shipment())
             ->addAddress((new Address())
                 ->setAddressType(Address::RECEIVER)
-                ->setName('Ontvangende Partij')
-                ->setZipcode('1411XC')
-                ->setStreetHouseNrExt('Churchillstraat 22')
-                ->setCity('Naarden')
-                ->setRemark('3x bellen')
+                ->setFirstName('Peter')
+                ->setName('de Ruiter')
+                ->setZipcode('3573SJ')
+                ->setStreetHouseNrExt('Oldenburgerstraat 137')
+                ->setCity('Utrecht')
+                ->setCompanyName('PostNL')
             )
             ->setBarcode($barcode)
             ->addContact((new Shipment\Contact())
-                ->setEmail('sebastiaan@123lens.nl')
+                ->setEmail('some@email.nl')
                 ->setContactType('01')
-                ->setSMSNr('0647128052')
+                ->setSMSNr('0612345678')
             )
             ->setDimension((new Shipment\Dimension())
                 ->setWeight(450)
             )
             ->setProductCodeDelivery(3085)
-            ->setCustomerOrderNumber('1234test')
-            ->setReference('1234testref')
-            ->setRemark('remark')
+            ->setCustomerOrderNumber('CustomerOrderNumber')
+            ->setReference('Reference')
+            ->setRemark('Unit Test')
         );
         $response = $request->send();
         $this->assertInstanceOf(GenerateLabelResponse::class, $response);
@@ -1155,7 +1157,7 @@ class LabellingTest extends TestCase
     }
 
     /**
-     * @test
+     * @testx
      */
     public function generateLabelGLobalpackCombilabel()
     {
@@ -1247,16 +1249,19 @@ class LabellingTest extends TestCase
         return (new Customer())
             ->setAddress((new Address())
                 ->setAddressType(Address::SENDER)
-                ->setCompanyName('123 Lens')
-                ->setCity('Gouda')
+                ->setCompanyName('Sender CompanyName')
+                ->setFirstName('Frank')
+                ->setName('Peeters')
+                ->setCity('Hoofddorp')
                 ->setCountryCode("NL")
-                ->setHouseNr(3)
-                ->setZipcode('2802AC')
-                ->setStreet('Industriestraat')
+                ->setHouseNr(42)
+                ->setHouseNrExt('A')
+                ->setZipcode('2132WT')
+                ->setStreet('Siriusdreef')
             )
             ->setCollectionLocation(getenv('COLLECTION_LOCATION'))
             ->setCustomerCode(getenv('CUSTOMER_CODE'))
             ->setCustomerNumber(getenv('CUSTOMER_NUMBER'))
-            ->setEmail('info@123lens.nl');
+            ->setEmail('some@email.nl');
     }
 }
