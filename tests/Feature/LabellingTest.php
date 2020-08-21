@@ -6,35 +6,111 @@ use Budgetlens\PostNLApi\Entities\Customer;
 use Budgetlens\PostNLApi\Entities\Shipment;
 use Budgetlens\PostNLApi\Messages\Responses\Labelling\GenerateLabelResponse;
 use Tests\TestCase;
+use Faker\Factory;
 
 class LabellingTest extends TestCase
 {
     // mostly used in tests
     const PRODUCT_CODE = "3085";
+    const REMARK = "UNIT TEST";
+
     /**
      * @testx
      */
     public function generateLabelNoConfirm()
     {
-
+        $r = $this->getReceiverEntity();
         $barcode = '3STBJG243556367';
         $customer = $this->getCustomerEntity();
 
-//        $request = $this->getClient('Labelling/GenerateLabelNoConfirmSuccess.json')->labelling()->generateLabelWithoutConfirm();
-        $request = $this->getClient()->labelling()->generateLabelWithoutConfirm();
+        $request = $this->getClient('Labelling/GenerateLabelNoConfirmSuccess.json')->labelling()->generateLabelWithoutConfirm();
         $request->setPrinter('GraphicFile|PDF');
         $request->setCustomer($customer);
         $request->addShipment((new Shipment())
             ->addAddress($this->getReceiverEntity())
             ->setBarcode($barcode)
             ->addContact($this->getContactEntity())
-            ->setDimension((new Shipment\Dimension())
-                ->setWeight(450)
-            )
+            ->setDimension($this->getDimensionEntity())
             ->setProductCodeDelivery(self::PRODUCT_CODE)
             ->setCustomerOrderNumber('CustomerOrderNumber')
             ->setReference('Reference')
-            ->setRemark('Unit Test')
+            ->setRemark(self::REMARK)
+        );
+        $response = $request->send();
+        $this->writeLabel($response);
+        $this->assertInstanceOf(GenerateLabelResponse::class, $response);
+        $this->assertIsArray($response->getShipments());
+        $this->assertArrayHasKey('Labels', $response->getShipments()[0]);
+        $this->assertSame($barcode, $response->getShipments()[0]['Barcode']);
+    }
+
+    /**
+     * @testx
+     */
+    public function generateLabelPickup()
+    {
+
+        $barcode = '3STBJG243556368';
+        $customer = $this->getCustomerEntity();
+
+        $request = $this->getClient('Labelling/GenerateLabelPickupNoConfirmSuccess.json')->labelling()->generateLabelWithoutConfirm();
+        $request->setPrinter('GraphicFile|PDF');
+        $request->setCustomer($customer);
+        $request->addShipment((new Shipment())
+            ->setDownPartnerID('PNPNL-01')
+            ->setDownPartnerLocation('162060')
+            ->addAddress($this->getReceiverEntity([
+                'type' => Address::DELIVERY_ADDRES
+            ]))
+            ->addAddress($this->getReceiverEntity([
+                'type' => Address::RECEIVER
+            ]))
+            ->setBarcode($barcode)
+            ->addContact($this->getContactEntity())
+            ->setDimension($this->getDimensionEntity())
+            ->setProductCodeDelivery(3533)
+            ->setCustomerOrderNumber('1234test')
+            ->setReference('1234testref')
+            ->setRemark(self::REMARK)
+        );
+        $response = $request->send();
+        $this->assertInstanceOf(GenerateLabelResponse::class, $response);
+        $this->assertIsArray($response->getShipments());
+        $this->assertArrayHasKey('Labels', $response->getShipments()[0]);
+        $this->assertSame($barcode, $response->getShipments()[0]['Barcode']);
+    }
+
+    /**
+     * @testx
+     */
+    public function generateLabelPickupBE()
+    {
+
+        $barcode = '3SDEVC0013543';
+        $request = $this->getClient('Labelling/GenerateLabelPickupBeNoConfirmSuccess.json')->labelling()->generateLabelWithoutConfirm();
+        $request->setPrinter('GraphicFile|PDF');
+        $request->setCustomer($this->getCustomerEntity());
+
+        $request->addShipment((new Shipment())
+            ->setDownPartnerID('PNPBE-01')
+            ->setDownPartnerLocation('BE0Q82')
+            ->addAddress($this->getReceiverEntity([
+                'type' => Address::DELIVERY_ADDRES,
+                'country' => "BE",
+                'postcode' => '2000'
+            ]))
+            ->addAddress($this->getReceiverEntity([
+                'type' => Address::RECEIVER,
+                'country' => "BE",
+                'postcode' => '2018'
+            ]))
+            ->setBarcode($barcode)
+            ->addContact($this->getContactEntity())
+            ->setDimension($this->getDimensionEntity())
+            ->setProductCodeDelivery(4932)
+            ->setCustomerOrderNumber('1234test')
+            ->setReference('1234testref')
+            ->setRemark(self::REMARK)
         );
         $response = $request->send();
         $this->assertInstanceOf(GenerateLabelResponse::class, $response);
@@ -46,140 +122,22 @@ class LabellingTest extends TestCase
     /**
      * @test
      */
-    public function generateLabelPickup()
-    {
-
-        $barcode = '3STBJG243556368';
-        $customer = $this->getCustomerEntity();
-
-        $request = $this->getClient()->labelling()->generateLabelWithoutConfirm();
-        $request->setPrinter('GraphicFile|PDF');
-        $request->setCustomer($customer);
-        $request->addShipment((new Shipment())
-            ->setDownPartnerID('PNPNL-01')
-            ->setDownPartnerLocation('162060')
-            ->addAddress((new Address())
-                ->setAddressType(Address::DELIVERY_ADDRES)
-                ->setName('S. Blaas')
-                ->setCompanyName('Plus Bos Naarden')
-                ->setZipcode('1411TC')
-                ->setHouseNr(78)
-                ->setCity('Naarden')
-            )
-            ->addAddress((new Address())
-                ->setAddressType(Address::RECEIVER)
-                ->setName('Ontvangende Partij')
-                ->setZipcode('1411XC')
-                ->setStreetHouseNrExt('Churchillstraat 22')
-                ->setCity('Naarden')
-                ->setRemark('3x bellen')
-            )
-            ->setBarcode($barcode)
-            ->addContact((new Shipment\Contact())
-                ->setEmail('sebastiaan@123lens.nl')
-                ->setContactType('01')
-                ->setSMSNr('0647128052')
-            )
-            ->setDimension((new Shipment\Dimension())
-                ->setWeight(450)
-            )
-            ->setProductCodeDelivery(3533)
-            ->setCustomerOrderNumber('1234test')
-            ->setReference('1234testref')
-            ->setRemark('remark')
-        );
-        $response = $request->send();
-        $this->assertInstanceOf(GenerateLabelResponse::class, $response);
-        $this->assertIsArray($response->getShipments());
-        $this->assertArrayHasKey('Labels', $response->getShipments()[0]);
-        $this->assertSame($barcode, $response->getShipments()[0]['Barcode']);
-//        $filename = 'label.pdf';
-//        file_put_contents($filename, base64_decode($response->getShipments()[0]['Labels'][0]['Content']));
-    }
-
-    /**
-     * @testx
-     */
-    public function generateLabelPickupBE()
-    {
-
-        $barcode = '3SDEVC0013543';
-        $request = $this->getClient()->labelling()->generateLabelWithoutConfirm();
-        $request->setPrinter('GraphicFile|PDF');
-        $request->setCustomer($this->getCustomerEntity());
-        $request->addShipment((new Shipment())
-            ->setDownPartnerID('PNPBE-01')
-            ->setDownPartnerLocation('BE0Q82')
-            ->addAddress((new Address())
-                ->setAddressType(Address::DELIVERY_ADDRES)
-                ->setName('S. Blaas')
-                ->setCompanyName('PostNL')
-                ->setZipcode('2018')
-                ->setHouseNr(4)
-                ->setCity('Antwerpen')
-                ->setCountryCode('BE')
-            )
-            ->addAddress((new Address())
-                ->setAddressType(Address::RECEIVER)
-                ->setName('S. Blaas')
-                ->setZipcode('2000')
-                ->setStreetHouseNrExt('Klapdorp 15')
-                ->setCountryCode('BE')
-                ->setCity('Antwerpen')
-                ->setRemark('3x bellen')
-            )
-            ->setBarcode($barcode)
-            ->addContact((new Shipment\Contact())
-                ->setEmail('sebastiaan@123lens.nl')
-                ->setContactType('01')
-                ->setSMSNr('0647128052')
-            )
-            ->setDimension((new Shipment\Dimension())
-                ->setWeight(450)
-            )
-            ->setProductCodeDelivery(4932)
-            ->setCustomerOrderNumber('1234test')
-            ->setReference('1234testref')
-            ->setRemark('remark')
-        );
-        $response = $request->send();
-        $this->assertInstanceOf(GenerateLabelResponse::class, $response);
-        $this->assertIsArray($response->getShipments());
-        $this->assertArrayHasKey('Labels', $response->getShipments()[0]);
-        $this->assertSame($barcode, $response->getShipments()[0]['Barcode']);
-    }
-
-    /**
-     * @testx
-     */
     public function generateLabelEveningDelivery()
     {
-
         $barcode = '3STBJG243556367';
         $customer = $this->getCustomerEntity();
 
-        $request = $this->getClient()->labelling()->generateLabelWithoutConfirm();
+        $request = $this->getClient('Labelling/GenerateLabelEveningNoConfirmSuccess.json')->labelling()->generateLabelWithoutConfirm();
         $request->setPrinter('GraphicFile|PDF');
         $request->setCustomer($customer);
         $request->addShipment((new Shipment())
-            ->addAddress((new Address())
-                ->setAddressType(Address::RECEIVER)
-                ->setName('Ontvangende Partij')
-                ->setZipcode('1411XC')
-                ->setStreetHouseNrExt('Churchillstraat 22')
-                ->setCity('Naarden')
-                ->setRemark('3x bellen')
-            )
-            ->setDeliveryDate(new \DateTime('20:00:00'))
+            ->addAddress($this->getReceiverEntity([
+                'type' => Address::RECEIVER
+            ]))
+            ->setDeliveryDate(new \DateTime('Next Wednesday 18:00:00'))
             ->setBarcode($barcode)
-            ->addContact((new Shipment\Contact())
-                ->setEmail('sebastiaan@123lens.nl')
-                ->setContactType('01')
-                ->setSMSNr('0647128052')
-            )
-            ->setDimension((new Shipment\Dimension())
-                ->setWeight(450)
-            )
+            ->addContact($this->getContactEntity())
+            ->setDimension($this->getDimensionEntity())
             ->setProductCodeDelivery(3089)
             ->addProductOption((new Shipment\ProductOption())
                 ->setOption('006')
@@ -187,9 +145,10 @@ class LabellingTest extends TestCase
             )
             ->setCustomerOrderNumber('1234test')
             ->setReference('1234testref')
-            ->setRemark('remark')
+            ->setRemark(self::REMARK)
         );
         $response = $request->send();
+//        $this->writeLabel($response);
         $this->assertInstanceOf(GenerateLabelResponse::class, $response);
         $this->assertIsArray($response->getShipments());
         $this->assertArrayHasKey('Labels', $response->getShipments()[0]);
@@ -1253,23 +1212,34 @@ class LabellingTest extends TestCase
             ->setEmail('some@email.nl');
     }
 
-    private function getReceiverEntity()
+    private function getReceiverEntity(array $data = [])
     {
+        $faker = Factory::create('nl_NL');
+
         return (new Address())
-            ->setAddressType(Address::RECEIVER)
-            ->setFirstName('Peter')
-            ->setName('de Ruiter')
-            ->setZipcode('3573SJ')
-            ->setStreetHouseNrExt('Oldenburgerstraat 137')
-            ->setCity('Utrecht')
-            ->setCompanyName('PostNL');
+            ->setAddressType($data['type'] ?? Address::RECEIVER)
+            ->setFirstName($data['firstname'] ?? $faker->firstName)
+            ->setName($data['lastname'] ?? $faker->lastName)
+            ->setZipcode($data['postcode'] ?? $faker->postcode)
+            ->setStreetHouseNrExt($data['address'] ?? $faker->streetAddress)
+            ->setCity($data['city'] ?? $faker->city)
+            ->setCompanyName($data['company'] ?? $faker->company)
+            ->setCountryCode($data['country'] ?? "NL");
     }
 
     private function getContactEntity()
     {
+        $faker = Factory::create('nl_NL');
         return (new Shipment\Contact())
-            ->setEmail('some@email.nl')
+            ->setEmail($faker->email)
             ->setContactType('01')
             ->setSMSNr('0612345678');
+    }
+
+    public function getDimensionEntity()
+    {
+        return (new Shipment\Dimension())
+            ->setWeight(450)
+        ;
     }
 }
