@@ -210,7 +210,7 @@ class LabellingTest extends TestCase
         $barcode = '3STBJG243556387';
         $customer = $this->getCustomerEntity();
 
-        $request = $this->getClient()->labelling()->generateLabelWithoutConfirm();
+        $request = $this->getClient('Labelling/GenerateLabelSameDaySuccess.json')->labelling()->generateLabelWithoutConfirm();
         $request->setPrinter('GraphicFile|PDF');
         $request->setCustomer($customer);
         $request->addShipment((new Shipment())
