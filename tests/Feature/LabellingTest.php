@@ -356,7 +356,7 @@ class LabellingTest extends TestCase
         $barcode = '3STBJG243556388';
         $customer = $this->getCustomerEntity();
 
-        $request = $this->getClient()->labelling()->generateLabelWithoutConfirm();
+        $request = $this->getClient('Labelling/GenerateLabelIdCheckAtDoorSuccess.json')->labelling()->generateLabelWithoutConfirm();
         $request->setPrinter('GraphicFile|PDF');
         $request->setCustomer($customer);
         $request->addShipment((new Shipment())
@@ -389,6 +389,7 @@ class LabellingTest extends TestCase
             ->setRemark('remark')
         );
         $response = $request->send();
+        $this->writeLabel($response);
         $this->assertInstanceOf(GenerateLabelResponse::class, $response);
         $this->assertIsArray($response->getShipments());
         $this->assertArrayHasKey('Labels', $response->getShipments()[0]);
