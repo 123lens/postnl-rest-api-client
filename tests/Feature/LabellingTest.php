@@ -774,7 +774,7 @@ class LabellingTest extends TestCase
         $barcode2 = '3STBJG243556370';
         $customer = $this->getCustomerEntity();
 
-        $request = $this->getClient()->labelling()->generateLabelWithoutConfirm();
+        $request = $this->getClient('Labelling/GenerateLabelMultiColloSuccess.json')->labelling()->generateLabelWithoutConfirm();
         $request->setPrinter('GraphicFile|PDF');
         $request->setCustomer($customer);
         $request->addShipment((new Shipment())
