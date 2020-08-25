@@ -550,7 +550,7 @@ class LabellingTest extends TestCase
 
         $customer = $this->getCustomerEntity();
 
-        $request = $this->getClient()->labelling()->generateLabelWithoutConfirm();
+        $request = $this->getClient('Labelling/GenerateLabelExtraAtHomeMultiColloSuccess.json')->labelling()->generateLabelWithoutConfirm();
         $request->setPrinter('GraphicFile|PDF');
         $request->setCustomer($customer);
         $request->addShipment((new Shipment())
