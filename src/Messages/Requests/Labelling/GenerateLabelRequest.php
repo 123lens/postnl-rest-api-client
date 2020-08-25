@@ -138,7 +138,7 @@ class GenerateLabelRequest extends AbstractLabellingRequest implements RequestIn
             ]
         );
 
-//        $filename = "/Users/sebastiaan/Projects/123 Lens/123lens-Opensource-Packages/postnl-rest-api/tests/Mocks/Labelling/GenerateLabelCargoPickupMultiColloSuccess.json";
+//        $filename = "/Users/sebastiaan/Projects/123 Lens/123lens-Opensource-Packages/postnl-rest-api/tests/Mocks/Labelling/GenerateLabelGLobalpackCombilabelSuccess.json";
 //        file_put_contents($filename, $response->getBody()->getContents());
 //        die("");
         return $this->response = new GenerateLabelResponse($this, $response->getBody()->json());
