@@ -27,7 +27,6 @@ class RequestExceptionMiddleware
                         if (isset($json['Envelope']['Body']['Fault']['Reason']['Text'][''])) {
                             throw new CifDownException($json['Envelope']['Body']['Fault']['Reason']['Text']['']);
                         }
-
                         // json formatted error response from PostNL
                         throw new ErrorResponseException(
                             'Error',

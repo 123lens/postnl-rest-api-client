@@ -9,6 +9,7 @@ use Budgetlens\PostNLApi\Endpoints\Checkout;
 use Budgetlens\PostNLApi\Endpoints\Deliverydate;
 use Budgetlens\PostNLApi\Endpoints\Labelling;
 use Budgetlens\PostNLApi\Endpoints\Locations;
+use Budgetlens\PostNLApi\Endpoints\Shipping;
 use Budgetlens\PostNLApi\Endpoints\Timeframe;
 use Budgetlens\PostNLApi\Endpoints\Company;
 use Budgetlens\PostNLApi\Endpoints\Confirming;
@@ -148,8 +149,22 @@ class RestApiClient
     {
         return new Labelling($this->client);
     }
+
+    /**
+     * Confirming Endpoint
+     * @return Confirming
+     */
     public function confirming(): Confirming
     {
         return new Confirming($this->client);
+    }
+
+    /**
+     * Shipping Endpoint
+     * @return Shipping
+     */
+    public function shipping(): Shipping
+    {
+        return new Shipping($this->client);
     }
 }
