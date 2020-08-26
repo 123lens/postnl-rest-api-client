@@ -71,6 +71,9 @@ abstract class AbstractEntity implements EntityInterface
                 } else {
                     $value = $this->{$propertyName};
                 }
+                if ($value instanceof EntityInterface) {
+                    $value = $value->toArray();
+                }
                 if (!is_null($value)) {
                     $return[$propertyName] = $value;
                 }

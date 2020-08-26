@@ -3,7 +3,7 @@ namespace Budgetlens\PostNLApi\Entities;
 
 /**
  * Company Entity
- * Class Location
+ * Class Company
  * @package Budgetlens\PostNLApi\Entities
  */
 

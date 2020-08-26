@@ -29,6 +29,9 @@ class ErrorResponseException extends \Exception
      */
     private function setErrors(array $errors = [])
     {
+        if (isset($errors['Errors'])) {
+            $errors = $errors['Errors'];
+        }
         if (isset($errors['Item'])) {
             $this->errors = $errors['Item'];
         } elseif (isset($errors['ErrorMsg'])) {

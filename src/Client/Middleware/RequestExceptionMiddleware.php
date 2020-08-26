@@ -28,7 +28,6 @@ class RequestExceptionMiddleware
                             throw new CifDownException($json['Envelope']['Body']['Fault']['Reason']['Text']['']);
                         }
 
-
                         // json formatted error response from PostNL
                         throw new ErrorResponseException(
                             'Error',
