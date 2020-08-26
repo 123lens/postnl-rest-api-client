@@ -1,6 +1,7 @@
 <?php
 namespace Tests\Feature;
 
+use Budgetlens\PostNLApi\Client\Middleware\ErrorResponseException;
 use Budgetlens\PostNLApi\Entities\Address;
 use Budgetlens\PostNLApi\Entities\Customer;
 use Budgetlens\PostNLApi\Entities\Shipment;
@@ -15,7 +16,7 @@ class LabellingTest extends TestCase
     const REMARK = "UNIT TEST";
 
     /**
-     * @testx
+     * @test
      */
     public function generateLabelNoConfirm()
     {
@@ -37,6 +38,34 @@ class LabellingTest extends TestCase
             ->setRemark(self::REMARK)
         );
         $response = $request->send();
+        $this->assertInstanceOf(GenerateLabelResponse::class, $response);
+        $this->assertIsArray($response->getShipments());
+        $this->assertArrayHasKey('Labels', $response->getShipments()[0]);
+        $this->assertSame($barcode, $response->getShipments()[0]['Barcode']);
+    }
+
+    /**
+     * @test
+     */
+    public function generateLabelConfirm()
+    {
+        $barcode = '3STBJG243556367';
+        $customer = $this->getCustomerEntity();
+
+        $request = $this->getClient('Labelling/GenerateLabelConfirmedSuccess.json')->labelling()->generateLabel();
+        $request->setPrinter('GraphicFile|PDF');
+        $request->setCustomer($customer);
+        $request->addShipment((new Shipment())
+            ->addAddress($this->getReceiverEntity())
+            ->setBarcode($barcode)
+            ->addContact($this->getContactEntity())
+            ->setDimension($this->getDimensionEntity())
+            ->setProductCodeDelivery(self::PRODUCT_CODE)
+            ->setCustomerOrderNumber('CustomerOrderNumber')
+            ->setReference('Reference')
+            ->setRemark(self::REMARK)
+        );
+        $response = $request->send();
         $this->writeLabel($response);
         $this->assertInstanceOf(GenerateLabelResponse::class, $response);
         $this->assertIsArray($response->getShipments());
@@ -45,7 +74,39 @@ class LabellingTest extends TestCase
     }
 
     /**
-     * @testx
+     * @test
+     */
+    public function generateLabelInvalidBarcode()
+    {
+        $barcode = '3243556367';
+        $customer = $this->getCustomerEntity();
+
+        try {
+            $request = $this->getClient('Labelling/GenerateLabelInvalidBarcodeException.json', 400)->labelling()->generateLabel();
+            $request->setPrinter('GraphicFile|PDF');
+            $request->setCustomer($customer);
+            $request->addShipment((new Shipment())
+                ->addAddress($this->getReceiverEntity())
+                ->setBarcode($barcode)
+                ->addContact($this->getContactEntity())
+                ->setDimension($this->getDimensionEntity())
+                ->setProductCodeDelivery(self::PRODUCT_CODE)
+                ->setCustomerOrderNumber('CustomerOrderNumber')
+                ->setReference('Reference')
+                ->setRemark(self::REMARK)
+            );
+            $response = $request->send();
+        } catch (ErrorResponseException $e) {
+            $this->assertSame($e->getCode(), 400);
+            $this->assertIsArray($e->getErrors());
+            $this->assertSame('10302', $e->getErrors()[0]['Code']);
+            $this->assertSame('Validation failed for shipment: 3243556367', $e->getErrors()[0]['Error']);
+            $this->assertSame('Length of 3S type barcode must be between 13 and 15', $e->getErrors()[0]['Description']);
+        }
+    }
+
+    /**
+     * @test
      */
     public function generateLabelPickup()
     {
@@ -81,7 +142,7 @@ class LabellingTest extends TestCase
     }
 
     /**
-     * @testx
+     * @test
      */
     public function generateLabelPickupBE()
     {
@@ -120,7 +181,7 @@ class LabellingTest extends TestCase
     }
 
     /**
-     * @testx
+     * @test
      */
     public function generateLabelEveningDelivery()
     {
@@ -148,7 +209,6 @@ class LabellingTest extends TestCase
             ->setRemark(self::REMARK)
         );
         $response = $request->send();
-//        $this->writeLabel($response);
         $this->assertInstanceOf(GenerateLabelResponse::class, $response);
         $this->assertIsArray($response->getShipments());
         $this->assertArrayHasKey('Labels', $response->getShipments()[0]);
@@ -156,7 +216,7 @@ class LabellingTest extends TestCase
     }
 
     /**
-     * @testx
+     * @test
      */
     public function generateLabelSundayDelivery()
     {
@@ -167,24 +227,13 @@ class LabellingTest extends TestCase
         $request->setPrinter('GraphicFile|PDF');
         $request->setCustomer($customer);
         $request->addShipment((new Shipment())
-            ->addAddress((new Address())
-                ->setAddressType(Address::RECEIVER)
-                ->setName('Ontvangende Partij')
-                ->setZipcode('1411XC')
-                ->setStreetHouseNrExt('Churchillstraat 22')
-                ->setCity('Naarden')
-                ->setRemark('3x bellen')
-            )
+            ->addAddress($this->getReceiverEntity([
+                'type' => Address::RECEIVER
+            ]))
             ->setDeliveryDate(new \DateTime('next Sunday'))
             ->setBarcode($barcode)
-            ->addContact((new Shipment\Contact())
-                ->setEmail('sebastiaan@123lens.nl')
-                ->setContactType('01')
-                ->setSMSNr('0647128052')
-            )
-            ->setDimension((new Shipment\Dimension())
-                ->setWeight(450)
-            )
+            ->addContact($this->getContactEntity())
+            ->setDimension($this->getDimensionEntity())
             ->setProductCodeDelivery(3089)
             ->addProductOption((new Shipment\ProductOption())
                 ->setOption('008')
@@ -192,10 +241,9 @@ class LabellingTest extends TestCase
             )
             ->setCustomerOrderNumber('1234test')
             ->setReference('1234testref')
-            ->setRemark('remark')
+            ->setRemark(self::REMARK)
         );
         $response = $request->send();
-        $this->writeLabel($response);
         $this->assertInstanceOf(GenerateLabelResponse::class, $response);
         $this->assertIsArray($response->getShipments());
         $this->assertArrayHasKey('Labels', $response->getShipments()[0]);
@@ -203,7 +251,7 @@ class LabellingTest extends TestCase
     }
 
     /**
-     * @testx
+     * @test
      */
     public function generateLabelSamedayDelivery()
     {
@@ -214,24 +262,13 @@ class LabellingTest extends TestCase
         $request->setPrinter('GraphicFile|PDF');
         $request->setCustomer($customer);
         $request->addShipment((new Shipment())
-            ->addAddress((new Address())
-                ->setAddressType(Address::RECEIVER)
-                ->setName('Ontvangende Partij')
-                ->setZipcode('1411XC')
-                ->setStreetHouseNrExt('Churchillstraat 22')
-                ->setCity('Naarden')
-                ->setRemark('3x bellen')
-            )
+            ->addAddress($this->getReceiverEntity([
+                'type' => Address::RECEIVER
+            ]))
             ->setDeliveryDate(new \DateTime('20:00:00'))
             ->setBarcode($barcode)
-            ->addContact((new Shipment\Contact())
-                ->setEmail('sebastiaan@123lens.nl')
-                ->setContactType('01')
-                ->setSMSNr('0647128052')
-            )
-            ->setDimension((new Shipment\Dimension())
-                ->setWeight(450)
-            )
+            ->addContact($this->getContactEntity())
+            ->setDimension($this->getDimensionEntity())
             ->setProductCodeDelivery(3089)
             ->addProductOption((new Shipment\ProductOption())
                 ->setOption('006')
@@ -243,10 +280,9 @@ class LabellingTest extends TestCase
             )
             ->setCustomerOrderNumber('1234test')
             ->setReference('1234testref')
-            ->setRemark('remark')
+            ->setRemark(self::REMARK)
         );
         $response = $request->send();
-        $this->writeLabel($response);
         $this->assertInstanceOf(GenerateLabelResponse::class, $response);
         $this->assertIsArray($response->getShipments());
         $this->assertArrayHasKey('Labels', $response->getShipments()[0]);
@@ -254,7 +290,7 @@ class LabellingTest extends TestCase
     }
 
     /**
-     * @testx
+     * @test
      */
     public function generateLabelDeliveryOnDemand()
     {
@@ -265,25 +301,14 @@ class LabellingTest extends TestCase
         $request->setPrinter('GraphicFile|PDF');
         $request->setCustomer($customer);
         $request->addShipment((new Shipment())
-            ->addAddress((new Address())
-                ->setAddressType(Address::RECEIVER)
-                ->setName('Ontvangende Partij')
-                ->setZipcode('1411XC')
-                ->setStreetHouseNrExt('Churchillstraat 22')
-                ->setCity('Naarden')
-                ->setRemark('3x bellen')
-            )
-            ->setDeliveryTimeStampStart(new \DateTime('14:00:00'))
-            ->setDeliveryTimeStampEnd(new \DateTime('18:00:00'))
+            ->addAddress($this->getReceiverEntity([
+                'type' => Address::RECEIVER
+            ]))
+            ->setDeliveryTimeStampStart(new \DateTime('Next Thursday 14:00:00'))
+            ->setDeliveryTimeStampEnd(new \DateTime('Next Thursday 18:00:00'))
             ->setBarcode($barcode)
-            ->addContact((new Shipment\Contact())
-                ->setEmail('sebastiaan@123lens.nl')
-                ->setContactType('01')
-                ->setSMSNr('0647128052')
-            )
-            ->setDimension((new Shipment\Dimension())
-                ->setWeight(450)
-            )
+            ->addContact($this->getContactEntity())
+            ->setDimension($this->getDimensionEntity())
             ->setProductCodeDelivery(3089)
             ->addProductOption((new Shipment\ProductOption())
                 ->setOption('014')
@@ -291,10 +316,9 @@ class LabellingTest extends TestCase
             )
             ->setCustomerOrderNumber('1234test')
             ->setReference('1234testref')
-            ->setRemark('remark')
+            ->setRemark(self::REMARK)
         );
         $response = $request->send();
-        $this->writeLabel($response);
         $this->assertInstanceOf(GenerateLabelResponse::class, $response);
         $this->assertIsArray($response->getShipments());
         $this->assertArrayHasKey('Labels', $response->getShipments()[0]);
@@ -302,7 +326,7 @@ class LabellingTest extends TestCase
     }
 
     /**
-     * @testx
+     * @test
      */
     public function generateLabelGuaranteedDelivery()
     {
@@ -313,24 +337,13 @@ class LabellingTest extends TestCase
         $request->setPrinter('GraphicFile|PDF');
         $request->setCustomer($customer);
         $request->addShipment((new Shipment())
-            ->addAddress((new Address())
-                ->setAddressType(Address::RECEIVER)
-                ->setName('Ontvangende Partij')
-                ->setZipcode('1411XC')
-                ->setStreetHouseNrExt('Churchillstraat 22')
-                ->setCity('Naarden')
-                ->setRemark('3x bellen')
-            )
+            ->addAddress($this->getReceiverEntity([
+                'type' => Address::RECEIVER
+            ]))
             ->setDeliveryDate(new \DateTime('next Wednesday'))
             ->setBarcode($barcode)
-            ->addContact((new Shipment\Contact())
-                ->setEmail('sebastiaan@123lens.nl')
-                ->setContactType('01')
-                ->setSMSNr('0647128052')
-            )
-            ->setDimension((new Shipment\Dimension())
-                ->setWeight(450)
-            )
+            ->addContact($this->getContactEntity())
+            ->setDimension($this->getDimensionEntity())
             ->setProductCodeDelivery(3089)
             ->addProductOption((new Shipment\ProductOption())
                 ->setOption('007')
@@ -338,10 +351,9 @@ class LabellingTest extends TestCase
             )
             ->setCustomerOrderNumber('1234test')
             ->setReference('1234testref')
-            ->setRemark('remark')
+            ->setRemark(self::REMARK)
         );
         $response = $request->send();
-        $this->writeLabel($response);
         $this->assertInstanceOf(GenerateLabelResponse::class, $response);
         $this->assertIsArray($response->getShipments());
         $this->assertArrayHasKey('Labels', $response->getShipments()[0]);
@@ -349,7 +361,7 @@ class LabellingTest extends TestCase
     }
 
     /**
-     * @testx
+     * @test
      */
     public function generateLabelIdCheckAtDoor()
     {
@@ -360,24 +372,13 @@ class LabellingTest extends TestCase
         $request->setPrinter('GraphicFile|PDF');
         $request->setCustomer($customer);
         $request->addShipment((new Shipment())
-            ->addAddress((new Address())
-                ->setAddressType(Address::RECEIVER)
-                ->setName('Ontvangende Partij')
-                ->setZipcode('1411XC')
-                ->setStreetHouseNrExt('Churchillstraat 22')
-                ->setCity('Naarden')
-                ->setRemark('3x bellen')
-            )
+            ->addAddress($this->getReceiverEntity([
+                'type' => Address::RECEIVER
+            ]))
             ->setDeliveryDate(new \DateTime('next Wednesday'))
             ->setBarcode($barcode)
-            ->addContact((new Shipment\Contact())
-                ->setEmail('sebastiaan@123lens.nl')
-                ->setContactType('01')
-                ->setSMSNr('0647128052')
-            )
-            ->setDimension((new Shipment\Dimension())
-                ->setWeight(450)
-            )
+            ->addContact($this->getContactEntity())
+            ->setDimension($this->getDimensionEntity())
             ->setProductCodeDelivery(3440)
             ->addProductOption((new Shipment\ProductOption())
                 ->setOption('016')
@@ -386,10 +387,9 @@ class LabellingTest extends TestCase
             ->setReceiverDateOfBirth(new \DateTime('1980-04-07'))
             ->setCustomerOrderNumber('1234test')
             ->setReference('1234testref')
-            ->setRemark('remark')
+            ->setRemark(self::REMARK)
         );
         $response = $request->send();
-        $this->writeLabel($response);
         $this->assertInstanceOf(GenerateLabelResponse::class, $response);
         $this->assertIsArray($response->getShipments());
         $this->assertArrayHasKey('Labels', $response->getShipments()[0]);
@@ -397,7 +397,7 @@ class LabellingTest extends TestCase
     }
 
     /**
-     * @testx
+     * @test
      */
     public function generateLabelDangerousGoods()
     {
@@ -408,24 +408,13 @@ class LabellingTest extends TestCase
         $request->setPrinter('GraphicFile|PDF');
         $request->setCustomer($customer);
         $request->addShipment((new Shipment())
-            ->addAddress((new Address())
-                ->setAddressType(Address::RECEIVER)
-                ->setName('Ontvangende Partij')
-                ->setZipcode('1411XC')
-                ->setStreetHouseNrExt('Churchillstraat 22')
-                ->setCity('Naarden')
-                ->setRemark('3x bellen')
-            )
+            ->addAddress($this->getReceiverEntity([
+                'type' => Address::RECEIVER
+            ]))
             ->setDeliveryDate(new \DateTime('next Wednesday'))
             ->setBarcode($barcode)
-            ->addContact((new Shipment\Contact())
-                ->setEmail('sebastiaan@123lens.nl')
-                ->setContactType('01')
-                ->setSMSNr('0647128052')
-            )
-            ->setDimension((new Shipment\Dimension())
-                ->setWeight(450)
-            )
+            ->addContact($this->getContactEntity())
+            ->setDimension($this->getDimensionEntity())
             ->setProductCodeDelivery(3096)
             ->addProductOption((new Shipment\ProductOption())
                 ->setCharacteristic('136')
@@ -434,10 +423,9 @@ class LabellingTest extends TestCase
             ->setReceiverDateOfBirth(new \DateTime('1980-04-07'))
             ->setCustomerOrderNumber('1234test')
             ->setReference('ADR/LQ - Reference')
-            ->setRemark('remark')
+            ->setRemark(self::REMARK)
         );
         $response = $request->send();
-        $this->writeLabel($response);
         $this->assertInstanceOf(GenerateLabelResponse::class, $response);
         $this->assertIsArray($response->getShipments());
         $this->assertArrayHasKey('Labels', $response->getShipments()[0]);
@@ -445,7 +433,7 @@ class LabellingTest extends TestCase
     }
 
     /**
-     * @testx
+     * @test
      */
     public function generateLabelExtraAtHome()
     {
@@ -456,31 +444,18 @@ class LabellingTest extends TestCase
         $request->setPrinter('GraphicFile|PDF');
         $request->setCustomer($customer);
         $request->addShipment((new Shipment())
-            ->addAddress((new Address())
-                ->setAddressType(Address::RECEIVER)
-                ->setName('Ontvangende Partij')
-                ->setZipcode('1411XC')
-                ->setStreetHouseNrExt('Churchillstraat 22')
-                ->setCity('Naarden')
-                ->setRemark('3x bellen')
-            )
+            ->addAddress($this->getReceiverEntity([
+                'type' => Address::RECEIVER
+            ]))
             ->setBarcode($barcode)
-            ->addContact((new Shipment\Contact())
-                ->setEmail('sebastiaan@123lens.nl')
-                ->setContactType('01')
-                ->setSMSNr('0647128052')
-            )
+            ->addContact($this->getContactEntity())
             ->setContent('Media player')
-            ->setDimension((new Shipment\Dimension())
-                ->setWeight(4500)
-                ->setVolume(30000)
-            )
+            ->setDimension($this->getDimensionEntity())
             ->setProductCodeDelivery(3628)
             ->setReference('2016014567')
-            ->setRemark('remark')
+            ->setRemark(self::REMARK)
         );
         $response = $request->send();
-        $this->writeLabel($response);
         $this->assertInstanceOf(GenerateLabelResponse::class, $response);
         $this->assertIsArray($response->getShipments());
         $this->assertArrayHasKey('Labels', $response->getShipments()[0]);
@@ -488,7 +463,7 @@ class LabellingTest extends TestCase
     }
 
     /**
-     * @testx
+     * @test
      */
     public function generateLabelExtraAtHomeCOD()
     {
@@ -499,20 +474,11 @@ class LabellingTest extends TestCase
         $request->setPrinter('GraphicFile|PDF');
         $request->setCustomer($customer);
         $request->addShipment((new Shipment())
-            ->addAddress((new Address())
-                ->setAddressType(Address::RECEIVER)
-                ->setName('Ontvangende Partij')
-                ->setZipcode('1411XC')
-                ->setStreetHouseNrExt('Churchillstraat 22')
-                ->setCity('Naarden')
-                ->setRemark('3x bellen')
-            )
+            ->addAddress($this->getReceiverEntity([
+                'type' => Address::RECEIVER
+            ]))
             ->setBarcode($barcode)
-            ->addContact((new Shipment\Contact())
-                ->setEmail('sebastiaan@123lens.nl')
-                ->setContactType('01')
-                ->setSMSNr('0647128052')
-            )
+            ->addContact($this->getContactEntity())
             ->addAmount((new Shipment\Amounts())
                 ->setAmountType(Shipment\Amounts::TYPE_COD)
                 ->setCurrency('EUR')
@@ -520,20 +486,19 @@ class LabellingTest extends TestCase
                 ->setIBAN('NL91ABNA0417164300')
             )
             ->setContent('Media player')
-            ->setDimension((new Shipment\Dimension())
-                ->setWeight(4500)
-                ->setVolume(30000)
-            )
+            ->setDimension($this->getDimensionEntity([
+                'weight' => 4500,
+                'volume' => 30000
+            ]))
             ->setProductCodeDelivery(3792)
             ->addProductOption((new Shipment\ProductOption())
                 ->setCharacteristic('003')
                 ->setOption('003')
             )
             ->setReference('2016014567')
-            ->setRemark('remark')
+            ->setRemark(self::REMARK)
         );
         $response = $request->send();
-        $this->writeLabel($response);
         $this->assertInstanceOf(GenerateLabelResponse::class, $response);
         $this->assertIsArray($response->getShipments());
         $this->assertArrayHasKey('Labels', $response->getShipments()[0]);
@@ -541,7 +506,7 @@ class LabellingTest extends TestCase
     }
 
     /**
-     * @testx
+     * @test
      */
     public function generateLabelExtraAtHomeMultiCollo()
     {
@@ -554,25 +519,16 @@ class LabellingTest extends TestCase
         $request->setPrinter('GraphicFile|PDF');
         $request->setCustomer($customer);
         $request->addShipment((new Shipment())
-            ->addAddress((new Address())
-                ->setAddressType(Address::RECEIVER)
-                ->setName('Ontvangende Partij')
-                ->setZipcode('1411XC')
-                ->setStreetHouseNrExt('Churchillstraat 22')
-                ->setCity('Naarden')
-                ->setRemark('3x bellen')
-            )
+            ->addAddress($this->getReceiverEntity([
+                'type' =>Address::RECEIVER
+            ]))
             ->setBarcode($barcode)
-            ->addContact((new Shipment\Contact())
-                ->setEmail('sebastiaan@123lens.nl')
-                ->setContactType('01')
-                ->setSMSNr('0647128052')
-            )
+            ->addContact($this->getContactEntity())
             ->setContent('Media player')
-            ->setDimension((new Shipment\Dimension())
-                ->setWeight(4500)
-                ->setVolume(30000)
-            )
+            ->setDimension($this->getDimensionEntity([
+                'weight' => 4500,
+                'volume' => 30000
+            ]))
             ->addGroup((new Shipment\Group())
                 ->setGroupCount(2)
                 ->setGroupSequence(1)
@@ -581,28 +537,19 @@ class LabellingTest extends TestCase
             )
             ->setProductCodeDelivery(3628)
             ->setReference('2016014567')
-            ->setRemark('remark')
+            ->setRemark(self::REMARK)
         );
         $request->addShipment((new Shipment())
-            ->addAddress((new Address())
-                ->setAddressType(Address::RECEIVER)
-                ->setName('Ontvangende Partij')
-                ->setZipcode('1411XC')
-                ->setStreetHouseNrExt('Churchillstraat 22')
-                ->setCity('Naarden')
-                ->setRemark('3x bellen')
-            )
+            ->addAddress($this->getReceiverEntity([
+                'type' => Address::RECEIVER
+            ]))
             ->setBarcode($barcode2)
-            ->addContact((new Shipment\Contact())
-                ->setEmail('sebastiaan@123lens.nl')
-                ->setContactType('01')
-                ->setSMSNr('0647128052')
-            )
+            ->addContact($this->getContactEntity())
             ->setContent('Chair')
-            ->setDimension((new Shipment\Dimension())
-                ->setWeight(5200)
-                ->setVolume(40000)
-            )
+            ->setDimension($this->getDimensionEntity([
+                'weight' =>5200,
+                'volume' =>40000
+            ]))
             ->addGroup((new Shipment\Group())
                 ->setGroupCount(2)
                 ->setGroupSequence(2)
@@ -611,12 +558,11 @@ class LabellingTest extends TestCase
             )
             ->setProductCodeDelivery(3628)
             ->setReference('2016014567')
-            ->setRemark('remark')
+            ->setRemark(self::REMARK)
         );
 
 
         $response = $request->send();
-        $this->writeLabel($response);
         $this->assertInstanceOf(GenerateLabelResponse::class, $response);
         $this->assertIsArray($response->getShipments());
         $this->assertArrayHasKey('Labels', $response->getShipments()[0]);
@@ -624,7 +570,7 @@ class LabellingTest extends TestCase
     }
 
     /**
-     * @testx
+     * @test
      */
     public function generateLabelReturnLabel()
     {
@@ -635,38 +581,21 @@ class LabellingTest extends TestCase
         $request->setPrinter('GraphicFile|PDF');
         $request->setCustomer($customer);
         $request->addShipment((new Shipment())
-            ->addAddress((new Address())
-                ->setAddressType(Address::RECEIVER)
-                ->setName('Ontvangende Partij')
-                ->setZipcode('1411XC')
-                ->setStreetHouseNrExt('Churchillstraat 22')
-                ->setCity('Naarden')
-                ->setRemark('3x bellen')
-            )
-            ->addAddress((new Address())
-                ->setAddressType(Address::RETURN_ADDRESS)
-                ->setName('Retour Partij')
-                ->setZipcode('1402VV')
-                ->setStreetHouseNrExt('Keizer ottostraat 86')
-                ->setCity('Bussum')
-                ->setRemark('3x bellen')
-            )
+            ->addAddress($this->getReceiverEntity([
+                'type' => Address::RECEIVER
+            ]))
+            ->addAddress($this->getReceiverEntity([
+                'type' => Address::RETURN_ADDRESS
+            ]))
             ->setBarcode($barcode)
-            ->addContact((new Shipment\Contact())
-                ->setEmail('sebastiaan@123lens.nl')
-                ->setContactType('01')
-                ->setSMSNr('0647128052')
-            )
-            ->setDimension((new Shipment\Dimension())
-                ->setWeight(4500)
-            )
+            ->addContact($this->getContactEntity())
+            ->setDimension($this->getDimensionEntity())
             ->setProductCodeDelivery(3085)
             ->setReturnBarcode('3SRETR12345678')
             ->setReference('2016014567')
-            ->setRemark('remark')
+            ->setRemark(self::REMARK)
         );
         $response = $request->send();
-        $this->writeLabel($response);
         $this->assertInstanceOf(GenerateLabelResponse::class, $response);
         $this->assertIsArray($response->getShipments());
         $this->assertArrayHasKey('Labels', $response->getShipments()[0]);
@@ -676,7 +605,7 @@ class LabellingTest extends TestCase
     }
 
     /**
-     * @testx
+     * @test
      */
     public function generateSingleReturnLabel()
     {
@@ -687,29 +616,17 @@ class LabellingTest extends TestCase
         $request->setPrinter('GraphicFile|PDF');
         $request->setCustomer($customer);
         $request->addShipment((new Shipment())
-            ->addAddress((new Address())
-                ->setAddressType(Address::RECEIVER)
-                ->setName('Retour Partij')
-                ->setZipcode('1411XC')
-                ->setStreetHouseNrExt('Churchillstraat 22')
-                ->setCity('Naarden')
-                ->setRemark('3x bellen')
-            )
+            ->addAddress($this->getReceiverEntity([
+                'type' => Address::RECEIVER
+            ]))
             ->setBarcode($barcode)
-            ->addContact((new Shipment\Contact())
-                ->setEmail('sebastiaan@123lens.nl')
-                ->setContactType('01')
-                ->setSMSNr('0647128052')
-            )
-            ->setDimension((new Shipment\Dimension())
-                ->setWeight(4500)
-            )
+            ->addContact($this->getContactEntity())
+            ->setDimension($this->getDimensionEntity())
             ->setProductCodeDelivery(2285)
             ->setReference('Return Reference')
-            ->setRemark('remark')
+            ->setRemark(self::REMARK)
         );
         $response = $request->send();
-        $this->writeLabel($response);
         $this->assertInstanceOf(GenerateLabelResponse::class, $response);
         $this->assertIsArray($response->getShipments());
         $this->assertArrayHasKey('Labels', $response->getShipments()[0]);
@@ -718,7 +635,7 @@ class LabellingTest extends TestCase
     }
 
     /**
-     * @testx
+     * @test
      */
     public function generateSmartReturnLabel()
     {
@@ -729,33 +646,21 @@ class LabellingTest extends TestCase
         $request->setPrinter('GraphicFile|PDF');
         $request->setCustomer($customer);
         $request->addShipment((new Shipment())
-            ->addAddress((new Address())
-                ->setAddressType(Address::RECEIVER)
-                ->setName('Retour Partij')
-                ->setZipcode('1411XC')
-                ->setStreetHouseNrExt('Churchillstraat 22')
-                ->setCity('Naarden')
-                ->setRemark('3x bellen')
-            )
+            ->addAddress($this->getReceiverEntity([
+                'type' => Address::RECEIVER
+            ]))
             ->setBarcode($barcode)
-            ->addContact((new Shipment\Contact())
-                ->setEmail('sebastiaan@123lens.nl')
-                ->setContactType('01')
-                ->setSMSNr('0647128052')
-            )
-            ->setDimension((new Shipment\Dimension())
-                ->setWeight(4500)
-            )
+            ->addContact($this->getContactEntity())
+            ->setDimension($this->getDimensionEntity())
             ->setProductCodeDelivery(2285)
             ->addProductOption((new Shipment\ProductOption())
                 ->setCharacteristic('152')
                 ->setOption('025')
             )
             ->setReference('Return Reference')
-            ->setRemark('remark')
+            ->setRemark(self::REMARK)
         );
         $response = $request->send();
-        $this->writeLabel($response);
         $this->assertInstanceOf(GenerateLabelResponse::class, $response);
         $this->assertIsArray($response->getShipments());
         $this->assertArrayHasKey('Labels', $response->getShipments()[0]);
@@ -765,7 +670,7 @@ class LabellingTest extends TestCase
 
 
     /**
-     * @testx
+     * @test
      */
     public function generateLabelMultiCollo()
     {
@@ -784,27 +689,16 @@ class LabellingTest extends TestCase
                 ->setGroupCount(2)
                 ->setMainBarcode($barcode)
             )
-            ->addAddress((new Address())
-                ->setAddressType(Address::RECEIVER)
-                ->setName('Ontvangende Partij')
-                ->setZipcode('1411XC')
-                ->setStreetHouseNrExt('Churchillstraat 22')
-                ->setCity('Naarden')
-                ->setRemark('3x bellen')
-            )
+            ->addAddress($this->getReceiverEntity([
+                'type' => Address::RECEIVER
+            ]))
             ->setBarcode($barcode)
-            ->addContact((new Shipment\Contact())
-                ->setEmail('sebastiaan@123lens.nl')
-                ->setContactType('01')
-                ->setSMSNr('0647128052')
-            )
-            ->setDimension((new Shipment\Dimension())
-                ->setWeight(450)
-            )
+            ->addContact($this->getContactEntity())
+            ->setDimension($this->getDimensionEntity())
             ->setProductCodeDelivery(3085)
             ->setCustomerOrderNumber('1234test')
             ->setReference('1234testref')
-            ->setRemark('remark')
+            ->setRemark(self::REMARK)
         );
         // 2nd collo
         $request->addShipment((new Shipment())
@@ -814,30 +708,18 @@ class LabellingTest extends TestCase
                 ->setGroupCount(2)
                 ->setMainBarcode($barcode2)
             )
-            ->addAddress((new Address())
-                ->setAddressType(Address::RECEIVER)
-                ->setName('Ontvangende Partij')
-                ->setZipcode('1411XC')
-                ->setStreetHouseNrExt('Churchillstraat 22')
-                ->setCity('Naarden')
-                ->setRemark('3x bellen')
-            )
+            ->addAddress($this->getReceiverEntity([
+                'type' => Address::RECEIVER
+            ]))
             ->setBarcode($barcode2)
-            ->addContact((new Shipment\Contact())
-                ->setEmail('sebastiaan@123lens.nl')
-                ->setContactType('01')
-                ->setSMSNr('0647128052')
-            )
-            ->setDimension((new Shipment\Dimension())
-                ->setWeight(450)
-            )
+            ->addContact($this->getContactEntity())
+            ->setDimension($this->getDimensionEntity())
             ->setProductCodeDelivery(3085)
             ->setCustomerOrderNumber('1234test')
             ->setReference('1234testref')
-            ->setRemark('remark')
+            ->setRemark(self::REMARK)
         );
         $response = $request->send();
-        $this->writeLabel($response);
         $this->assertInstanceOf(GenerateLabelResponse::class, $response);
         $this->assertIsArray($response->getShipments());
         $this->assertCount(2, $response->getShipments());
@@ -847,7 +729,7 @@ class LabellingTest extends TestCase
     }
 
     /**
-     * @testx
+     * @test
      */
     public function generateMultiLabel()
     {
@@ -861,74 +743,40 @@ class LabellingTest extends TestCase
         $request->setPrinter('GraphicFile|PDF|MergeA');
         $request->setCustomer($customer);
         $request->addShipment((new Shipment())
-            ->addAddress((new Address())
-                ->setAddressType(Address::RECEIVER)
-                ->setName('Retour Partij')
-                ->setZipcode('1411XC')
-                ->setStreetHouseNrExt('Churchillstraat 22')
-                ->setCity('Naarden')
-                ->setRemark('3x bellen')
-            )
+            ->addAddress($this->getReceiverEntity([
+                'type' => Address::RECEIVER
+            ]))
             ->setBarcode($barcode)
-            ->addContact((new Shipment\Contact())
-                ->setEmail('sebastiaan@123lens.nl')
-                ->setContactType('01')
-                ->setSMSNr('0647128052')
-            )
-            ->setDimension((new Shipment\Dimension())
-                ->setWeight(4500)
-            )
+            ->addContact($this->getContactEntity())
+            ->setDimension($this->getDimensionEntity())
             ->setProductCodeDelivery(3085)
             ->setReference('Return Reference')
-            ->setRemark('remark')
+            ->setRemark(self::REMARK)
         );
         $request->addShipment((new Shipment())
-            ->addAddress((new Address())
-                ->setAddressType(Address::RECEIVER)
-                ->setName('Another Shipment')
-                ->setZipcode('1411XC')
-                ->setStreetHouseNrExt('Churchillstraat 22')
-                ->setCity('Naarden')
-                ->setRemark('3x bellen')
-            )
+            ->addAddress($this->getReceiverEntity([
+                'type' => Address::RECEIVER
+            ]))
             ->setBarcode($barcode2)
-            ->addContact((new Shipment\Contact())
-                ->setEmail('sebastiaan@123lens.nl')
-                ->setContactType('01')
-                ->setSMSNr('0647128052')
-            )
-            ->setDimension((new Shipment\Dimension())
-                ->setWeight(4500)
-            )
+            ->addContact($this->getContactEntity())
+            ->setDimension($this->getDimensionEntity())
             ->setProductCodeDelivery(3085)
             ->setReference('Return Reference')
-            ->setRemark('remark')
+            ->setRemark(self::REMARK)
         );
         $request->addShipment((new Shipment())
-            ->addAddress((new Address())
-                ->setAddressType(Address::RECEIVER)
-                ->setName('And Another Shipment')
-                ->setZipcode('1411XC')
-                ->setStreetHouseNrExt('Churchillstraat 22')
-                ->setCity('Naarden')
-                ->setRemark('3x bellen')
-            )
+            ->addAddress($this->getReceiverEntity([
+                'type' => Address::RECEIVER
+            ]))
             ->setBarcode($barcode3)
-            ->addContact((new Shipment\Contact())
-                ->setEmail('sebastiaan@123lens.nl')
-                ->setContactType('01')
-                ->setSMSNr('0647128052')
-            )
-            ->setDimension((new Shipment\Dimension())
-                ->setWeight(4500)
-            )
+            ->addContact($this->getContactEntity())
+            ->setDimension($this->getDimensionEntity())
             ->setProductCodeDelivery(3085)
             ->setReference('Return Reference')
-            ->setRemark('remark')
+            ->setRemark(self::REMARK)
         );
 
         $response = $request->send();
-        $this->writeLabel($response, true);
         $this->assertInstanceOf(GenerateLabelResponse::class, $response);
         $this->assertIsArray($response->getMergedLabels());
         $this->assertArrayHasKey('Barcodes', $response->getMergedLabels()[0]);
@@ -940,7 +788,7 @@ class LabellingTest extends TestCase
     }
 
     /**
-     * @testx
+     * @test
      */
     public function generateLabelCargoPickup()
     {
@@ -951,33 +799,17 @@ class LabellingTest extends TestCase
         $request->setPrinter('GraphicFile|PDF');
         $request->setCustomer($customer);
         $request->addShipment((new Shipment())
-            ->addAddress((new Address())
-                ->setAddressType(Address::RECEIVER)
-                ->setName('Ontvangende Partij')
-                ->setZipcode('1411XC')
-                ->setStreetHouseNrExt('Churchillstraat 22')
-                ->setCity('Naarden')
-                ->setRemark('3x bellen')
-            )
-            ->addAddress((new Address())
-                ->setAddressType(Address::COLLECTION_ADDRESS)
-                ->setName('Pickup adres')
-                ->setZipcode('1411XC')
-                ->setStreetHouseNrExt('Churchillstraat 22')
-                ->setCity('Naarden')
-                ->setRemark('3x bellen')
-            )
+            ->addAddress($this->getReceiverEntity([
+                'type' => Address::RECEIVER
+            ]))
+            ->addAddress($this->getReceiverEntity([
+                'type' => Address::COLLECTION_ADDRESS
+            ]))
             ->setBarcode($barcode)
             ->setCollectionTimeStampStart(new \DateTime("12:00:00"))
             ->setCollectionTimeStampEnd(new \DateTime("12:00:00"))
-            ->addContact((new Shipment\Contact())
-                ->setEmail('sebastiaan@123lens.nl')
-                ->setContactType('01')
-                ->setSMSNr('0647128052')
-            )
-            ->setDimension((new Shipment\Dimension())
-                ->setWeight(4500)
-            )
+            ->addContact($this->getContactEntity())
+            ->setDimension($this->getDimensionEntity())
             ->setProductCodeDelivery(3610)
             ->addProductOption((new Shipment\ProductOption())
                 ->setCharacteristic('135')
@@ -985,10 +817,9 @@ class LabellingTest extends TestCase
             )
             ->setCustomerOrderNumber('1234test')
             ->setReference('1234testref')
-            ->setRemark('remark')
+            ->setRemark(self::REMARK)
         );
         $response = $request->send();
-        $this->writeLabel($response);
         $this->assertInstanceOf(GenerateLabelResponse::class, $response);
         $this->assertIsArray($response->getShipments());
         $this->assertCount(1, $response->getShipments());
@@ -997,7 +828,7 @@ class LabellingTest extends TestCase
     }
 
     /**
-     * @testx
+     * @test
      */
     public function generateLabelCargoPickupMultiCollo()
     {
@@ -1009,39 +840,23 @@ class LabellingTest extends TestCase
         $request->setPrinter('GraphicFile|PDF');
         $request->setCustomer($customer);
         $request->addShipment((new Shipment())
-            ->addAddress((new Address())
-                ->setAddressType(Address::RECEIVER)
-                ->setName('Ontvangende Partij')
-                ->setZipcode('1411XC')
-                ->setStreetHouseNrExt('Churchillstraat 22')
-                ->setCity('Naarden')
-                ->setRemark('3x bellen')
-            )
-            ->addAddress((new Address())
-                ->setAddressType(Address::COLLECTION_ADDRESS)
-                ->setName('Pickup adres')
-                ->setZipcode('1411XC')
-                ->setStreetHouseNrExt('Churchillstraat 22')
-                ->setCity('Naarden')
-                ->setRemark('3x bellen')
-            )
+            ->addAddress($this->getReceiverEntity([
+                'type' => Address::RECEIVER
+            ]))
+            ->addAddress($this->getReceiverEntity([
+                'type' => Address::COLLECTION_ADDRESS
+            ]))
             ->setBarcode($barcode)
             ->setCollectionTimeStampStart(new \DateTime("12:00:00"))
             ->setCollectionTimeStampEnd(new \DateTime("12:00:00"))
-            ->addContact((new Shipment\Contact())
-                ->setEmail('sebastiaan@123lens.nl')
-                ->setContactType('01')
-                ->setSMSNr('0647128052')
-            )
+            ->addContact($this->getContactEntity())
             ->addGroup((new Shipment\Group())
                 ->setGroupCount(2)
                 ->setGroupSequence(1)
                 ->setGroupType(Shipment\Group::GROUPTYPE_MULTICOLLO)
                 ->setMainBarcode($barcode)
             )
-            ->setDimension((new Shipment\Dimension())
-                ->setWeight(4500)
-            )
+            ->setDimension($this->getDimensionEntity())
             ->setProductCodeDelivery(3610)
             ->addProductOption((new Shipment\ProductOption())
                 ->setCharacteristic('135')
@@ -1049,42 +864,26 @@ class LabellingTest extends TestCase
             )
             ->setCustomerOrderNumber('1234test')
             ->setReference('1234testref')
-            ->setRemark('remark')
+            ->setRemark(self::REMARK)
         );
         $request->addShipment((new Shipment())
-            ->addAddress((new Address())
-                ->setAddressType(Address::RECEIVER)
-                ->setName('Ontvangende Partij')
-                ->setZipcode('1411XC')
-                ->setStreetHouseNrExt('Churchillstraat 22')
-                ->setCity('Naarden')
-                ->setRemark('3x bellen')
-            )
-            ->addAddress((new Address())
-                ->setAddressType(Address::COLLECTION_ADDRESS)
-                ->setName('Pickup adres')
-                ->setZipcode('1411XC')
-                ->setStreetHouseNrExt('Churchillstraat 22')
-                ->setCity('Naarden')
-                ->setRemark('3x bellen')
-            )
+            ->addAddress($this->getReceiverEntity([
+                'type' => Address::RECEIVER
+            ]))
+            ->addAddress($this->getReceiverEntity([
+                'type' => Address::COLLECTION_ADDRESS
+            ]))
             ->setBarcode($barcode2)
             ->setCollectionTimeStampStart(new \DateTime("12:00:00"))
             ->setCollectionTimeStampEnd(new \DateTime("12:00:00"))
-            ->addContact((new Shipment\Contact())
-                ->setEmail('sebastiaan@123lens.nl')
-                ->setContactType('01')
-                ->setSMSNr('0647128052')
-            )
+            ->addContact($this->getContactEntity())
             ->addGroup((new Shipment\Group())
                 ->setGroupCount(2)
                 ->setGroupSequence(2)
                 ->setGroupType(Shipment\Group::GROUPTYPE_MULTICOLLO)
                 ->setMainBarcode($barcode)
             )
-            ->setDimension((new Shipment\Dimension())
-                ->setWeight(4500)
-            )
+            ->setDimension($this->getDimensionEntity())
             ->setProductCodeDelivery(3610)
             ->addProductOption((new Shipment\ProductOption())
                 ->setCharacteristic('135')
@@ -1092,10 +891,9 @@ class LabellingTest extends TestCase
             )
             ->setCustomerOrderNumber('1234test')
             ->setReference('1234testref')
-            ->setRemark('remark')
+            ->setRemark(self::REMARK)
         );
         $response = $request->send();
-        $this->writeLabel($response);
         $this->assertInstanceOf(GenerateLabelResponse::class, $response);
         $this->assertIsArray($response->getShipments());
         $this->assertCount(2, $response->getShipments());
@@ -1105,7 +903,7 @@ class LabellingTest extends TestCase
     }
 
     /**
-     * @testx
+     * @test
      */
     public function generateLabelGLobalpackCombilabel()
     {
@@ -1116,23 +914,12 @@ class LabellingTest extends TestCase
         $request->setPrinter('GraphicFile|PDF');
         $request->setCustomer($customer);
         $request->addShipment((new Shipment())
-            ->addAddress((new Address())
-                ->setAddressType(Address::RECEIVER)
-                ->setName('Ontvangende Partij')
-                ->setZipcode('310000')
-                ->setStreetHouseNrExt('Nanjinglu 137')
-                ->setCity('Shanghai')
-                ->setCountryCode('CN')
-                ->setRemark('3x bellen')
-            )
-            ->addAddress((new Address())
-                ->setAddressType(Address::COLLECTION_ADDRESS)
-                ->setName('Pickup adres')
-                ->setZipcode('1411XC')
-                ->setStreetHouseNrExt('Churchillstraat 22')
-                ->setCity('Naarden')
-                ->setRemark('3x bellen')
-            )
+            ->addAddress($this->getReceiverEntity([
+                'type' => Address::RECEIVER
+            ]))
+            ->addAddress($this->getReceiverEntity([
+                'type' => Address::COLLECTION_ADDRESS
+            ]))
             ->setBarcode($barcode)
             ->setCustoms((new Shipment\Customs())
                 ->setCurrency('EUR')
@@ -1150,22 +937,15 @@ class LabellingTest extends TestCase
                     ->setEAN('0231231232124')
                 )
             )
-            ->addContact((new Shipment\Contact())
-                ->setEmail('sebastiaan@123lens.nl')
-                ->setContactType('01')
-                ->setSMSNr('0647128052')
-            )
-            ->setDimension((new Shipment\Dimension())
-                ->setWeight(4500)
-            )
+            ->addContact($this->getContactEntity())
+            ->setDimension($this->getDimensionEntity())
             ->setDownPartnerBarcode('CC123456785NL')
             ->setProductCodeDelivery(4947)
             ->setCustomerOrderNumber('1234test')
             ->setReference('1234testref')
-            ->setRemark('remark')
+            ->setRemark(self::REMARK)
         );
         $response = $request->send();
-        $this->writeLabel($response);
         $this->assertInstanceOf(GenerateLabelResponse::class, $response);
         $this->assertIsArray($response->getShipments());
         $this->assertCount(1, $response->getShipments());
@@ -1237,10 +1017,28 @@ class LabellingTest extends TestCase
             ->setSMSNr('0612345678');
     }
 
-    public function getDimensionEntity()
+    public function getDimensionEntity(array $params = [])
     {
-        return (new Shipment\Dimension())
-            ->setWeight(450)
-        ;
+        $weight = $params['weight'] ?? null;
+        $volume = $params['volume'] ?? null;
+        $height = $params['height'] ?? null;
+        $length = $params['length'] ?? null;
+        $width = $params['width'] ?? null;
+
+        $dimension = (new Shipment\Dimension())
+            ->setWeight($params['weight'] ?? 450);
+        if (!is_null($volume)) {
+            $dimension->setVolume($volume);
+        }
+        if (!is_null($height)) {
+            $dimension->setHeight($height);
+        }
+        if (!is_null($length)) {
+            $dimension->setLength($length);
+        }
+        if (!is_null($width)) {
+            $dimension->setWidth($width);
+        }
+        return $dimension;
     }
 }
