@@ -33,7 +33,8 @@
         }
     },
     "scripts": {
-        "style": "vendor/bin/phpcs --standard=PSR2 --extensions=php --colors src/*",
+        "style": "vendor/bin/phpcs --standard=PSR2 --extensions=php --warning-severity=6 --colors src/*",
+        "style-strict": "vendor/bin/phpcs --standard=PSR2 --extensions=php --colors src/*",
         "lint": "vendor/bin/phplint --no-configuration --no-cache --no-interaction --extensions=php src/*"
     }
 }
