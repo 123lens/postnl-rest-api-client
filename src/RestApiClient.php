@@ -11,6 +11,7 @@ use Budgetlens\PostNLApi\Endpoints\Labelling;
 use Budgetlens\PostNLApi\Endpoints\Locations;
 use Budgetlens\PostNLApi\Endpoints\Timeframe;
 use Budgetlens\PostNLApi\Endpoints\Company;
+use Budgetlens\PostNLApi\Endpoints\Confirming;
 use GuzzleHttp\ClientInterface;
 use Psr\Log\LoggerInterface;
 
@@ -146,5 +147,9 @@ class RestApiClient
     public function labelling(): Labelling
     {
         return new Labelling($this->client);
+    }
+    public function confirming(): Confirming
+    {
+        return new Confirming($this->client);
     }
 }
