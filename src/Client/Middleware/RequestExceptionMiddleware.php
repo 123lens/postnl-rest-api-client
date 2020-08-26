@@ -21,13 +21,13 @@ class RequestExceptionMiddleware
                         throw RequestException::create($request, $response);
                     } else {
                         $json = $response->getBody()->json();
+//                        print_r($json);exit;
                         if (!empty($json['fault']['faultstring']) && $json['fault']['faultstring'] === 'Invalid ApiKey') {
                             throw new ApiException('Invalid Api Key');
                         }
                         if (isset($json['Envelope']['Body']['Fault']['Reason']['Text'][''])) {
                             throw new CifDownException($json['Envelope']['Body']['Fault']['Reason']['Text']['']);
                         }
-
                         // json formatted error response from PostNL
                         throw new ErrorResponseException(
                             'Error',
