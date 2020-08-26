@@ -163,7 +163,7 @@ class RestApiClient
      * Shipping Endpoint
      * @return Shipping
      */
-    public function Shipping(): Shipping
+    public function shipping(): Shipping
     {
         return new Shipping($this->client);
     }

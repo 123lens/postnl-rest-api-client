@@ -22,7 +22,7 @@ class ShippingTest extends TestCase
     {
         $customer = $this->getCustomerEntity();
 
-        $request = $this->getClient('Shipping/GenerateShipmentSuccess.json')->Shipping()->generateShipmentWithoutConfirm();
+        $request = $this->getClient('Shipping/GenerateShipmentSuccess.json')->shipping()->generateShipmentWithoutConfirm();
         $request->setPrinter('GraphicFile|PDF');
         $request->setCustomer($customer);
         $request->addShipment((new Shipment())
@@ -48,7 +48,7 @@ class ShippingTest extends TestCase
         $barcode = '3STBJG243556367';
         $customer = $this->getCustomerEntity();
 
-        $request = $this->getClient('Shipping/GenerateShipmentWithCustomBarcodeSuccess.json')->Shipping()->generateShipmentWithoutConfirm();
+        $request = $this->getClient('Shipping/GenerateShipmentWithCustomBarcodeSuccess.json')->shipping()->generateShipmentWithoutConfirm();
         $request->setPrinter('GraphicFile|PDF');
         $request->setCustomer($customer);
         $request->addShipment((new Shipment())
@@ -75,7 +75,7 @@ class ShippingTest extends TestCase
     {
         $customer = $this->getCustomerEntity();
 
-        $request = $this->getClient('Shipping/GenerateShipmentConfirmedSuccess.json')->Shipping()->generateShipment();
+        $request = $this->getClient('Shipping/GenerateShipmentConfirmedSuccess.json')->shipping()->generateShipment();
         $request->setPrinter('GraphicFile|PDF');
         $request->setCustomer($customer);
         $request->addShipment((new Shipment())
@@ -99,7 +99,7 @@ class ShippingTest extends TestCase
     {
         $customer = $this->getCustomerEntity();
 
-        $request = $this->getClient('Shipping/GenerateShipmentPickupPointSuccess.json')->Shipping()->generateShipmentWithoutConfirm();
+        $request = $this->getClient('Shipping/GenerateShipmentPickupPointSuccess.json')->shipping()->generateShipmentWithoutConfirm();
         $request->setPrinter('GraphicFile|PDF');
         $request->setCustomer($customer);
         $request->addShipment((new Shipment())
@@ -130,7 +130,7 @@ class ShippingTest extends TestCase
      */
     public function generateLabelPickupBE()
     {
-        $request = $this->getClient('Shipping/GenerateShipmentPickupBESuccess.json')->Shipping()->generateShipmentWithoutConfirm();
+        $request = $this->getClient('Shipping/GenerateShipmentPickupBESuccess.json')->shipping()->generateShipmentWithoutConfirm();
         $request->setPrinter('GraphicFile|PDF');
         $request->setCustomer($this->getCustomerEntity());
 
@@ -168,7 +168,7 @@ class ShippingTest extends TestCase
     {
         $customer = $this->getCustomerEntity();
 
-        $request = $this->getClient('Shipping/GenerateShipmentEveningDeliverySuccess.json')->Shipping()->generateShipmentWithoutConfirm();
+        $request = $this->getClient('Shipping/GenerateShipmentEveningDeliverySuccess.json')->shipping()->generateShipmentWithoutConfirm();
         $request->setPrinter('GraphicFile|PDF');
         $request->setCustomer($customer);
         $request->addShipment((new Shipment())
@@ -200,7 +200,7 @@ class ShippingTest extends TestCase
     {
         $customer = $this->getCustomerEntity();
 
-        $request = $this->getClient('Shipping/GenerateShipmentSundayDeliverySuccess.json')->Shipping()->generateShipmentWithoutConfirm();
+        $request = $this->getClient('Shipping/GenerateShipmentSundayDeliverySuccess.json')->shipping()->generateShipmentWithoutConfirm();
         $request->setPrinter('GraphicFile|PDF');
         $request->setCustomer($customer);
         $request->addShipment((new Shipment())
@@ -232,7 +232,7 @@ class ShippingTest extends TestCase
     {
         $customer = $this->getCustomerEntity();
 
-        $request = $this->getClient('Shipping/GenerateShipmentSameDayDeliverySuccess.json')->Shipping()->generateShipmentWithoutConfirm();
+        $request = $this->getClient('Shipping/GenerateShipmentSameDayDeliverySuccess.json')->shipping()->generateShipmentWithoutConfirm();
         $request->setPrinter('GraphicFile|PDF');
         $request->setCustomer($customer);
         $request->addShipment((new Shipment())
@@ -268,7 +268,7 @@ class ShippingTest extends TestCase
     {
         $customer = $this->getCustomerEntity();
 
-        $request = $this->getClient('Shipping/GenerateShipmentDeliveryOnDemandSuccess.json')->Shipping()->generateShipmentWithoutConfirm();
+        $request = $this->getClient('Shipping/GenerateShipmentDeliveryOnDemandSuccess.json')->shipping()->generateShipmentWithoutConfirm();
         $request->setPrinter('GraphicFile|PDF');
         $request->setCustomer($customer);
         $request->addShipment((new Shipment())
@@ -301,7 +301,7 @@ class ShippingTest extends TestCase
     {
         $customer = $this->getCustomerEntity();
 
-        $request = $this->getClient('Shipping/GenerateLabelDeliveryGuaranteedSuccess.json')->Shipping()->generateShipmentWithoutConfirm();
+        $request = $this->getClient('Shipping/GenerateLabelDeliveryGuaranteedSuccess.json')->shipping()->generateShipmentWithoutConfirm();
         $request->setPrinter('GraphicFile|PDF');
         $request->setCustomer($customer);
         $request->addShipment((new Shipment())
@@ -334,7 +334,7 @@ class ShippingTest extends TestCase
     {
         $customer = $this->getCustomerEntity();
 
-        $request = $this->getClient('Shipping/GenerateLabelIdCheckAtDoorSuccess.json')->Shipping()->generateShipmentWithoutConfirm();
+        $request = $this->getClient('Shipping/GenerateLabelIdCheckAtDoorSuccess.json')->shipping()->generateShipmentWithoutConfirm();
         $request->setPrinter('GraphicFile|PDF');
         $request->setCustomer($customer);
         $request->addShipment((new Shipment())
@@ -367,7 +367,7 @@ class ShippingTest extends TestCase
     {
         $customer = $this->getCustomerEntity();
 
-        $request = $this->getClient('Shipping/GenerateLabelDangerousGoodsSuccess.json')->Shipping()->generateShipmentWithoutConfirm();
+        $request = $this->getClient('Shipping/GenerateLabelDangerousGoodsSuccess.json')->shipping()->generateShipmentWithoutConfirm();
         $request->setPrinter('GraphicFile|PDF');
         $request->setCustomer($customer);
         $request->addShipment((new Shipment())
@@ -400,7 +400,7 @@ class ShippingTest extends TestCase
     {
         $customer = $this->getCustomerEntity();
 
-        $request = $this->getClient('Shipping/GenerateLabelExtraAtHomeSuccess.json')->Shipping()->generateShipmentWithoutConfirm();
+        $request = $this->getClient('Shipping/GenerateLabelExtraAtHomeSuccess.json')->shipping()->generateShipmentWithoutConfirm();
         $request->setPrinter('GraphicFile|PDF');
         $request->setCustomer($customer);
         $request->addShipment((new Shipment())
@@ -427,7 +427,7 @@ class ShippingTest extends TestCase
     {
         $customer = $this->getCustomerEntity();
 
-        $request = $this->getClient('Shipping/GenerateLabelExtraAtHomeCODSuccess.json')->Shipping()->generateShipmentWithoutConfirm();
+        $request = $this->getClient('Shipping/GenerateLabelExtraAtHomeCODSuccess.json')->shipping()->generateShipmentWithoutConfirm();
         $request->setPrinter('GraphicFile|PDF');
         $request->setCustomer($customer);
         $request->addShipment((new Shipment())
@@ -470,7 +470,7 @@ class ShippingTest extends TestCase
 
         $customer = $this->getCustomerEntity();
 
-        $request = $this->getClient('Shipping/GenerateLabelExtraAtHomeMultiColloSuccess.json')->Shipping()->generateShipmentWithoutConfirm();
+        $request = $this->getClient('Shipping/GenerateLabelExtraAtHomeMultiColloSuccess.json')->shipping()->generateShipmentWithoutConfirm();
         $request->setPrinter('GraphicFile|PDF');
         $request->setCustomer($customer);
         $request->addShipment((new Shipment())
@@ -529,7 +529,7 @@ class ShippingTest extends TestCase
     {
         $customer = $this->getCustomerEntity();
 
-        $request = $this->getClient('Shipping/GenerateLabelReturnLabelSuccess.json')->Shipping()->generateShipmentWithoutConfirm();
+        $request = $this->getClient('Shipping/GenerateLabelReturnLabelSuccess.json')->shipping()->generateShipmentWithoutConfirm();
         $request->setPrinter('GraphicFile|PDF');
         $request->setCustomer($customer);
         $request->addShipment((new Shipment())
@@ -561,7 +561,7 @@ class ShippingTest extends TestCase
     {
         $customer = $this->getCustomerEntity();
 
-        $request = $this->getClient('Shipping/GenerateLabelSingleReturnLabelSuccess.json')->Shipping()->generateShipmentWithoutConfirm();
+        $request = $this->getClient('Shipping/GenerateLabelSingleReturnLabelSuccess.json')->shipping()->generateShipmentWithoutConfirm();
         $request->setPrinter('GraphicFile|PDF');
         $request->setCustomer($customer);
         $request->addShipment((new Shipment())
@@ -588,7 +588,7 @@ class ShippingTest extends TestCase
     {
         $customer = $this->getCustomerEntity();
 
-        $request = $this->getClient('Shipping/GenerateLabelSmartReturnLabelSuccess.json')->Shipping()->generateShipmentWithoutConfirm();
+        $request = $this->getClient('Shipping/GenerateLabelSmartReturnLabelSuccess.json')->shipping()->generateShipmentWithoutConfirm();
         $request->setPrinter('GraphicFile|PDF');
         $request->setCustomer($customer);
         $request->addShipment((new Shipment())
@@ -623,7 +623,7 @@ class ShippingTest extends TestCase
         $barcode2 = '3STBJG243556370';
         $customer = $this->getCustomerEntity();
 
-        $request = $this->getClient('Shipping/GenerateLabelMultiColloSuccess.json')->Shipping()->generateShipmentWithoutConfirm();
+        $request = $this->getClient('Shipping/GenerateLabelMultiColloSuccess.json')->shipping()->generateShipmentWithoutConfirm();
         $request->setPrinter('GraphicFile|PDF');
         $request->setCustomer($customer);
         $request->addShipment((new Shipment())
@@ -683,7 +683,7 @@ class ShippingTest extends TestCase
 
         $customer = $this->getCustomerEntity();
 
-        $request = $this->getClient('Shipping/GenerateLabelMultiLabelSuccess.json')->Shipping()->generateShipmentWithoutConfirm();
+        $request = $this->getClient('Shipping/GenerateLabelMultiLabelSuccess.json')->shipping()->generateShipmentWithoutConfirm();
         $request->setPrinter('GraphicFile|PDF|MergeA');
         $request->setCustomer($customer);
         $request->addShipment((new Shipment())
@@ -738,7 +738,7 @@ class ShippingTest extends TestCase
     {
         $customer = $this->getCustomerEntity();
 
-        $request = $this->getClient('Shipping/GenerateLabelCargoPickupSuccess.json')->Shipping()->generateShipmentWithoutConfirm();
+        $request = $this->getClient('Shipping/GenerateLabelCargoPickupSuccess.json')->shipping()->generateShipmentWithoutConfirm();
         $request->setPrinter('GraphicFile|PDF');
         $request->setCustomer($customer);
         $request->addShipment((new Shipment())
@@ -777,7 +777,7 @@ class ShippingTest extends TestCase
         $barcode2 = '3STBJG243556389';
         $customer = $this->getCustomerEntity();
 
-        $request = $this->getClient('Shipping/GenerateLabelCargoPickupMultiColloSuccess.json')->Shipping()->generateShipmentWithoutConfirm();
+        $request = $this->getClient('Shipping/GenerateLabelCargoPickupMultiColloSuccess.json')->shipping()->generateShipmentWithoutConfirm();
         $request->setPrinter('GraphicFile|PDF');
         $request->setCustomer($customer);
         $request->addShipment((new Shipment())
@@ -851,7 +851,7 @@ class ShippingTest extends TestCase
         $barcode = '3STBJG243556369';
         $customer = $this->getCustomerEntity();
 
-        $request = $this->getClient('Shipping/GenerateLabelGLobalpackCombilabelSuccess.json')->Shipping()->generateShipmentWithoutConfirm();
+        $request = $this->getClient('Shipping/GenerateLabelGLobalpackCombilabelSuccess.json')->shipping()->generateShipmentWithoutConfirm();
         $request->setPrinter('GraphicFile|PDF');
         $request->setCustomer($customer);
         $request->addShipment((new Shipment())
