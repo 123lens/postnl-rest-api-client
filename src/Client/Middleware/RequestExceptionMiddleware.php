@@ -21,6 +21,7 @@ class RequestExceptionMiddleware
                         throw RequestException::create($request, $response);
                     } else {
                         $json = $response->getBody()->json();
+                        print_r($json);exit;
                         if (!empty($json['fault']['faultstring']) && $json['fault']['faultstring'] === 'Invalid ApiKey') {
                             throw new ApiException('Invalid Api Key');
                         }

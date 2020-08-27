@@ -10,6 +10,7 @@ use Budgetlens\PostNLApi\Endpoints\Deliverydate;
 use Budgetlens\PostNLApi\Endpoints\Labelling;
 use Budgetlens\PostNLApi\Endpoints\Locations;
 use Budgetlens\PostNLApi\Endpoints\Shipping;
+use Budgetlens\PostNLApi\Endpoints\ShippingStatus;
 use Budgetlens\PostNLApi\Endpoints\Timeframe;
 use Budgetlens\PostNLApi\Endpoints\Company;
 use Budgetlens\PostNLApi\Endpoints\Confirming;
@@ -166,5 +167,14 @@ class RestApiClient
     public function shipping(): Shipping
     {
         return new Shipping($this->client);
+    }
+
+    /**
+     *  ShippingStatus Endpoint
+     * @return ShippingStatus
+     */
+    public function shippingStatus(): ShippingStatus
+    {
+        return new ShippingStatus($this->client);
     }
 }
