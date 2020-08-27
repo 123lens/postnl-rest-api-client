@@ -1,0 +1,10 @@
+{
+  "CurrentStatus":{
+  },
+  "Warnings":[
+    {
+      "Message":"No shipment found",
+      "Code":"2"
+    }
+  ]
+}

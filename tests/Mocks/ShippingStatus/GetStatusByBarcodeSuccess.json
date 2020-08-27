@@ -1,0 +1,123 @@
+{
+  "CurrentStatus":{
+    "Shipment":{
+      "MainBarcode":"3STBJG243556369",
+      "Barcode":"3STBJG243556389",
+      "ShipmentAmount":"2",
+      "ShipmentCounter":"2",
+      "Customer":{
+        "CustomerCode":"TBJG",
+        "CustomerNumber":"1052296",
+        "Name":"Budgetlens B.V."
+      },
+      "ProductCode":"003610",
+      "ProductDescription":"Europallets NL",
+      "Reference":"1234testref",
+      "Dimension":{
+        "Height":{
+
+        },
+        "Length":{
+
+        },
+        "Volume":{
+
+        },
+        "Weight":{
+
+        },
+        "Width":{
+
+        }
+      },
+      "Address":[
+        {
+          "AddressType":"01",
+          "Building":{
+
+          },
+          "City":"NAARDEN",
+          "CompanyName":"Pret Groep",
+          "CountryCode":"NL",
+          "DepartmentName":{
+
+          },
+          "District":{
+
+          },
+          "FirstName":"Pleun",
+          "Floor":{
+
+          },
+          "HouseNumber":"10",
+          "HouseNumberSuffix":"-00",
+          "LastName":"Kuijpers",
+          "Region":{
+
+          },
+          "Remark":"3x bellen",
+          "Street":"van Leeuwendreef",
+          "Zipcode":"9501AM"
+        },
+        {
+          "AddressType":"02",
+          "Building":{
+
+          },
+          "City":"GOUDA",
+          "CompanyName":"Sender CompanyName",
+          "CountryCode":"NL",
+          "DepartmentName":{
+
+          },
+          "District":{
+
+          },
+          "FirstName":"Frank",
+          "Floor":{
+
+          },
+          "HouseNumber":"42",
+          "HouseNumberSuffix":"A",
+          "LastName":"Peeters",
+          "Region":{
+
+          },
+          "Remark":{
+
+          },
+          "Street":"Siriusdreef",
+          "Zipcode":"2132WT"
+        }
+      ],
+      "ProductOptions":[
+        {
+          "OptionCode":"1",
+          "CharacteristicCode":"135"
+        },
+        {
+          "OptionDescription":"Bezorging gewijzigd vanaf voormelding",
+          "OptionCode":"11",
+          "CharacteristicCode":"119"
+        },
+        {
+          "OptionDescription":"Bezorging gewijzigd door PostNL",
+          "OptionCode":"13",
+          "CharacteristicCode":"119"
+        },
+        {
+          "OptionDescription":"1 bezorgpoging",
+          "OptionCode":"1",
+          "CharacteristicCode":"112"
+        }
+      ],
+      "Status":{
+        "TimeStamp":"26-08-2020 15:26:25",
+        "StatusCode":"1",
+        "StatusDescription":"Zending voorgemeld",
+        "PhaseCode":"1",
+        "PhaseDescription":"Collectie"
+      }
+    }
+  }
+}
