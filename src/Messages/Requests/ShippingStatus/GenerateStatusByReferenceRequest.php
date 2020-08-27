@@ -6,18 +6,18 @@ namespace Budgetlens\PostNLApi\Messages\Requests\ShippingStatus;
  *
  * ### Example
  * <code>
- *      $request = $client->barcode()->generateBarcodeDomestic();
+ *      $request = $client->shippingStatus()->reference();
  *      $request->setCustomerCode('--CUSTOMER_CODE--');
  *      $request->setCustomerNumber('--CUSTOMER_NUMBER--');
+ *      $request->setReferenceId('-- reference id --');
  *      $response = $request->send();
- *      $barcode = $response->getBarcode();
+ *      print_r($response->getCurrentStatus());
  * </code>
  *
  */
 
 use Budgetlens\PostNLApi\Messages\Requests\Contracts\MessageInterface;
 use Budgetlens\PostNLApi\Messages\Requests\Contracts\RequestInterface;
-use Budgetlens\PostNLApi\Messages\Responses\Shipping\GenerateShipmentResponse;
 use Budgetlens\PostNLApi\Messages\Responses\ShippingStatus\ShippingStatusResponse;
 
 class GenerateStatusByReferenceRequest extends AbstractShippingStatusRequest implements RequestInterface, MessageInterface

@@ -6,18 +6,18 @@ namespace Budgetlens\PostNLApi\Messages\Requests\ShippingStatus;
  *
  * ### Example
  * <code>
- *      $request = $client->barcode()->generateBarcodeDomestic();
+ *      $request = $client->shippingStatus()->shipment();
  *      $request->setCustomerCode('--CUSTOMER_CODE--');
- *      $request->setCustomerNumber('--CUSTOMER_NUMBER--');
+ *      $request->addPeriod(new \DateTime('2020-08-07'))
+ *      $request->addPeriod(new \DateTime('2020-08-08'));
  *      $response = $request->send();
- *      $barcode = $response->getBarcode();
+ *      print_r($response->getData());
  * </code>
  *
  */
 
 use Budgetlens\PostNLApi\Messages\Requests\Contracts\MessageInterface;
 use Budgetlens\PostNLApi\Messages\Requests\Contracts\RequestInterface;
-use Budgetlens\PostNLApi\Messages\Responses\Shipping\GenerateShipmentResponse;
 use Budgetlens\PostNLApi\Messages\Responses\ShippingStatus\ShippingStatusResponse;
 
 class GenerateUpdatedShipmentsByCustomerNumberRequest extends AbstractShippingStatusRequest implements RequestInterface, MessageInterface
@@ -105,10 +105,6 @@ class GenerateUpdatedShipmentsByCustomerNumberRequest extends AbstractShippingSt
             ]
         );
 
-//        $filename = "/Users/sebastiaan/Projects/123 Lens/123lens-Opensource-Packages/postnl-rest-api/tests/Mocks/ShippingStatus/GetUpdatedShipmentsFilterPeriodSuccess.json";
-//        file_put_contents($filename, $response->getBody());
-//        die("");
-//
         return $this->response = new ShippingStatusResponse($this, $response->getBody()->json());
     }
 }

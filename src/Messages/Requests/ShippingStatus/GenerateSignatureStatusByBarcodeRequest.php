@@ -6,18 +6,16 @@ namespace Budgetlens\PostNLApi\Messages\Requests\ShippingStatus;
  *
  * ### Example
  * <code>
- *      $request = $client->barcode()->generateBarcodeDomestic();
- *      $request->setCustomerCode('--CUSTOMER_CODE--');
- *      $request->setCustomerNumber('--CUSTOMER_NUMBER--');
+ *      $request = $client->shippingStatus()->signature();
+ *      $request->setBarcode('--barcode--');
  *      $response = $request->send();
- *      $barcode = $response->getBarcode();
+ *      print_r($response->getCurrentStatus());
  * </code>
  *
  */
 
 use Budgetlens\PostNLApi\Messages\Requests\Contracts\MessageInterface;
 use Budgetlens\PostNLApi\Messages\Requests\Contracts\RequestInterface;
-use Budgetlens\PostNLApi\Messages\Responses\Shipping\GenerateShipmentResponse;
 use Budgetlens\PostNLApi\Messages\Responses\ShippingStatus\ShippingStatusResponse;
 
 class GenerateSignatureStatusByBarcodeRequest extends AbstractShippingStatusRequest implements RequestInterface, MessageInterface
