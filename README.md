@@ -43,7 +43,6 @@ Meaning of **Is finished:**:
 | [Labelling webservice](#Labelling-webservice)             | v1 | &#9745;
 | [Confirming webservice](#Confirming-webservice)           | v1 | &#9745;
 | [Shippingstatus webservice](#Shippingstatus-webservice)   | v1 | &#9745;
-| [Return on demand](#Return-on-demand)                     | v1 | &#9744;
 |**Delivery Options** [More info](https://developer.postnl.nl/browse-apis/delivery-options/)||
 | [Deliverydate webservice](#Deliverydate-webservice)       | v1 | &#9745;
 | [Location webservice](#Location-webservice)               | v1 | &#9745;
@@ -99,7 +98,7 @@ Base endoint: /
 
 |Endpoint|Version|Implemented|Tested
 |---|---|---|---
-| /v1/shipment | v1 | &#9744;| &#9744;
+| /v1/shipment | v1 | &#9745;| &#9745;
 
 
 ### Barcode webservice
@@ -114,33 +113,25 @@ Base endoint: /shipment/v2_2
 
 |Endpoint|Version|Implemented|Tested
 |---|---|---|---
-| /label | v2_2 | &#9744;| &#9744;
+| /label | v2_2 | &#9745;| &#9745;
 
 ### Confirming webservice
 Base endoint: /shipment/v2 
 
 |Endpoint|Version|Implemented|Tested
 |---|---|---|---
-| /confirm | v2 | &#9744;| &#9744;
+| /confirm | v2 | &#9745;| &#9745;
 
 ### Shippingstatus webservice
 Base endoint: /shipment 
 
 |Endpoint|Version|Implemented|Tested
 |---|---|---|---
-| /v2/status/barcode                            | v2 | &#9744;| &#9744;
-| /v2/status/reference                          | v2 | &#9744;| &#9744;
-| /v2/status/lookup                             | v2 | &#9744;| &#9744;
-| /v2/status/signature                          | v2 | &#9744;| &#9744;
-| /v2/status/{customerNumber}/updatedshipments  | v2 | &#9744;| &#9744;
-
-### Return on demand
-Base endoint: /shipment/v1 
-
-|Endpoint|Version|Implemented|Tested
-|---|---|---|---
-| /pickuporder/quotes   | v1 | &#9744;| &#9744;
-| /pickuporder          | v1 | &#9744;| &#9744;
+| /v2/status/barcode                            | v2 | &#9745;| &#9745;
+| /v2/status/reference                          | v2 | &#9745;| &#9745;
+| /v2/status/lookup                             | v2 | &#9745;| &#9745;
+| /v2/status/signature                          | v2 | &#9745;| &#9745;
+| /v2/status/{customerNumber}/updatedshipments  | v2 | &#9745;| &#9745;
 
 ### Deliverydate webservice
 Base endoint: /shipment 
