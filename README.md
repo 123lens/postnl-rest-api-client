@@ -38,11 +38,11 @@ Meaning of **Is finished:**:
 | [Geo Adrescheck Nationaal](#Geo-Adrescheck-Nationaal)     | v1 | &#9745;
 | [Adrescheck Basis Nationaal](#Adrescheck-Basis-Nationaal) | v1 | &#9745;
 |**Send and Track** [More info](https://developer.postnl.nl/browse-apis/send-and-track/)||
-| [Shipping webservice](#Shipping-webservice)               | v1 | &#9744;
+| [Shipping webservice](#Shipping-webservice)               | v1 | &#9745;
 | [Barcode webservice](#Barcode-webservice)                 | v1 | &#9745;
-| [Labelling webservice](#Labelling-webservice)             | v1 | &#9744;
-| [Confirming webservice](#Confirming-webservice)           | v1 | &#9744;
-| [Shippingstatus webservice](#Shippingstatus-webservice)   | v1 | &#9744;
+| [Labelling webservice](#Labelling-webservice)             | v1 | &#9745;
+| [Confirming webservice](#Confirming-webservice)           | v1 | &#9745;
+| [Shippingstatus webservice](#Shippingstatus-webservice)   | v1 | &#9745;
 | [Return on demand](#Return-on-demand)                     | v1 | &#9744;
 |**Delivery Options** [More info](https://developer.postnl.nl/browse-apis/delivery-options/)||
 | [Deliverydate webservice](#Deliverydate-webservice)       | v1 | &#9745;
