@@ -8,7 +8,6 @@ namespace Budgetlens\PostNLApi\Messages\Requests\Labelling;
 use Budgetlens\PostNLApi\Messages\Requests\AbstractRequest;
 use Budgetlens\PostNLApi\Messages\Requests\Contracts\MessageInterface;
 use Budgetlens\PostNLApi\Messages\Requests\Contracts\RequestInterface;
-use Budgetlens\PostNLApi\Messages\Responses\Barcode\GenerateBarcodeResponse;
 use Budgetlens\PostNLApi\Entities\Message;
 
 abstract class AbstractLabellingRequest extends AbstractRequest implements RequestInterface, MessageInterface
