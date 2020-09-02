@@ -8,7 +8,6 @@ use Budgetlens\PostNLApi\Messages\Responses\LocationLookupResponse;
 use Budgetlens\PostNLApi\Messages\Responses\NearestLocationsByAreaResponse;
 use Budgetlens\PostNLApi\Messages\Responses\NearestLocationsByGeoResponse;
 use Budgetlens\PostNLApi\Messages\Responses\NearestLocationsResponse;
-use GuzzleHttp\Exception\ClientException;
 use Tests\TestCase;
 
 class LocationsTest extends TestCase
