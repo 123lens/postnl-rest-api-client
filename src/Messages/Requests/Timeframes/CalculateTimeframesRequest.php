@@ -26,7 +26,6 @@ namespace Budgetlens\PostNLApi\Messages\Requests\Timeframes;
 use Budgetlens\PostNLApi\Messages\Requests\AbstractRequest;
 use Budgetlens\PostNLApi\Messages\Requests\Contracts\MessageInterface;
 use Budgetlens\PostNLApi\Messages\Requests\Contracts\RequestInterface;
-use Budgetlens\PostNLApi\Messages\Responses\DeliveryDate\CalculateDeliveryDateResponse;
 use Budgetlens\PostNLApi\Messages\Responses\Timeframes\CalculateTimeframesResponse;
 
 class CalculateTimeframesRequest extends AbstractRequest implements RequestInterface, MessageInterface
