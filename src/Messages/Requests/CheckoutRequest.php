@@ -18,7 +18,6 @@ use Budgetlens\PostNLApi\Messages\Requests\Contracts\MessageInterface;
 use Budgetlens\PostNLApi\Messages\Requests\Contracts\RequestInterface;
 use Budgetlens\PostNLApi\Messages\Responses\CheckoutResponse;
 use Budgetlens\PostNLApi\Messages\Responses\NearestLocationsResponse;
-use Budgetlens\PostNLApi\Messages\Responses\PostalcodeCheckResponse;
 
 class CheckoutRequest extends AbstractRequest implements RequestInterface, MessageInterface
 {

@@ -9,7 +9,6 @@ namespace Budgetlens\PostNLApi\Entities\Shipment;
 
 use Budgetlens\PostNLApi\Entities\AbstractEntity;
 use Budgetlens\PostNLApi\Entities\Contracts\EntityInterface;
-use Budgetlens\PostNLApi\Entities\Shipment\Customs\Item;
 use Budgetlens\PostNLApi\Traits\ValidationTrait;
 
 class HazardousMaterial extends AbstractEntity implements EntityInterface

@@ -2,7 +2,6 @@
 namespace Tests;
 
 use Budgetlens\PostNLApi\RestApiClient;
-use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\BadResponseException;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;

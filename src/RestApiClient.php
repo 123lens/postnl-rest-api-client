@@ -53,6 +53,11 @@ class RestApiClient
 
         $this->apiKey = $apiKey;
     }
+
+    /**
+     * Get HttpClient
+     * @return GuzzleHttp\ClientInterface
+     */
     public function getHttpClient()
     {
         return $this->client;

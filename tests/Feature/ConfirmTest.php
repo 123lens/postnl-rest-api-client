@@ -1,12 +1,10 @@
 <?php
 namespace Tests\Feature;
 
-use Budgetlens\PostNLApi\Client\Middleware\ErrorResponseException;
 use Budgetlens\PostNLApi\Entities\Address;
 use Budgetlens\PostNLApi\Entities\Customer;
 use Budgetlens\PostNLApi\Entities\Shipment;
 use Budgetlens\PostNLApi\Messages\Responses\Labelling\ConfirmResponse;
-use Budgetlens\PostNLApi\Messages\Responses\Labelling\GenerateLabelResponse;
 use Tests\TestCase;
 use Faker\Factory;
 

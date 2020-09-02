@@ -5,7 +5,6 @@ namespace Budgetlens\PostNLApi\Messages\Responses;
  * Postalcode Check Response
  */
 
-use Budgetlens\PostNLApi\Entities\Address;
 use Budgetlens\PostNLApi\Messages\Responses\Contracts\ResponseInterface;
 
 class PostalcodeCheckResponse extends AbstractResponse implements ResponseInterface

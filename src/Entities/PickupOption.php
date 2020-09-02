@@ -8,7 +8,6 @@ namespace Budgetlens\PostNLApi\Entities;
  */
 
 use Budgetlens\PostNLApi\Entities\Contracts\EntityInterface;
-use Cassandra\Date;
 
 class PickupOption extends AbstractEntity implements EntityInterface
 {

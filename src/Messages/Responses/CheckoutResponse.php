@@ -5,10 +5,8 @@ namespace Budgetlens\PostNLApi\Messages\Responses;
  * Checkout Response
  */
 
-use Budgetlens\PostNLApi\Entities\Address;
 use Budgetlens\PostNLApi\Entities\Checkout\Warning;
 use Budgetlens\PostNLApi\Entities\DeliveryDateOption;
-use Budgetlens\PostNLApi\Entities\Location;
 use Budgetlens\PostNLApi\Entities\PickupOption;
 use Budgetlens\PostNLApi\Entities\TimeFrame;
 use Budgetlens\PostNLApi\Messages\Responses\Contracts\ResponseInterface;

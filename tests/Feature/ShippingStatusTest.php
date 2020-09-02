@@ -1,13 +1,8 @@
 <?php
 namespace Tests\Feature;
 
-use Budgetlens\PostNLApi\Client\Middleware\ErrorResponseException;
-use Budgetlens\PostNLApi\Entities\Address;
-use Budgetlens\PostNLApi\Entities\Customer;
-use Budgetlens\PostNLApi\Entities\Shipment;
 use Budgetlens\PostNLApi\Messages\Responses\ShippingStatus\ShippingStatusResponse;
 use Tests\TestCase;
-use Faker\Factory;
 
 class ShippingStatusTest extends TestCase
 {

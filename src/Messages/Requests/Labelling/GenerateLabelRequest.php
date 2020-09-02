@@ -6,11 +6,52 @@ namespace Budgetlens\PostNLApi\Messages\Requests\Labelling;
  *
  * ### Example
  * <code>
- *      $request = $client->barcode()->generateBarcodeDomestic();
- *      $request->setCustomerCode('--CUSTOMER_CODE--');
- *      $request->setCustomerNumber('--CUSTOMER_NUMBER--');
+ *      $request = $client->labelling()->generateLabelWithoutConfirm();
+ *      $request->setPrinter('GraphicFile|PDF');
+ *      $request->setCustomer((new Customer())
+ *          ->setAddress((new Address())
+ *              ->setAddressType(Address::SENDER)
+ *              ->setCompanyName('Sender CompanyName')
+ *              ->setFirstName('Frank')
+ *              ->setName('Peeters')
+ *              ->setCity('Hoofddorp')
+ *              ->setCountryCode("NL")
+ *              ->setHouseNr(42)
+ *              ->setHouseNrExt('A')
+ *              ->setZipcode('2132WT')
+ *              ->setStreet('Siriusdreef')
+ *          )
+ *          ->setCollectionLocation(getenv('COLLECTION_LOCATION'))
+ *          ->setCustomerCode(getenv('CUSTOMER_CODE'))
+ *          ->setCustomerNumber(getenv('CUSTOMER_NUMBER'))
+ *          ->setEmail('some@email.nl');
+ *      );
+ *      $request->addShipment((new Shipment())
+ *          ->addAddress((new Address())
+ *              ->setAddressType(Address::RECEIVER)
+ *              ->setFirstName('Peter')
+ *              ->setName('de Ruiter')
+ *              ->setZipcode('3532VA')
+ *              ->setStreet('Bilderdijkstraat')
+ *              ->setHouseNr(9)
+ *              ->setHouseNrExt('a bis')
+ *              ->setCity('Utrecht')
+ *              ->setCountryCode("NL")
+ *          )
+ *          ->setBarcode('3SDEVC6659149')
+ *          ->addContact((new Shipment\Contact())
+ *              ->setEmail('info@email.nl')
+ *              ->setContactType('01')
+ *              ->setSMSNr('0612345678')
+ *          )
+ *          ->setDeliveryAddress('01')
+ *          ->setDimension((new Shipment\Dimension())
+ *              ->setWeight(450)
+ *          )
+ *          ->setProductCodeDelivery(3085)
+ *          ->setRemark('Remark')
+ *      );
  *      $response = $request->send();
- *      $barcode = $response->getBarcode();
  * </code>
  *
  */
