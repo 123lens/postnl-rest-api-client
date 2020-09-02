@@ -13,7 +13,7 @@ use Tests\TestCase;
 class LocationsTest extends TestCase
 {
     /**
-     * @testx
+     * @test
      */
     public function getNearestLocations()
     {
@@ -29,11 +29,11 @@ class LocationsTest extends TestCase
         // assert address data.
         $this->assertInstanceOf(Address::class, $response->getLocations()[0]->getAddress());
         $this->assertSame('1000AA', $response->getLocations()[0]->getAddress()->getZipcode());
-        $this->assertSame(1, $response->getLocations()[0]->getAddress()->getHouseNumber());
+        $this->assertSame(1, $response->getLocations()[0]->getAddress()->getHouseNr());
     }
 
     /**
-     * @testx
+     * @test
      */
     public function getNearestLocationsByGeo()
     {
@@ -49,11 +49,11 @@ class LocationsTest extends TestCase
         // assert address data.
         $this->assertInstanceOf(Address::class, $response->getLocations()[0]->getAddress());
         $this->assertSame('2132PZ', $response->getLocations()[0]->getAddress()->getZipcode());
-        $this->assertSame(10, $response->getLocations()[0]->getAddress()->getHouseNumber());
+        $this->assertSame(10, $response->getLocations()[0]->getAddress()->getHouseNr());
     }
 
     /**
-     * @testx
+     * @test
      */
     public function getNearestLocationsByArea()
     {
@@ -71,7 +71,7 @@ class LocationsTest extends TestCase
         // assert address data.
         $this->assertInstanceOf(Address::class, $response->getLocations()[0]->getAddress());
         $this->assertSame('3454CJ', $response->getLocations()[0]->getAddress()->getZipcode());
-        $this->assertSame(3, $response->getLocations()[0]->getAddress()->getHouseNumber());
+        $this->assertSame(3, $response->getLocations()[0]->getAddress()->getHouseNr());
     }
 
     /**
@@ -89,7 +89,7 @@ class LocationsTest extends TestCase
         // assert address data.
         $this->assertInstanceOf(Address::class, $response->getLocation()->getAddress());
         $this->assertSame('2132PZ', $response->getLocation()->getAddress()->getZipcode());
-        $this->assertSame(10, $response->getLocation()->getAddress()->getHouseNumber());
+        $this->assertSame(10, $response->getLocation()->getAddress()->getHouseNr());
     }
 
     /**
