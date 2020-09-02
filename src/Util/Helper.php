@@ -5,8 +5,6 @@ namespace Budgetlens\PostNLApi\Util;
  * Helper class
  */
 
-use InvalidArgumentException;
-
 class Helper
 {
     /**

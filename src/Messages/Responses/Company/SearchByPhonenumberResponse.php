@@ -5,11 +5,7 @@ namespace Budgetlens\PostNLApi\Messages\Responses\Company;
  * Company Search By Phonenumber Response
  */
 
-use Budgetlens\PostNLApi\Entities\Address;
 use Budgetlens\PostNLApi\Entities\Company;
-use Budgetlens\PostNLApi\Entities\DeliveryOption;
-use Budgetlens\PostNLApi\Entities\Location;
-use Budgetlens\PostNLApi\Entities\OpeningHour;
 use Budgetlens\PostNLApi\Messages\Responses\AbstractResponse;
 use Budgetlens\PostNLApi\Messages\Responses\Contracts\ResponseInterface;
 
