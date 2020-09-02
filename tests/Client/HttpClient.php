@@ -9,10 +9,7 @@ use Budgetlens\PostNLApi\Client\Middleware\ResponseIsErrorMiddleware;
 use GuzzleHttp\Client;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
-use GuzzleHttp\MessageFormatter;
 use GuzzleHttp\Middleware;
-use GuzzleHttp\Utils;
-use Psr\Log\LoggerInterface;
 
 /**
  * Mockery http client
