@@ -1,0 +1,930 @@
+{
+  "CurrentStatus":{
+    "Shipment":[
+      {
+        "MainBarcode":"3STBJG196272025",
+        "Barcode":"3STBJG196272025",
+        "ShipmentAmount":"1",
+        "ShipmentCounter":"1",
+        "Customer":{
+          "CustomerCode":"TBJG",
+          "CustomerNumber":"1234567",
+          "Name":"Bedrijf"
+        },
+        "ProductCode":"003085",
+        "ProductDescription":"Standaard Zending",
+        "Reference":"Reference",
+        "Dimension":{
+          "Height":{
+
+          },
+          "Length":{
+
+          },
+          "Volume":{
+
+          },
+          "Weight":{
+
+          },
+          "Width":{
+
+          }
+        },
+        "Address":[
+          {
+            "AddressType":"01",
+            "Building":{
+
+            },
+            "City":{
+
+            },
+            "CompanyName":"Fietsenmaker Hakker NV",
+            "CountryCode":"NL",
+            "DepartmentName":{
+
+            },
+            "District":{
+
+            },
+            "FirstName":"Hugo",
+            "Floor":{
+
+            },
+            "HouseNumber":"555",
+            "HouseNumberSuffix":{
+
+            },
+            "LastName":"Ridder",
+            "Region":{
+
+            },
+            "Remark":{
+
+            },
+            "Street":"Beekmanstraat",
+            "Zipcode":"9401MA"
+          },
+          {
+            "AddressType":"02",
+            "Building":{
+
+            },
+            "City":"HOOFDDORP",
+            "CompanyName":"Sender CompanyName",
+            "CountryCode":"NL",
+            "DepartmentName":{
+
+            },
+            "District":{
+
+            },
+            "FirstName":"Frank",
+            "Floor":{
+
+            },
+            "HouseNumber":"42",
+            "HouseNumberSuffix":"A",
+            "LastName":"Peeters",
+            "Region":{
+
+            },
+            "Remark":{
+
+            },
+            "Street":"Siriusdreef",
+            "Zipcode":"2132WT"
+          }
+        ],
+        "ProductOptions":[
+          {
+            "OptionDescription":"Bezorging gewijzigd vanaf voormelding",
+            "OptionCode":"11",
+            "CharacteristicCode":"119"
+          },
+          {
+            "OptionDescription":"Bezorging gewijzigd door PostNL",
+            "OptionCode":"13",
+            "CharacteristicCode":"119"
+          },
+          {
+            "OptionDescription":"1 bezorgpoging",
+            "OptionCode":"1",
+            "CharacteristicCode":"112"
+          }
+        ],
+        "Status":{
+          "TimeStamp":"27-08-2020 04:15:00",
+          "StatusCode":"13",
+          "StatusDescription":"Voorgemeld: nog niet aangenomen",
+          "PhaseCode":"1",
+          "PhaseDescription":"Collectie"
+        }
+      },
+      {
+        "MainBarcode":"3STBJG350196922",
+        "Barcode":"3STBJG350196922",
+        "ShipmentAmount":"1",
+        "ShipmentCounter":"1",
+        "Customer":{
+          "CustomerCode":"TBJG",
+          "CustomerNumber":"1234567",
+          "Name":"Bedrijf"
+        },
+        "ProductCode":"003085",
+        "ProductDescription":"Standaard Zending",
+        "Reference":"Reference",
+        "Dimension":{
+          "Height":{
+
+          },
+          "Length":{
+
+          },
+          "Volume":{
+
+          },
+          "Weight":{
+
+          },
+          "Width":{
+
+          }
+        },
+        "Address":[
+          {
+            "AddressType":"01",
+            "Building":{
+
+            },
+            "City":{
+
+            },
+            "CompanyName":"Kunst Winkel",
+            "CountryCode":"NL",
+            "DepartmentName":{
+
+            },
+            "District":{
+
+            },
+            "FirstName":"Emir",
+            "Floor":{
+
+            },
+            "HouseNumber":"64",
+            "HouseNumberSuffix":"m",
+            "LastName":"van der Laan",
+            "Region":{
+
+            },
+            "Remark":{
+
+            },
+            "Street":"Mulderring",
+            "Zipcode":"5231PS"
+          },
+          {
+            "AddressType":"02",
+            "Building":{
+
+            },
+            "City":"HOOFDDORP",
+            "CompanyName":"Sender CompanyName",
+            "CountryCode":"NL",
+            "DepartmentName":{
+
+            },
+            "District":{
+
+            },
+            "FirstName":"Frank",
+            "Floor":{
+
+            },
+            "HouseNumber":"42",
+            "HouseNumberSuffix":"A",
+            "LastName":"Peeters",
+            "Region":{
+
+            },
+            "Remark":{
+
+            },
+            "Street":"Siriusdreef",
+            "Zipcode":"2132WT"
+          }
+        ],
+        "Status":{
+          "TimeStamp":"27-08-2020 04:15:00",
+          "StatusCode":"13",
+          "StatusDescription":"Voorgemeld: nog niet aangenomen",
+          "PhaseCode":"1",
+          "PhaseDescription":"Collectie"
+        }
+      },
+      {
+        "MainBarcode":"3STBJG460800551",
+        "Barcode":"3STBJG460800551",
+        "ShipmentAmount":"1",
+        "ShipmentCounter":"1",
+        "Customer":{
+          "CustomerCode":"TBJG",
+          "CustomerNumber":"1234567",
+          "Name":"Bedrijf"
+        },
+        "ProductCode":"003085",
+        "ProductDescription":"Standaard Zending",
+        "Reference":"Reference",
+        "Dimension":{
+          "Height":{
+
+          },
+          "Length":{
+
+          },
+          "Volume":{
+
+          },
+          "Weight":{
+
+          },
+          "Width":{
+
+          }
+        },
+        "Address":[
+          {
+            "AddressType":"01",
+            "Building":{
+
+            },
+            "City":{
+
+            },
+            "CompanyName":"Pizzagroep",
+            "CountryCode":"NL",
+            "DepartmentName":{
+
+            },
+            "District":{
+
+            },
+            "FirstName":"Daan",
+            "Floor":{
+
+            },
+            "HouseNumber":"75",
+            "HouseNumberSuffix":"-16",
+            "LastName":"Şahin",
+            "Region":{
+
+            },
+            "Remark":{
+
+            },
+            "Street":"Köseboulevard",
+            "Zipcode":"2512VH"
+          },
+          {
+            "AddressType":"02",
+            "Building":{
+
+            },
+            "City":"HOOFDDORP",
+            "CompanyName":"Sender CompanyName",
+            "CountryCode":"NL",
+            "DepartmentName":{
+
+            },
+            "District":{
+
+            },
+            "FirstName":"Frank",
+            "Floor":{
+
+            },
+            "HouseNumber":"42",
+            "HouseNumberSuffix":"A",
+            "LastName":"Peeters",
+            "Region":{
+
+            },
+            "Remark":{
+
+            },
+            "Street":"Siriusdreef",
+            "Zipcode":"2132WT"
+          }
+        ],
+        "ProductOptions":[
+          {
+            "OptionDescription":"Bezorging gewijzigd vanaf voormelding",
+            "OptionCode":"11",
+            "CharacteristicCode":"119"
+          },
+          {
+            "OptionDescription":"Bezorging gewijzigd door PostNL",
+            "OptionCode":"13",
+            "CharacteristicCode":"119"
+          },
+          {
+            "OptionDescription":"1 bezorgpoging",
+            "OptionCode":"1",
+            "CharacteristicCode":"112"
+          }
+        ],
+        "Status":{
+          "TimeStamp":"27-08-2020 04:15:00",
+          "StatusCode":"13",
+          "StatusDescription":"Voorgemeld: nog niet aangenomen",
+          "PhaseCode":"1",
+          "PhaseDescription":"Collectie"
+        }
+      },
+      {
+        "MainBarcode":"3STBJG207217521",
+        "Barcode":"3STBJG207217521",
+        "ShipmentAmount":"1",
+        "ShipmentCounter":"1",
+        "Customer":{
+          "CustomerCode":"TBJG",
+          "CustomerNumber":"1234567",
+          "Name":"Bedrijf"
+        },
+        "ProductCode":"003085",
+        "ProductDescription":"Standaard Zending",
+        "Reference":"Reference",
+        "Dimension":{
+          "Height":{
+
+          },
+          "Length":{
+
+          },
+          "Volume":{
+
+          },
+          "Weight":{
+
+          },
+          "Width":{
+
+          }
+        },
+        "Address":[
+          {
+            "AddressType":"01",
+            "Building":{
+
+            },
+            "City":{
+
+            },
+            "CompanyName":"Mediasalon CSL",
+            "CountryCode":"NL",
+            "DepartmentName":{
+
+            },
+            "District":{
+
+            },
+            "FirstName":"Elin",
+            "Floor":{
+
+            },
+            "HouseNumber":"2",
+            "HouseNumberSuffix":"n",
+            "LastName":"van der Pol",
+            "Region":{
+
+            },
+            "Remark":{
+
+            },
+            "Street":"Muldersweg",
+            "Zipcode":"8231DH"
+          },
+          {
+            "AddressType":"02",
+            "Building":{
+
+            },
+            "City":"HOOFDDORP",
+            "CompanyName":"Sender CompanyName",
+            "CountryCode":"NL",
+            "DepartmentName":{
+
+            },
+            "District":{
+
+            },
+            "FirstName":"Frank",
+            "Floor":{
+
+            },
+            "HouseNumber":"42",
+            "HouseNumberSuffix":"A",
+            "LastName":"Peeters",
+            "Region":{
+
+            },
+            "Remark":{
+
+            },
+            "Street":"Siriusdreef",
+            "Zipcode":"2132WT"
+          }
+        ],
+        "Status":{
+          "TimeStamp":"27-08-2020 04:15:00",
+          "StatusCode":"13",
+          "StatusDescription":"Voorgemeld: nog niet aangenomen",
+          "PhaseCode":"1",
+          "PhaseDescription":"Collectie"
+        }
+      },
+      {
+        "MainBarcode":"3STBJG811371525",
+        "Barcode":"3STBJG811371525",
+        "ShipmentAmount":"1",
+        "ShipmentCounter":"1",
+        "Customer":{
+          "CustomerCode":"TBJG",
+          "CustomerNumber":"1234567",
+          "Name":"Bedrijf"
+        },
+        "ProductCode":"003085",
+        "ProductDescription":"Standaard Zending",
+        "Reference":"Reference",
+        "Dimension":{
+          "Height":{
+
+          },
+          "Length":{
+
+          },
+          "Volume":{
+
+          },
+          "Weight":{
+
+          },
+          "Width":{
+
+          }
+        },
+        "Address":[
+          {
+            "AddressType":"01",
+            "Building":{
+
+            },
+            "City":{
+
+            },
+            "CompanyName":"Kapperszaak Dogan",
+            "CountryCode":"NL",
+            "DepartmentName":{
+
+            },
+            "District":{
+
+            },
+            "FirstName":"Merel",
+            "Floor":{
+
+            },
+            "HouseNumber":"30",
+            "HouseNumberSuffix":"-z",
+            "LastName":"Molenaar",
+            "Region":{
+
+            },
+            "Remark":{
+
+            },
+            "Street":"van den Veldepad",
+            "Zipcode":"6655AE"
+          },
+          {
+            "AddressType":"02",
+            "Building":{
+
+            },
+            "City":"HOOFDDORP",
+            "CompanyName":"Sender CompanyName",
+            "CountryCode":"NL",
+            "DepartmentName":{
+
+            },
+            "District":{
+
+            },
+            "FirstName":"Frank",
+            "Floor":{
+
+            },
+            "HouseNumber":"42",
+            "HouseNumberSuffix":"A",
+            "LastName":"Peeters",
+            "Region":{
+
+            },
+            "Remark":{
+
+            },
+            "Street":"Siriusdreef",
+            "Zipcode":"2132WT"
+          }
+        ],
+        "ProductOptions":[
+          {
+            "OptionDescription":"Bezorging gewijzigd vanaf voormelding",
+            "OptionCode":"11",
+            "CharacteristicCode":"119"
+          },
+          {
+            "OptionDescription":"Bezorging gewijzigd door PostNL",
+            "OptionCode":"13",
+            "CharacteristicCode":"119"
+          },
+          {
+            "OptionDescription":"1 bezorgpoging",
+            "OptionCode":"1",
+            "CharacteristicCode":"112"
+          }
+        ],
+        "Status":{
+          "TimeStamp":"27-08-2020 04:15:00",
+          "StatusCode":"13",
+          "StatusDescription":"Voorgemeld: nog niet aangenomen",
+          "PhaseCode":"1",
+          "PhaseDescription":"Collectie"
+        }
+      },
+      {
+        "MainBarcode":"3STBJG066845975",
+        "Barcode":"3STBJG066845975",
+        "ShipmentAmount":"1",
+        "ShipmentCounter":"1",
+        "Customer":{
+          "CustomerCode":"TBJG",
+          "CustomerNumber":"1234567",
+          "Name":"Bedrijf"
+        },
+        "ProductCode":"003085",
+        "ProductDescription":"Standaard Zending",
+        "Reference":"Reference",
+        "Dimension":{
+          "Height":{
+
+          },
+          "Length":{
+
+          },
+          "Volume":{
+
+          },
+          "Weight":{
+
+          },
+          "Width":{
+
+          }
+        },
+        "Address":[
+          {
+            "AddressType":"01",
+            "Building":{
+
+            },
+            "City":{
+
+            },
+            "CompanyName":"Sport Vakhuis",
+            "CountryCode":"NL",
+            "DepartmentName":{
+
+            },
+            "District":{
+
+            },
+            "FirstName":"Kick",
+            "Floor":{
+
+            },
+            "HouseNumber":"6",
+            "HouseNumberSuffix":"-w",
+            "LastName":"de Bock",
+            "Region":{
+
+            },
+            "Remark":{
+
+            },
+            "Street":"Koçpad",
+            "Zipcode":"9742GT"
+          },
+          {
+            "AddressType":"02",
+            "Building":{
+
+            },
+            "City":"HOOFDDORP",
+            "CompanyName":"Sender CompanyName",
+            "CountryCode":"NL",
+            "DepartmentName":{
+
+            },
+            "District":{
+
+            },
+            "FirstName":"Frank",
+            "Floor":{
+
+            },
+            "HouseNumber":"42",
+            "HouseNumberSuffix":"A",
+            "LastName":"Peeters",
+            "Region":{
+
+            },
+            "Remark":{
+
+            },
+            "Street":"Siriusdreef",
+            "Zipcode":"2132WT"
+          }
+        ],
+        "ProductOptions":[
+          {
+            "OptionDescription":"Bezorging gewijzigd vanaf voormelding",
+            "OptionCode":"11",
+            "CharacteristicCode":"119"
+          },
+          {
+            "OptionDescription":"Bezorging gewijzigd door PostNL",
+            "OptionCode":"13",
+            "CharacteristicCode":"119"
+          },
+          {
+            "OptionDescription":"1 bezorgpoging",
+            "OptionCode":"1",
+            "CharacteristicCode":"112"
+          }
+        ],
+        "Status":{
+          "TimeStamp":"27-08-2020 04:15:00",
+          "StatusCode":"13",
+          "StatusDescription":"Voorgemeld: nog niet aangenomen",
+          "PhaseCode":"1",
+          "PhaseDescription":"Collectie"
+        }
+      },
+      {
+        "MainBarcode":"3STBJG836805216",
+        "Barcode":"3STBJG836805216",
+        "ShipmentAmount":"1",
+        "ShipmentCounter":"1",
+        "Customer":{
+          "CustomerCode":"TBJG",
+          "CustomerNumber":"1234567",
+          "Name":"Bedrijf"
+        },
+        "ProductCode":"003085",
+        "ProductDescription":"Standaard Zending",
+        "Reference":"Reference",
+        "Dimension":{
+          "Height":{
+
+          },
+          "Length":{
+
+          },
+          "Volume":{
+
+          },
+          "Weight":{
+
+          },
+          "Width":{
+
+          }
+        },
+        "Address":[
+          {
+            "AddressType":"01",
+            "Building":{
+
+            },
+            "City":{
+
+            },
+            "CompanyName":"Sport Park VOF",
+            "CountryCode":"NL",
+            "DepartmentName":{
+
+            },
+            "District":{
+
+            },
+            "FirstName":"Jill",
+            "Floor":{
+
+            },
+            "HouseNumber":"995",
+            "HouseNumberSuffix":{
+
+            },
+            "LastName":"Evers",
+            "Region":{
+
+            },
+            "Remark":{
+
+            },
+            "Street":"Vegtdreef",
+            "Zipcode":"5103KD"
+          },
+          {
+            "AddressType":"02",
+            "Building":{
+
+            },
+            "City":"HOOFDDORP",
+            "CompanyName":"Sender CompanyName",
+            "CountryCode":"NL",
+            "DepartmentName":{
+
+            },
+            "District":{
+
+            },
+            "FirstName":"Frank",
+            "Floor":{
+
+            },
+            "HouseNumber":"42",
+            "HouseNumberSuffix":"A",
+            "LastName":"Peeters",
+            "Region":{
+
+            },
+            "Remark":{
+
+            },
+            "Street":"Siriusdreef",
+            "Zipcode":"2132WT"
+          }
+        ],
+        "ProductOptions":[
+          {
+            "OptionDescription":"Bezorging gewijzigd vanaf voormelding",
+            "OptionCode":"11",
+            "CharacteristicCode":"119"
+          },
+          {
+            "OptionDescription":"Bezorging gewijzigd door PostNL",
+            "OptionCode":"13",
+            "CharacteristicCode":"119"
+          },
+          {
+            "OptionDescription":"1 bezorgpoging",
+            "OptionCode":"1",
+            "CharacteristicCode":"112"
+          }
+        ],
+        "Status":{
+          "TimeStamp":"27-08-2020 04:15:00",
+          "StatusCode":"13",
+          "StatusDescription":"Voorgemeld: nog niet aangenomen",
+          "PhaseCode":"1",
+          "PhaseDescription":"Collectie"
+        }
+      },
+      {
+        "MainBarcode":"3STBJG530501782",
+        "Barcode":"3STBJG530501782",
+        "ShipmentAmount":"1",
+        "ShipmentCounter":"1",
+        "Customer":{
+          "CustomerCode":"TBJG",
+          "CustomerNumber":"1234567",
+          "Name":"Bedrijf"
+        },
+        "ProductCode":"003085",
+        "ProductDescription":"Standaard Zending",
+        "Reference":"Reference",
+        "Dimension":{
+          "Height":{
+
+          },
+          "Length":{
+
+          },
+          "Volume":{
+
+          },
+          "Weight":{
+
+          },
+          "Width":{
+
+          }
+        },
+        "Address":[
+          {
+            "AddressType":"01",
+            "Building":{
+
+            },
+            "City":{
+
+            },
+            "CompanyName":"Boekhandel die Witte CV",
+            "CountryCode":"NL",
+            "DepartmentName":{
+
+            },
+            "District":{
+
+            },
+            "FirstName":"Micha",
+            "Floor":{
+
+            },
+            "HouseNumber":"480",
+            "HouseNumberSuffix":{
+
+            },
+            "LastName":"Ramlal",
+            "Region":{
+
+            },
+            "Remark":{
+
+            },
+            "Street":"Sardjoeboulevard",
+            "Zipcode":"1443CK"
+          },
+          {
+            "AddressType":"02",
+            "Building":{
+
+            },
+            "City":"HOOFDDORP",
+            "CompanyName":"Sender CompanyName",
+            "CountryCode":"NL",
+            "DepartmentName":{
+
+            },
+            "District":{
+
+            },
+            "FirstName":"Frank",
+            "Floor":{
+
+            },
+            "HouseNumber":"42",
+            "HouseNumberSuffix":"A",
+            "LastName":"Peeters",
+            "Region":{
+
+            },
+            "Remark":{
+
+            },
+            "Street":"Siriusdreef",
+            "Zipcode":"2132WT"
+          }
+        ],
+        "ProductOptions":[
+          {
+            "OptionDescription":"Bezorging gewijzigd vanaf voormelding",
+            "OptionCode":"11",
+            "CharacteristicCode":"119"
+          },
+          {
+            "OptionDescription":"Bezorging gewijzigd door PostNL",
+            "OptionCode":"13",
+            "CharacteristicCode":"119"
+          },
+          {
+            "OptionDescription":"1 bezorgpoging",
+            "OptionCode":"1",
+            "CharacteristicCode":"112"
+          }
+        ],
+        "Status":{
+          "TimeStamp":"27-08-2020 04:15:00",
+          "StatusCode":"13",
+          "StatusDescription":"Voorgemeld: nog niet aangenomen",
+          "PhaseCode":"1",
+          "PhaseDescription":"Collectie"
+        }
+      }
+    ]
+  }
+}

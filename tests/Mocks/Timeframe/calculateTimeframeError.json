@@ -1,0 +1,10 @@
+[
+  {
+    "ErrorMsg":"Parameter 'Timeframe.EndDate' may not be null.",
+    "ErrorNumber":7
+  },
+  {
+    "ErrorMsg":"Parameter 'Timeframe.SundaySorting' may not be null.",
+    "ErrorNumber":7
+  }
+]

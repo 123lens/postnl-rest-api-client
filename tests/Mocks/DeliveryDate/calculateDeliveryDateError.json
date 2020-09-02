@@ -1,0 +1,14 @@
+{
+  "Array":{
+    "Item":[{
+      "ErrorMsg":"Parameter 'GetDeliveryDate.PostalCode' may not be null.",
+      "ErrorNumber":7
+    },{
+      "ErrorMsg":"Parameter 'GetDeliveryDate.ShippingDuration' may not be null.",
+      "ErrorNumber":7
+    },{
+      "ErrorMsg":"Parameter 'GetDeliveryDate.ShippingDate' may not be null.",
+      "ErrorNumber":7
+    }]
+  }
+}

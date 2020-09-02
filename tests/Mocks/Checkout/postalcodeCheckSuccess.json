@@ -1,0 +1,12 @@
+[
+  {
+    "city": "CITY",
+    "postalCode": "1000AA",
+    "streetName": "Straat",
+    "houseNumber": 1,
+    "formattedAddress": [
+      "Straat 1",
+      "1000AA CITY"
+    ]
+  }
+]

@@ -1,0 +1,15 @@
+[
+  {
+    "Barcode":"3STBJG076459501",
+    "CreationDate":"2020-08-26",
+    "CustomerNumber":"1052296",
+    "CustomerCode":"TBJG",
+    "Status":{
+      "Timestamp":"2020-08-26T19:23:02",
+      "StatusCode":"2",
+      "StatusDescription":"Zending in ontvangst genomen",
+      "PhaseCode":"1",
+      "PhaseDescription":"Collectie"
+    }
+  }
+]

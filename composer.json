@@ -1,0 +1,40 @@
+{
+    "name": "budgetlens/postl-rest-api-client",
+    "description": "PHP Client for PostNL Rest API",
+    "version": "0.1.0",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Sebastiaan Blaas",
+            "email": "sebastiaan@123lens.nl"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": "^7.4",
+        "guzzlehttp/guzzle": "^7.0",
+        "intervention/validation": "^2.4"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.2",
+        "squizlabs/php_codesniffer": "^3.5",
+        "overtrue/phplint": "^2.0",
+        "fzaninotto/faker": "^1.9"
+    },
+    "autoload": {
+        "psr-4": {
+            "Budgetlens\\PostNLApi\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "style": "vendor/bin/phpcs --standard=PSR2 --extensions=php --warning-severity=6 --colors src/*",
+        "style-strict": "vendor/bin/phpcs --standard=PSR2 --extensions=php --colors src/*",
+        "lint": "vendor/bin/phplint --no-configuration --no-cache --no-interaction --extensions=php src/*"
+    }
+}
