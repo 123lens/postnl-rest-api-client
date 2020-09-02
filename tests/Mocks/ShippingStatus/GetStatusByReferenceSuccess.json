@@ -8,8 +8,8 @@
         "ShipmentCounter":"1",
         "Customer":{
           "CustomerCode":"TBJG",
-          "CustomerNumber":"1052296",
-          "Name":"Budgetlens B.V."
+          "CustomerNumber":"1234567",
+          "Name":"Bedrijf"
         },
         "ProductCode":"003085",
         "ProductDescription":"Standaard Zending",
@@ -129,8 +129,8 @@
         "ShipmentCounter":"1",
         "Customer":{
           "CustomerCode":"TBJG",
-          "CustomerNumber":"1052296",
-          "Name":"Budgetlens B.V."
+          "CustomerNumber":"1234567",
+          "Name":"Bedrijf"
         },
         "ProductCode":"003085",
         "ProductDescription":"Standaard Zending",
@@ -231,8 +231,8 @@
         "ShipmentCounter":"1",
         "Customer":{
           "CustomerCode":"TBJG",
-          "CustomerNumber":"1052296",
-          "Name":"Budgetlens B.V."
+          "CustomerNumber":"1234567",
+          "Name":"Bedrijf"
         },
         "ProductCode":"003085",
         "ProductDescription":"Standaard Zending",
@@ -350,8 +350,8 @@
         "ShipmentCounter":"1",
         "Customer":{
           "CustomerCode":"TBJG",
-          "CustomerNumber":"1052296",
-          "Name":"Budgetlens B.V."
+          "CustomerNumber":"1234567",
+          "Name":"Bedrijf"
         },
         "ProductCode":"003085",
         "ProductDescription":"Standaard Zending",
@@ -452,8 +452,8 @@
         "ShipmentCounter":"1",
         "Customer":{
           "CustomerCode":"TBJG",
-          "CustomerNumber":"1052296",
-          "Name":"Budgetlens B.V."
+          "CustomerNumber":"1234567",
+          "Name":"Bedrijf"
         },
         "ProductCode":"003085",
         "ProductDescription":"Standaard Zending",
@@ -571,8 +571,8 @@
         "ShipmentCounter":"1",
         "Customer":{
           "CustomerCode":"TBJG",
-          "CustomerNumber":"1052296",
-          "Name":"Budgetlens B.V."
+          "CustomerNumber":"1234567",
+          "Name":"Bedrijf"
         },
         "ProductCode":"003085",
         "ProductDescription":"Standaard Zending",
@@ -690,8 +690,8 @@
         "ShipmentCounter":"1",
         "Customer":{
           "CustomerCode":"TBJG",
-          "CustomerNumber":"1052296",
-          "Name":"Budgetlens B.V."
+          "CustomerNumber":"1234567",
+          "Name":"Bedrijf"
         },
         "ProductCode":"003085",
         "ProductDescription":"Standaard Zending",
@@ -811,8 +811,8 @@
         "ShipmentCounter":"1",
         "Customer":{
           "CustomerCode":"TBJG",
-          "CustomerNumber":"1052296",
-          "Name":"Budgetlens B.V."
+          "CustomerNumber":"1234567",
+          "Name":"Bedrijf"
         },
         "ProductCode":"003085",
         "ProductDescription":"Standaard Zending",
