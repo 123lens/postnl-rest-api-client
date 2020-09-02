@@ -2,12 +2,12 @@
 namespace Budgetlens\PostNLApi\Messages\Requests\ShippingStatus;
 
 /**
- * Generate Signature Status By Barcode Request
+ * Generate Shipping Status By Customernumber / period Request
  *
  * ### Example
  * <code>
  *      $request = $client->shippingStatus()->shipment();
- *      $request->setCustomerCode('--CUSTOMER_CODE--');
+ *      $request->setCustomerNumber('--CUSTOMER_NUMBER--');
  *      $request->addPeriod(new \DateTime('2020-08-07'))
  *      $request->addPeriod(new \DateTime('2020-08-08'));
  *      $response = $request->send();
