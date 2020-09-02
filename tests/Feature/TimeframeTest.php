@@ -5,8 +5,6 @@ use Budgetlens\PostNLApi\Client\Middleware\ErrorResponseException;
 use Budgetlens\PostNLApi\Entities\TimeFrame;
 use Budgetlens\PostNLApi\Entities\Timeframe\DeliveryTimeFrame;
 use Budgetlens\PostNLApi\Entities\Timeframe\ReasonNoTimeframeEntity;
-use Budgetlens\PostNLApi\Messages\Responses\DeliveryDate\CalculateDeliveryDateResponse;
-use Budgetlens\PostNLApi\Messages\Responses\DeliveryDate\CalculateShippingDateResponse;
 use Budgetlens\PostNLApi\Messages\Responses\Timeframes\CalculateTimeframesResponse;
 use Tests\TestCase;
 
