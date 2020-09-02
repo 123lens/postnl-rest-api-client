@@ -118,7 +118,6 @@ class ShippingTest extends TestCase
             ->setRemark(self::REMARK)
         );
         $response = $request->send();
-        $this->writeLabel($response);
         $this->assertInstanceOf(GenerateShipmentResponse::class, $response);
         $this->assertIsArray($response->getShipments());
         $this->assertArrayHasKey('Labels', $response->getShipments()[0]);
@@ -900,22 +899,6 @@ class ShippingTest extends TestCase
         $this->assertNotNull($response->getShipments()[0]['DownPartnerID']);
     }
 
-    private function writeLabel($response, $mergedLabels = false)
-    {
-        $teller = 0;
-        $labels = ($mergedLabels)
-            ? $response->getMergedLabels()
-            : $response->getShipments();
-
-        foreach ($labels as $shipment) {
-            foreach ($shipment['Labels'] as $label) {
-                $teller++;
-                $barcode = isset($label['Barcode']) ? $label['Barcode'] : 'label';
-                $filename = "label-{$barcode}-{$teller}.pdf";
-                file_put_contents($filename, base64_decode($label['Content']));
-            }
-        }
-    }
     private function getCustomerEntity()
     {
         return (new Customer())

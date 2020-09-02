@@ -178,10 +178,6 @@ class GenerateShipmentRequest extends AbstractShipmentRequest implements Request
                 ]
             ]
         );
-
-//        $filename = "/Users/sebastiaan/Projects/123 Lens/123lens-Opensource-Packages/postnl-rest-api/tests/Mocks/Shipping/GenerateLabelGLobalpackCombilabelSuccess.json";
-//        file_put_contents($filename, $response->getBody());
-//        die("");
         return $this->response = new GenerateShipmentResponse($this, $response->getBody()->json());
     }
 }
