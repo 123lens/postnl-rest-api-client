@@ -17,7 +17,6 @@ namespace Budgetlens\PostNLApi\Messages\Requests;
 use Budgetlens\PostNLApi\Messages\Requests\Contracts\MessageInterface;
 use Budgetlens\PostNLApi\Messages\Requests\Contracts\RequestInterface;
 use Budgetlens\PostNLApi\Messages\Responses\LocationLookupResponse;
-use Budgetlens\PostNLApi\Messages\Responses\NearestLocationsResponse;
 
 class LocationLookupRequest extends AbstractRequest implements RequestInterface, MessageInterface
 {

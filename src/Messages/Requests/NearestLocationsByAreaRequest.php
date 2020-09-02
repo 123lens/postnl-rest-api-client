@@ -22,7 +22,6 @@ use Budgetlens\PostNLApi\Messages\Requests\Contracts\MessageInterface;
 use Budgetlens\PostNLApi\Messages\Requests\Contracts\RequestInterface;
 use Budgetlens\PostNLApi\Messages\Responses\NearestLocationsByAreaResponse;
 use Budgetlens\PostNLApi\Messages\Responses\NearestLocationsByGeoResponse;
-use Budgetlens\PostNLApi\Messages\Responses\NearestLocationsResponse;
 
 class NearestLocationsByAreaRequest extends AbstractRequest implements RequestInterface, MessageInterface
 {
