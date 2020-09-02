@@ -1,7 +1,6 @@
 <?php
 namespace Tests\Feature;
 
-use Budgetlens\PostNLApi\Client\Middleware\ErrorResponseException;
 use Budgetlens\PostNLApi\Entities\Address;
 use Budgetlens\PostNLApi\Entities\Customer;
 use Budgetlens\PostNLApi\Entities\Shipment;
@@ -349,7 +348,7 @@ class ShippingTest extends TestCase
                 ->setOption('016')
                 ->setCharacteristic('002')
             )
-            ->setReceiverDateOfBirth(new \DateTime('1980-04-07'))
+            ->setReceiverDateOfBirth(new \DateTime('1980-01-01'))
             ->setCustomerOrderNumber('1234test')
             ->setReference('1234testref')
             ->setRemark(self::REMARK)
@@ -382,7 +381,7 @@ class ShippingTest extends TestCase
                 ->setCharacteristic('136')
                 ->setOption('006')
             )
-            ->setReceiverDateOfBirth(new \DateTime('1980-04-07'))
+            ->setReceiverDateOfBirth(new \DateTime('1980-01-01'))
             ->setCustomerOrderNumber('1234test')
             ->setReference('ADR/LQ - Reference')
             ->setRemark(self::REMARK)
