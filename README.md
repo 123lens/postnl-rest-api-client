@@ -2,6 +2,11 @@
 Client for the PostNL Rest API
 
 
+## Attention!
+Currently this project is stalled as no access to the PostNL is currently available to us.\
+Sorry for the inconvenience 
+
+
 ## Installation
 ```
 composer require 123lens/postnl-rest-api-client
